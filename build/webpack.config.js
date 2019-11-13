@@ -20,13 +20,6 @@ const webpackConfig = {
         }
     },
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            test: /\.(js|jsx)$/,
-            minimize: true,
-            options: {
-                eslint: __base.eslintrc
-            }
-        }),
         //处理.css文件
         new MiniCssExtractPlugin({
             filename: "[name].css",

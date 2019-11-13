@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Icon, Row, Col, Dropdown } from 'antd';
+import { Menu, Icon, Row, Col, Dropdown, Button } from 'antd';
 
 export default class Main extends Component {
     constructor(props) {
@@ -71,7 +71,7 @@ export default class Main extends Component {
                     </Col>
                     <Col span={2}>
                         <Dropdown overlay={this.userStatus()} placement="bottomLeft" trigger={['click']}>
-                            <div className="head-status">贺鹏阳</div>
+                            <div className="head-status"><Button ghost>贺鹏阳</Button></div>
                         </Dropdown>
                     </Col>
                 </Row>
