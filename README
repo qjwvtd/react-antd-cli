@@ -1,0 +1,45 @@
+项目结构：(待优化)
+
+|-- build : webpack 配置目录
+|-- public : 编译，构建，热更新
+|-- src : 源文件目录
+
+
+脚手架演示：
+
+npm install
+
+npm run build
+
+npm start
+
+http://localhost:6868
+
+##############router start###############
+
+若使用BrowserRouter作路由
+
+则需要在devServer中设置historyApiFallback为true
+
+并且JS文件的引用路径改为绝对路径
+
+来保证开发环境刷新不丢失
+
+监听用户手动修改路由：
+
+import createHashHistory from "history/createHashHistory";
+
+const history = createHashHistory();
+
+history.listen((location, action) => {
+
+    //dosomething
+    
+});
+
+#############router end################
+
+##############react hooks start##############
+react version 16.8.4
+##############react hooks end##############
+
