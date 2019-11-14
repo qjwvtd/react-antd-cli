@@ -1,31 +1,29 @@
 import axios from 'axios';
 
-//生产环境url
-// const productionUrl = 'http://www.baidu.com';
-//开发环境baseurl
-// const CORSUrl = process.env.NODE_ENV === "development" ? '/api/' : productionUrl;
+//生产环境
+if (process.env.NODE_ENV === 'production') {
+    axios.defaults.baseURL = 'http://www.baidu.com';
+}
+//开发环境
+if (process.env.NODE_ENV === 'development') {
+    //注意:webpack中devSever配置了proxy跨域,不能设置baseurl
+    if (process.env.NODE_PROXY) {
+        axios.defaults.baseURL = null;
+    }
+}
+axios.defaults.timeout = 10000;
 
-// const service = axios.create({
-//     baseURL: CORSUrl, // api 的 base_url
-//     timeout: 10000 // request timeout
-// });
+//http request 拦截器
 const author = 'Authorization';
-const token = 'e47503c9-86a5-4970-94dc-67b6c6ca3aa3';
+const token = '8608cafd-715d-480f-9418-005100a293de';
 axios.interceptors.request.use(config => {
     if (token) {
         config.headers.common[author] = 'Bearer' + token;
-        // const whiteList = store.getters.whiteList;
-        // if (whiteList.indexOf(getHashPath()) !== -1) {
-        //     delete config.headers.common[author];
-        //     // 单独处理 "./api/enterprise/v1/company/add" 接口
-        //     if (config.url === './api/enterprise/v1/company/add') {
-        //         config.headers.common[author] = 'Bearer' + token;
-        //     }
-        // }
     }
     return config;
 }, error => Promise.reject(error));
 
+//http response 拦截器
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
 function checkStatus (response) {

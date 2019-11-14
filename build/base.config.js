@@ -16,13 +16,13 @@ module.exports = {
     dev: {
         filename: '[name].js',
         //开发环境代码构建编译目录
-        path: path.resolve(__dirname, root + 'public/dist/'),
+        path: path.resolve(__dirname, root + 'public'),
         //开发环境热更新目录必须是输出路径的绝对路径
-        publicPath: '/dist/'
+        publicPath: '/'
     },
     //生产环境,打包到根目录的bundle
     prod: {
-        filename: 'dist/[name].V-' + (Math.random(1, 2)) + '.js',
+        filename: '[name].[hash].js',
         path: path.resolve(__dirname, root + 'bundle')
     }
 };

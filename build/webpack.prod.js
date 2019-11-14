@@ -1,37 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackConfig = require('./webpack.config.js');
 const __base = require('./base.config.js');
 
-//构建html
-const buildHtml = new HtmlWebpackPlugin({
-    title: 'Webpack App',
-    hash: false,
-    //HtmlWebpackPlugin插件的路径要从项目根目录开始
-    favicon: 'public/favicon.ico',
-    template: 'build/template.html'
-});
 //提供代码优化，如压缩、作用域提升等
 const defineMyEnv = new webpack.DefinePlugin({
+    'process.env.NODE_PROXY': false, //不使用代理,在http.js中使用这个变量
     'process.env.NODE_ENV': JSON.stringify('production')
 });
 //清除已经build过的文件
 const clearFiles = new CleanWebpackPlugin([__base.prod.path]);
-//监控构建进度
-const handler = (percentage, message, ...args) => {
-    console.log(parseFloat(percentage.toFixed(2)) * 100 + '%', message);
-};
-const progress = new webpack.ProgressPlugin(handler);
 
-webpackConfig.plugins.push(buildHtml);
 webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(clearFiles);
-webpackConfig.plugins.push(progress);
 
 webpackConfig.optimization = {
     minimize: true,
@@ -51,13 +36,13 @@ webpackConfig.optimization = {
             vendor: {
                 test: /[\\/]node_modules[\\/]/,
                 name: "vendor",
-                priority: 10,//设置处理的优先级，数值越大越优先处理
+                priority: 10, //设置处理的优先级，数值越大越优先处理
                 enforce: true
             }
         }
     },
     minimizer: [
-        // 自定义js优化配置，将会覆盖默认配置
+        // 自定义js优化配置，覆盖默认配置
         new UglifyJsPlugin({
             cache: true,
             parallel: true, // 开启并行压缩，充分利用cpu
@@ -74,7 +59,7 @@ webpackConfig.optimization = {
                 }
             }
         }),
-        // 用于优化css文件
+        // 优化css
         new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/g,
             cssProcessorOptions: {

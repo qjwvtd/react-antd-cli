@@ -1,12 +1,20 @@
 {
     "plugins": [
-        // [
-        //     "import",
-        //     {
-        //         "libraryName": "antd",
-        //         "libraryDirectory": "es",
-        //         "style": true // `style: true` 会加载 less 文件
-        //     }
-        // ]
+        [
+            "transform-runtime",
+            {
+                "polyfill": false
+            }
+        ]
+    ],
+    "presets": [
+        [
+            "env",
+            {
+                "modules": false //默认值是commonjs,webpack会自动转换成es5,所以必须是false
+            }
+        ],
+        "stage-0",
+        "react"
     ]
 }

@@ -79,7 +79,7 @@ export default class Login extends Component {
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" block size="large">
-                                    <Link to="/">登录</Link>
+                                    <Link to="/">登  录</Link>
                                 </Button>
                             </Form.Item>
                         </Form>
