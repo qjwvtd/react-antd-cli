@@ -36,8 +36,8 @@ const webpackConfig = {
                 minifyCSS: true
             },
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
-            favicon: 'public/favicon.ico',
-            template: 'public/index.html'
+            favicon: path.resolve(__dirname, './../public/favicon.ico'),
+            template: path.resolve(__dirname, './../public/index.html')
         }),
         //监控进度
         new webpack.ProgressPlugin((percentage, message, ...args) => {
