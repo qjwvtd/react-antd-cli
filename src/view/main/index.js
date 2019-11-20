@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon, Row, Col, Dropdown, Button } from 'antd';
+const logo = require('@/static/images/logo.png');
 
 export default class Main extends Component {
     constructor(props) {
@@ -23,6 +24,9 @@ export default class Main extends Component {
             <Menu.Item>
                 <Link to="/login">安全退出</Link>
             </Menu.Item>
+            <Menu.Item>
+                <Link to="/register">注册</Link>
+            </Menu.Item>
         </Menu>);
     };
     render () {
@@ -32,7 +36,7 @@ export default class Main extends Component {
                 <Row className="head-container">
                     <Col span={2}>
                         <Link className="head-logo" to="/">
-                            <img src="http://www.dhwork.cn/favicon.ico" style={{ width: '30px', height: '30px' }} />
+                            <img src={ logo } style={{ width: 'auto', height: '30px' }} />
                             <span>运营后台</span>
                         </Link>
                     </Col>

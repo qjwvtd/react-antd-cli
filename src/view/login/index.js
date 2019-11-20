@@ -75,6 +75,11 @@ export default class Login extends Component {
                                     <Link to="/">登  录</Link>
                                 </Button>
                             </Form.Item>
+                            <Form.Item>
+                                <Button block size="large">
+                                    <Link to="/register">注  册</Link>
+                                </Button>
+                            </Form.Item>
                         </Form>
                     </Col>
                 </Row >

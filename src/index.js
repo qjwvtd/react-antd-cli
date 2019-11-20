@@ -4,7 +4,7 @@ import App from './view/app.js';
 /**
  * import css
  * **/
-import './assets/style/index.less';
+import './static/style/index.less';
 
 ReactDOM.render(
     <App />,
