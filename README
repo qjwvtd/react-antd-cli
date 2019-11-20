@@ -1,19 +1,28 @@
-项目结构：(待优化)
+#项目结构：(优化中)
 
 |-- build : webpack 配置目录
 |-- public : 编译，构建，热更新
-|-- src : 源文件目录
-
+|-- src : 工作目录
+    |-- common : 公共库,JS,接口, 工具类,store等
+    |-- static : 静态资源,图片,CSS,字体文件等
+    |-- view : 源文件目录
 
 脚手架演示：
 
+#安装
 npm install
 
-npm run build
-
+#开发环境开启本地服务
 npm start
 
-http://localhost:6868
+#开发过程中手动一键修复错误
+npm run lint
+
+#生产环境打包构建
+npm run build
+
+#浏览器访问,可自定义host及端口
+http://localhost:9000
 
 ##############router start###############
 
@@ -38,8 +47,4 @@ history.listen((location, action) => {
 });
 
 #############router end################
-
-##############react hooks start##############
-react version 16.8.4
-##############react hooks end##############
 
