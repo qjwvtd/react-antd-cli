@@ -2,6 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const os = require('os');
+const HappyPack = require('happypack');
+const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
 const __base = require('./base.config.js');
 const __rules = require('./loaders');
 
@@ -36,13 +41,21 @@ const webpackConfig = {
                 minifyCSS: true
             },
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
-            favicon: 'public/favicon.ico',
-            template: 'public/index.html'
+            favicon: path.resolve(__dirname, './../public/favicon.ico'),
+            template: path.resolve(__dirname, './../public/index.html')
         }),
-        //监控进度
-        new webpack.ProgressPlugin((percentage, message, ...args) => {
-            console.log(parseFloat(percentage.toFixed(2)) * 100 + '%', message);
+        //加快构建速度
+        new HappyPack({
+            id: 'js',
+            cache: true,
+            loaders: ['babel-loader?cacheDirectory=true'],
+            threadPool: happThreadPool
         })
+        //监控进度
+        // new webpack.ProgressPlugin((percentage, message, ...args) => {
+        // console.log(parseFloat(percentage.toFixed(2)) * 100 + '%', message);
+        // })
+
     ]
 };
 

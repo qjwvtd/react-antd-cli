@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Row, Col } from 'antd';
-import { getImgCode64 } from '@/http/api/api.js';
-
-function getUUid () {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        let r = Math.random() * 16 | 0,
-            v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+import { getImgCode64 } from '@/common/api/login';
+import { getUUid } from '@/common/utils';
 
 export default class Login extends Component {
     constructor(props) {
