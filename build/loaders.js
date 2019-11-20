@@ -12,6 +12,12 @@ const babelLoader = {
     include: __include__dirname,
     exclude: /node_modules/
 };
+const happypackLoader = {
+    test: /\.(js|jsx)$/,
+    loader: 'happypack/loader?id=happyBabel',
+    include: __include__dirname,
+    exclude: /node_modules/
+};
 const esLintLoader = {
     test: /\.(js|jsx)$/,
     use: [{
@@ -59,5 +65,5 @@ const fileLoader = {
     exclude: /node_modules/
 };
 module.exports = [
-    babelLoader, esLintLoader, cssLoader, lessLoader, sassLoader, urlLoader, fileLoader
+    happypackLoader, babelLoader, esLintLoader, cssLoader, lessLoader, sassLoader, urlLoader, fileLoader
 ];

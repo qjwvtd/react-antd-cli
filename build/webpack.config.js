@@ -10,6 +10,8 @@ const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const __base = require('./base.config.js');
 const __rules = require('./loaders');
 
+const __package = require('./../package.json');
+
 const webpackConfig = {
     entry: { 'index': path.resolve(__dirname, __base.entry) },
     module: {
@@ -33,7 +35,7 @@ const webpackConfig = {
         }),
         //构建html
         new HtmlWebpackPlugin({
-            title: '运营后台',
+            title: (__package.projectName || __package.name) + __package.version,
             minify: {
                 // 移除HTML中的注释
                 removeComments: true,
@@ -46,10 +48,11 @@ const webpackConfig = {
         }),
         //加快构建速度
         new HappyPack({
-            id: 'js',
-            cache: true,
+            id: 'happyBabel',
             loaders: ['babel-loader?cacheDirectory=true'],
-            threadPool: happThreadPool
+            threadPool: happThreadPool,
+            //允许 HappyPack 输出日志
+            verbose: true
         })
         //监控进度
         // new webpack.ProgressPlugin((percentage, message, ...args) => {

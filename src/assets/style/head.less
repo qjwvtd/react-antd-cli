@@ -1,9 +1,28 @@
+//主灰色
+@mainGay:rgba(255, 255, 255, 0.65);
+//主蓝色
+@mainBlue:#409eff;
 .head-container{
-    color: rgba(255, 255, 255, 0.65);
+    color: @mainGay;
     background: #001529;
-    .head-status{
-        text-align: right;
+    .head-logo,.head-status{
+        height: 46px;//与antd导航的高度保持一致
         line-height: 46px;
+        text-align: center;
+        >span{
+            padding-left: 10px;
+            color: @mainGay;
+            &:hover{
+                color: @mainBlue;
+            }
+        }
+    }
+    .head-logo{
+        display: inline-block;
+        width: 100%;
+        border-right: 1px solid @mainGay;
+    }
+    .head-status{
         cursor: pointer;
     }
 }

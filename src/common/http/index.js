@@ -64,6 +64,9 @@ function checkStatus (response) {
     if (response.status >= 500) {
         alert('服务器内部错误,' + response.statusText);
     }
+    if (response.status === 504) {
+        alert('网关超时,' + response.statusText);
+    }
 }
 
 function checkCode (res, errMsg) {

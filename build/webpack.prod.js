@@ -9,7 +9,8 @@ const __base = require('./base.config.js');
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({
-    'process.env.NODE_PROXY': false, //不使用代理,在http.js中使用这个变量
+    //使用代理,在http.js中使用这个变量
+    'process.env.NODE_PROXY': false,
     'process.env.NODE_ENV': JSON.stringify('production')
 });
 //清除已经build过的文件

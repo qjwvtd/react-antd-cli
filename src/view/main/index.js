@@ -6,7 +6,6 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: 'this is main view',
             current: 'appstore'
         };
     }
@@ -17,31 +16,28 @@ export default class Main extends Component {
         });
     };
     userStatus = () => {
-        return <Menu>
+        return (<Menu style={{ textAlign: 'center' }}>
             <Menu.Item>
-                <Link to="/">
-                    修改密码
-                </Link>
+                <Link to="/">修改密码</Link>
             </Menu.Item>
             <Menu.Item>
-                <Link to="/login">
-                    安全退出
-                </Link>
+                <Link to="/login">安全退出</Link>
             </Menu.Item>
-        </Menu>;
+        </Menu>);
     };
     render () {
         const { SubMenu } = Menu;
         return (
             <React.Fragment>
                 <Row className="head-container">
-                    <Col span={21}>
+                    <Col span={2}>
+                        <Link className="head-logo" to="/">
+                            <img src="http://www.dhwork.cn/favicon.ico" style={{ width: '30px', height: '30px' }} />
+                            <span>运营后台</span>
+                        </Link>
+                    </Col>
+                    <Col span={20} style={{ textAlign: 'center' }}>
                         <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark">
-                            <Menu.Item key="logo" key="logo">
-                                <Link to="/">
-                                    <img src="http://www.dhwork.cn/favicon.ico" style={{ width: '30px', height: '30px' }} />
-                                </Link>
-                            </Menu.Item>
                             <SubMenu
                                 title={
                                     <span className="submenu-title-wrapper">
@@ -70,8 +66,11 @@ export default class Main extends Component {
                         </Menu>
                     </Col>
                     <Col span={2}>
-                        <Dropdown overlay={this.userStatus()} placement="bottomLeft" trigger={['click']}>
-                            <div className="head-status"><Button ghost>贺鹏阳</Button></div>
+                        <Dropdown overlay={this.userStatus()} placement="bottomLeft" trigger={['hover']}>
+                            <div className="head-status">
+                                <Icon type="user" />
+                                贺鹏阳
+                            </div>
                         </Dropdown>
                     </Col>
                 </Row>
