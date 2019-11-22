@@ -9,4 +9,4 @@ import http from '@/common/http';
  * @param "width": 100
  * */
 
-export const getImgCode64 = data => http.POST('./api/versatile/v1/verifyCode/base64', data);
+export const getImgCode64 = data => http.POST('/api/versatile/v1/verifyCode/base64', data);

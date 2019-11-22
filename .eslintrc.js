@@ -73,7 +73,8 @@ module.exports = {
             "multi-line",
             "consistent"
         ],
-
+        //函数名前面不能有空格
+        "space-before-function-paren": ["error", "never"],
         //在return,throw,continue,break之后出现代码告警
         "no-unreachable": "warn",
         //外部作用域中的变量不能与它所包含的作用域中的变量或参数同名

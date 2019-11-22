@@ -1,18 +1,88 @@
+import Cookies from 'js-cookie';
+
+const TokenKey = 'Admin-Token';
 //登录令牌
 export const LOGINSECRET = {
     id: 'web',
     secret: 'sKuBjFlMsUiPsKlO'
 };
+//token,get
+export function getToken() {
+    const isremember = localStorage.getItem('REMEMBER');
+    if (isremember === 'true') {
+        return Cookies.get(TokenKey);
+    }
+    if (isremember === 'false') {
+        return sessionStorage.getItem(TokenKey);
+    }
+}
+//token,set
+export function setToken(token) {
+    const isremember = localStorage.getItem('REMEMBER');
+    if (isremember === 'true') {
+        Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
+    }
+    if (isremember === 'false') {
+        sessionStorage.setItem(TokenKey, token);
+    }
+}
+//token,rm
+export function removeToken() {
+    sessionStorage.removeItem(TokenKey);
+    return Cookies.remove(TokenKey);
+}
+export function setLocalStorage(key, value) {
+    window.localStorage.setItem(key, JSON.stringify(value));
+}
+
+export function getLocalStorage(key) {
+    let obj = JSON.parse(window.localStorage.getItem(key));
+    if (obj && obj !== 'undefined' && obj !== 'null') {
+        return obj;
+    }
+    return '';
+}
+
+export function removeLocalStorage(key) {
+    if (key) {
+        window.localStorage.removeItem(key);
+    } else {
+        for (let i in arguments) {
+            window.localStorage.removeItem(arguments[i]);
+        }
+    }
+}
+export function setSessionStorage(key, value) {
+    window.sessionStorage.setItem(key, JSON.stringify(value));
+}
+
+export function getSessionStorage(key) {
+    let obj = window.sessionStorage.getItem(key);
+    if (obj && obj !== 'undefined' && obj !== 'null') {
+        return JSON.parse(obj);
+    }
+    return '';
+}
+
+export function removeSessionStorage(key) {
+    if (key) {
+        window.sessionStorage.removeItem(key);
+    } else {
+        for (let i in arguments) {
+            window.sessionStorage.removeItem(arguments[i]);
+        }
+    }
+}
 //uuid
-export function getUUid () {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+export function getUUid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         let r = Math.random() * 16 | 0,
             v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
 //深拷贝
-export function deepClone (source, key) {
+export function deepClone(source, key) {
     const targetObj = source.constructor === Array ? [] : {};
     for (const keys in source) {
         if (source.hasOwnProperty(keys)) {
@@ -32,7 +102,7 @@ export function deepClone (source, key) {
     return targetObj;
 }
 //解析路由取参
-export function urlParse () {
+export function urlParse() {
     const url = window.location.search;
     const obj = {};
     const reg = /[?&][^?&]+=[^?&]+/g;
@@ -49,13 +119,14 @@ export function urlParse () {
 }
 /**
  * 防抖函数
- * 只需要在调用的地方传一个event对象,如:
- * shakePrevent(event)
- * @param e,event对象
+ * 只需要在事件触发的第一行调用,如:
+ * shakePrevent()
  * @param delay,延迟毫秒,可不传,默认3000
  */
-export function shakePrevent (e, delay) {
-    function getTarget (target) {
+export function shakePrevent(delay) {
+    const e = event;
+    const _delay = delay ? delay : 3000;
+    function getTarget(target) {
         //已到顶层,非button和input类型的按钮
         if (['BODY', 'HTML', '#document'].indexOf(target.nodeName) >= 0) {
             console.log('非button和input类型的按钮,无法设置防抖');
@@ -68,7 +139,7 @@ export function shakePrevent (e, delay) {
     _target.disabled = true;
     setTimeout(() => {
         _target.disabled = false;
-    }, delay ? delay : 3000);
+    }, _delay);
 }
 /**
  * 获取指定的URL参数值
@@ -77,7 +148,7 @@ export function shakePrevent (e, delay) {
  * 调用方法:getUrlParams("name")
  * 返回值:tyler
  */
-export default function getUrlParams (paramName) {
+export default function getUrlParams(paramName) {
     const str = window.location.hash;
     const xh = str.indexOf('?');
     const query = str.substr(xh + 1, str.length);

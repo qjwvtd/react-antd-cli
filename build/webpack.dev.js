@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -18,17 +20,24 @@ webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(hotUpdate);
 module.exports = merge(webpackConfig, {
     mode: 'development',
-    output: __base.dev,
+    output: {
+        //输出文件
+        filename: __base.dev.filename,
+        //开发环境代码构建编译目录
+        path: __base.dev.path,
+        //开发环境热更新目录必须是输出路径的绝对路径
+        publicPath: __base.dev.publicPath
+    },
     cache: true,
     devtool: 'cheap-module-eval-source-map', //'inline-source-map'
     devServer: {
-        contentBase: path.join(__dirname, __base.sevices), //定位静态服务到index.html
+        contentBase: path.join(__dirname, __base.dev.sevices), //定位静态服务到index.html
         open: false, //是否自动打开浏览器
-        host: __base.host, //默认localhost
-        port: __base.port,
+        host: __base.dev.host || 'localhost', //默认localhost
+        port: __base.dev.port || '3000', //默认3000
         compress: true, //虚拟服务代码压缩,加快开发流程和优化
         hot: true, //true,webpack4会自动添加HMR插件
-        historyApiFallback: true, //保证BrowserRouter刷新不丢失
-        proxy: __base.proxy
+        historyApiFallback: true, //保证Router刷新不丢失
+        proxy: __base.dev.proxy
     }
 });

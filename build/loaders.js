@@ -1,6 +1,8 @@
 /**
  * 配置loaders
  */
+'use strict';
+
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const baseConfig = require('./base.config');
@@ -32,7 +34,11 @@ const esLintLoader = {
 };
 const cssLoader = {
     test: /\.css$/,
-    use: ['style-loader', "css-loader"],
+    use: [
+        MiniCssExtractPlugin.loader,
+        { loader: 'style-loader' },
+        { loader: 'css-loader' }
+    ],
     include: __include__dirname,
     exclude: /node_modules/
 };
@@ -48,7 +54,11 @@ const lessLoader = {
 };
 const sassLoader = {
     test: /\.scss$/,
-    use: ["css-loader", "sass-loader"],
+    use: [
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader' },
+        { loader: 'sass-loader' }
+    ],
     include: __include__dirname,
     exclude: /node_modules/
 };
@@ -59,7 +69,7 @@ const urlLoader = {
     exclude: /node_modules/
 };
 const fileLoader = {
-    test: /\.(eot|svg|ttf|woff|woff2)/,
+    test: /\.(eot|svg|ttf|otf|woff|woff2)/,
     use: [{ loader: 'file-loader', options: { limit: 128, name: 'fonts/[name][hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/

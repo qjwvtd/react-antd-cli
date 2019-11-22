@@ -26,7 +26,7 @@ axios.interceptors.request.use(config => {
 //http response 拦截器
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
-function checkStatus (response) {
+function checkStatus(response) {
     if (!response) {
         alert('网络故障,请检查您的网络');
         return;
@@ -69,7 +69,7 @@ function checkStatus (response) {
     }
 }
 
-function checkCode (res, errMsg) {
+function checkCode(res, errMsg) {
     if (!res) { return; }
     if (!res.status) {
         console.log(res.data);
@@ -91,10 +91,10 @@ function checkCode (res, errMsg) {
 }
 
 export default {
-    POST (url, data, errMsg) {
+    POST(url, data, errMsg) {
         return axios.post(url, data, {}).then(checkStatus).then(res => checkCode(res, errMsg));
     },
-    GET (url, params, errMsg) {
+    GET(url, params, errMsg) {
         return axios.get(url, {
             params: {
                 _t: +(new Date()),
@@ -102,7 +102,7 @@ export default {
             }
         }).then(checkStatus).then(res => checkCode(res, errMsg));
     },
-    DELETE (url, params, errMsg) {
+    DELETE(url, params, errMsg) {
         return axios.delete(url, {
             params: {
                 _t: +(new Date()),
@@ -110,7 +110,7 @@ export default {
             }
         }).then(checkStatus).then(res => checkCode(res, errMsg));
     },
-    PUT (url, data, errMsg) {
+    PUT(url, data, errMsg) {
         return axios.put(url, data, {}).then(checkStatus).then(res => checkCode(res, errMsg));
     }
 };
