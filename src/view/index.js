@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route} from 'react-router-dom';
 //router
 import routerHistory from '@/common/router';
 //全局顶层模块

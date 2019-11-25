@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button, Row, Col } from 'antd';
+import { Button, Row, Col } from 'antd';
 import Logo from '@/view/component/logo';
-
-//Logo
-import logo from '@/static/images/logo.png';
 
 export default class Main extends PureComponent {
     constructor(props) {

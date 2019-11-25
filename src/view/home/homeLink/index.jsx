@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from 'react';
-import { Row, Col, Menu, Icon, Button } from 'antd';
+import React, { Fragment } from 'react';
+import { Menu, Icon, Button } from 'antd';
 
 const { SubMenu } = Menu;
 
@@ -7,7 +7,7 @@ export default function MainLink(props) {
     const { collapsed, callback } = props;
     return (
         <Fragment>
-            <Button type="primary" onClick={() => callback()} style={{ marginBottom: 16 }}>
+            <Button type="primary" onClick={() => callback()} style={{ margin: '10px auto' }}>
                 <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
             </Button>
             <Menu

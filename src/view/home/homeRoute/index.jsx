@@ -1,4 +1,4 @@
-import React, { Component, PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 
 export default class MainRoute extends Component {
     constructor(props) {
