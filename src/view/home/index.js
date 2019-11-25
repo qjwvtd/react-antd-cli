@@ -1,44 +1,86 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button, Row, Col } from 'antd';
-import Logo from '@/view/components/logo';
+import React, { Component } from 'react';
+import { Row, Col, Menu, Icon, Button } from 'antd';
 
-//Logo
-import logo from '@/static/images/logo.png';
+const { SubMenu } = Menu;
 
-export default class Home extends PureComponent {
+
+export default class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            collapsed: false //左侧导航是否折叠
+        };
     }
+    //切换折叠
+    toggleCollapsed() {
+        console.log('start collapsed');
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
+    }
+    componentDidMount() { }
     render() {
         return (
             <React.Fragment>
-                <Row className="clearfix">
-                    <Col span={10}>
-                        <Logo link={'/'} />
-                    </Col>
-                    <Col span={14} className="text-right">
-                        <Button type="primary" shape="round"><Link to="/login">登  录</Link></Button>
-                        <Button type="primary" shape="round">微信小程序</Button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={12}>
-                        <h3>智安汇是什么？</h3>
-                        <p>
-                            智安汇以智能硬件为入口，以项目管控为核心，聚焦现场工程进度、安全管控、协同管理，保证业务各方高效沟通；同时采集现场人员健康数据，确保安全施工，让工程管理更高效、工人作业更安全！
-                        </p>
-                    </Col>
-                    <Col span={12}>
-                        UI图
-                    </Col>
-                </Row>
-                <Row>
-                    <Link to="/register"><Button type="primary" shape="round">免费注册</Button></Link>
-                    <Button type="primary" shape="round">观看视频</Button>
-                </Row>
-            </React.Fragment>
+                <div className="sass-ui-container">
+                    <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"}>
+                        <Button type="primary" onClick={() => this.toggleCollapsed()} style={{ marginBottom: 16 }}>
+                            <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
+                        </Button>
+                        <Menu
+                            defaultSelectedKeys={['1']}
+                            defaultOpenKeys={['sub1']}
+                            mode="inline"
+                            theme="dark"
+                            inlineCollapsed={this.state.collapsed}
+                        >
+                            <Menu.Item key="1">
+                                <Icon type="pie-chart" />
+                                <span>Option 1</span>
+                            </Menu.Item>
+                            <Menu.Item key="2">
+                                <Icon type="desktop" />
+                                <span>Option 2</span>
+                            </Menu.Item>
+                            <Menu.Item key="3">
+                                <Icon type="inbox" />
+                                <span>Option 3</span>
+                            </Menu.Item>
+                            <SubMenu
+                                key="sub1"
+                                title={
+                                    <span>
+                                        <Icon type="mail" />
+                                        <span>Navigation One</span>
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="5">Option 5</Menu.Item>
+                                <Menu.Item key="6">Option 6</Menu.Item>
+                                <Menu.Item key="7">Option 7</Menu.Item>
+                                <Menu.Item key="8">Option 8</Menu.Item>
+                            </SubMenu>
+                            <SubMenu
+                                key="sub2"
+                                title={
+                                    <span>
+                                        <Icon type="appstore" />
+                                        <span>Navigation Two</span>
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="9">Option 9</Menu.Item>
+                                <Menu.Item key="10">Option 10</Menu.Item>
+                                <SubMenu key="sub3" title="Submenu">
+                                    <Menu.Item key="11">Option 11</Menu.Item>
+                                    <Menu.Item key="12">Option 12</Menu.Item>
+                                </SubMenu>
+                            </SubMenu>
+                        </Menu>
+                    </div>
+                    <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"}>right</div>
+                </div>
+            </React.Fragment >
         );
     }
 }

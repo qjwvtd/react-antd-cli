@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { message } from 'antd';
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
-    axios.defaults.baseURL = 'http://www.baidu.com';
+    axios.defaults.baseURL = 'http://www.dhwork.cn';
 }
 //开发环境
 if (process.env.NODE_ENV === 'development') {
@@ -11,6 +12,7 @@ if (process.env.NODE_ENV === 'development') {
         axios.defaults.baseURL = null;
     }
 }
+//默认10秒超时
 axios.defaults.timeout = 10000;
 
 //http request 拦截器
@@ -28,44 +30,44 @@ axios.interceptors.response.use(response => response, error => Promise.resolve(e
 
 function checkStatus(response) {
     if (!response) {
-        alert('网络故障,请检查您的网络');
+        message.error('网络故障,请检查您的网络');
         return;
     }
     if (response.status === 200 || response.status === 304) {
         if (response.data.code === 401) {
-            alert('登录已过期,请重新登录');
+            message.error('登录已过期,请重新登录');
         }
         if (response.data.code !== 200) {
-            alert(response.data.msg || '未知异常');
+            message.error(response.data.msg || '未知异常');
         }
         if (response.data.data.constructor === Array && response.data.data.length === 0) {
-            alert('暂无数据');
+            message.error('暂无数据');
         }
         if (response.data.data.constructor === Object && JSON.stringify(response.data.data) === '{}') {
-            alert('暂无数据');
+            message.error('暂无数据');
         }
         return response;
     }
     if (response.status === 401) {
-        alert('请求授权失败');
+        message.error('请求授权失败');
     }
     if (response.status === 401) {
-        alert('请求授权失败');
+        message.error('请求授权失败');
     }
     if (response.status === 403) {
-        alert('请求不允许');
+        message.error('请求不允许');
     }
     if (response.status === 404) {
-        alert('没有发现文件、查询或URl');
+        message.error('没有发现文件、查询或URl');
     }
     if (response.status === 405) {
-        alert('Request-Line字段定义的方法不允许');
+        message.error('Request-Line字段定义的方法不允许');
     }
     if (response.status >= 500) {
-        alert('服务器内部错误,' + response.statusText);
+        message.error('服务器内部错误,' + response.statusText);
     }
     if (response.status === 504) {
-        alert('网关超时,' + response.statusText);
+        message.error('网关超时,' + response.statusText);
     }
 }
 
@@ -75,16 +77,16 @@ function checkCode(res, errMsg) {
         console.log(res.data);
         switch (res.data.data.code) {
         case 1:
-            alert(res.data.data.msg || '参数异常');
+            message.error(res.data.data.msg || '参数异常');
             break;
         case 2:
-            alert('未登录！');
+            message.error('未登录！');
             break;
         case 3:
-            alert('没有权限');
+            message.error('没有权限');
             break;
         default:
-            errMsg ? alert(errMsg) : alert(res.data.message || '未知异常');
+            errMsg ? message.error(errMsg) : message.error(res.data.message || '未知异常');
         }
     }
     return res.data;

@@ -18,7 +18,7 @@ export default class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log('login');
-        routerHistory.push('/main');
+        routerHistory.push('/');
     }
     submitLogin() {
         shakePrevent();
@@ -84,11 +84,6 @@ export default class Login extends Component {
                             </Form.Item>
                             <Form.Item>
                                 <Link to="/setPassword">忘记密码?</Link>
-                            </Form.Item>
-                            <Form.Item>
-                                <Button block size="large">
-                                    <Link to="/register">注  册</Link>
-                                </Button>
                             </Form.Item>
                         </Form>
                     </Col>

@@ -1,4 +1,4 @@
-/*主界面整体布局*/
+/*主界面左右布局*/
 html,body{
     min-width: 1366px;
     max-width: 1920px;
@@ -9,12 +9,41 @@ html,body{
 body>#root{
     width: 100%;
     height: 100%;
-}
-#root>.dhsass-head-container{
-    height: 46px;
-}
-#root>.dhsass-body-container{
-    height: calc(100% - 46px);
-    overflow: hidden;
-    overflow-y: auto;
+    >.sass-ui-container{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        &:after,&:before{ 
+            display:block;
+            height: 0px;
+            clear: both;
+            visibility: hidden;
+            font-size: 0;
+            content: "";
+        }
+        >div.sass-ui-left,>div.sass-ui-right{
+            float: left;
+            height: inherit;
+            overflow: hidden;
+            overflow-y: auto;
+            transition: width 0.1s linear;
+        }
+        //左侧
+        >div.sass-ui-left{
+            //背景色与antd导航保持一致
+            background: #001529; 
+            width: 256px;
+        }
+        >div.sass-ui-left.active{
+            width: 80px;
+        }
+        //右侧
+        >div.sass-ui-right{
+            width: calc(100% - 80px);
+        }
+        >div.sass-ui-right.active{
+            width: calc(100% - 256px);
+        }
+    }
+    
 }

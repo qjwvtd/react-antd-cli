@@ -59,7 +59,7 @@ export default class SetPassword extends Component {
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" block size="large" onClick={this.submitLogin}>
-                                    <Link to="/main">提  交</Link>
+                                    <Link to="/">提  交</Link>
                                 </Button>
                             </Form.Item>
                         </Form>

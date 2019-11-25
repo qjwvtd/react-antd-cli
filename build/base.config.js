@@ -3,7 +3,7 @@
 const path = require('path');
 
 //项目根目录
-const root = './../';
+const root = path.join(__dirname, './../');
 
 /**
  *代理跨域
@@ -28,7 +28,7 @@ const __proxy = {
 
 module.exports = {
     //入口文件
-    entry: root + 'src/index.js',
+    entry: root + 'src/app.js',
     //主工作目录
     workPath: root + 'src',
     //开发环境
