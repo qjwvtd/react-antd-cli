@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Row, Col } from 'antd';
 import { shakePrevent } from '@/common/utils';
-import Logo from '@/view/components/logo';
+import Logo from '@/view/component/logo';
 
 export default class SetPassword extends Component {
     constructor(props) {

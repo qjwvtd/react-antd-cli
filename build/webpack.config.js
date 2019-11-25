@@ -45,8 +45,8 @@ const webpackConfig = {
                 minifyCSS: true
             },
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
-            favicon: path.resolve(__dirname, './../public/favicon.ico'),
-            template: path.resolve(__dirname, './../public/index.html')
+            favicon: __base.dev.sevices + '/favicon.ico',
+            template: __base.dev.sevices + '/index.html'
         }),
         //加快构建速度
         new HappyPack({

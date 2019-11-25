@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Row, Col } from 'antd';
-import Logo from '@/view/components/logo';
+import Logo from '@/view/component/logo';
 import { getImgCode64 } from '@/common/api/login';
 import { getUUid, shakePrevent } from '@/common/utils';
 
@@ -52,7 +52,7 @@ export default class Login extends Component {
                     <Col span={8} className="login-form-container">
                         <Form onSubmit={(e) => this.handleSubmit(e)} className="login-form">
                             <Form.Item>
-                                <h2><b>运营后台</b></h2>
+                                <h2><b>智安汇</b></h2>
                             </Form.Item>
                             <Form.Item>
                                 <Input

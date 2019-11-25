@@ -3,9 +3,6 @@
 const path = require('path');
 const env = require('./env');
 
-//项目根目录
-const root = path.join(__dirname, './../');
-
 /**
  *代理跨域
  *同webpack-dev-server的proxy设置一样,
@@ -26,27 +23,35 @@ const __proxy = {
         }
     }
 };
-
+function joinName(pathString) {
+    return path.join(__dirname.replace('build', pathString)).replace(/\\/g, '/');
+}
+//src,工作目录
+const _src = joinName('src');
+//public,开发环境热更新目录
+const _public = joinName('public');
+//bundle,生产环境构建目录
+const _bundle = joinName('bundle');
 
 module.exports = {
-    //配置项目名称
+    //项目名称
     projectName: '智安汇平台',
     //版本
-    version: '1.1.0',
+    version: '1.2.0',
     //入口文件
-    entry: root + 'src/app.js',
+    entry: _src + '/app.js',
     //主工作目录
-    workPath: root + 'src',
+    workPath: _src,
     //开发环境
     dev: {
-        //输出文件'[name].js'
+        //输出文件'
         filename: env.dev ? 'static/js/[name].js' : env.prod && 'static/js/[name].[hash:8].js',
         //开发环境代码构建编译目录
-        path: path.resolve(__dirname, root + 'public'),
+        path: path.resolve(__dirname, _public),
         //开发环境热更新目录必须是输出路径的绝对路径
         publicPath: '/',
         //开发环境目录
-        sevices: root + 'public',
+        sevices: _public,
         //开发环境host
         host: "localhost",
         //开发环境端口
@@ -56,9 +61,9 @@ module.exports = {
     },
     //生产环境,打包到根目录的bundle
     prod: {
-        //输出文件'[name].[hash].js'
+        //输出文件'
         filename: 'static/js/[name].[hash:8].js',
         //生产环境代码输出目录
-        path: path.resolve(__dirname, root + 'bundle')
+        path: path.resolve(__dirname, _bundle)
     }
 };
