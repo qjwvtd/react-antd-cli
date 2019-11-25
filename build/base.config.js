@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const env = require('./env');
 
 //项目根目录
 const root = path.join(__dirname, './../');
@@ -26,15 +27,20 @@ const __proxy = {
     }
 };
 
+
 module.exports = {
+    //配置项目名称
+    projectName: '智安汇平台',
+    //版本
+    version: '1.1.0',
     //入口文件
     entry: root + 'src/app.js',
     //主工作目录
     workPath: root + 'src',
     //开发环境
     dev: {
-        //输出文件
-        filename: '[name].js',
+        //输出文件'[name].js'
+        filename: env.dev ? 'static/js/[name].js' : env.prod && 'static/js/[name].[hash:8].js',
         //开发环境代码构建编译目录
         path: path.resolve(__dirname, root + 'public'),
         //开发环境热更新目录必须是输出路径的绝对路径
@@ -50,8 +56,8 @@ module.exports = {
     },
     //生产环境,打包到根目录的bundle
     prod: {
-        //输出文件
-        filename: '[name].[hash].js',
+        //输出文件'[name].[hash].js'
+        filename: 'static/js/[name].[hash:8].js',
         //生产环境代码输出目录
         path: path.resolve(__dirname, root + 'bundle')
     }

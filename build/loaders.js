@@ -63,14 +63,14 @@ const sassLoader = {
     exclude: /node_modules/
 };
 const urlLoader = {
-    test: /\.(png|jpg|gif)$/,
-    use: [{ loader: 'url-loader', options: { limit: 128, name: 'img/[name][hash:8].[ext]' } }],
+    test: /\.(png|jpg|jpeg|gif)$/,
+    use: [{ loader: 'url-loader', options: { limit: 128, name: 'static/img/[name][hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };
 const fileLoader = {
     test: /\.(eot|svg|ttf|otf|woff|woff2)/,
-    use: [{ loader: 'file-loader', options: { limit: 128, name: 'fonts/[name][hash:8].[ext]' } }],
+    use: [{ loader: 'file-loader', options: { limit: 128, name: 'static/fonts/[name][hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };

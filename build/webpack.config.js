@@ -9,10 +9,10 @@ const os = require('os');
 const HappyPack = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
+const env = require('./env');
+
 const __base = require('./base.config.js');
 const __rules = require('./loaders');
-
-const __package = require('./../package.json');
 
 const webpackConfig = {
     entry: { 'index': path.resolve(__dirname, __base.entry) },
@@ -32,12 +32,12 @@ const webpackConfig = {
     plugins: [
         //处理.css文件
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "version.[id].0.css"
+            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name].[hash:8].css',
+            chunkFilename: 'static/css/[name].[hash:8].chunk.css'
         }),
         //构建html
         new HtmlWebpackPlugin({
-            title: (__package.projectName || __package.name) + __package.version,
+            title: __base.projectName + __base.version,
             minify: {
                 // 移除HTML中的注释
                 removeComments: true,
