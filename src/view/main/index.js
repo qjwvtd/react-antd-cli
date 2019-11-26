@@ -32,6 +32,7 @@ export default class Main extends PureComponent {
                     </Col>
                 </Row>
                 <Row>
+                    <Button type="primary" shape="round">免费试用</Button>
                     <Button type="primary" shape="round">观看视频</Button>
                 </Row>
             </React.Fragment>

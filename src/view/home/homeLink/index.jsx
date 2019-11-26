@@ -19,7 +19,7 @@ export default function MainLink(props) {
                 inlineCollapsed={collapsed}
             >
                 <Menu.Item key="member">
-                    <Link to="/member">
+                    <Link to="/home/member" replace>
                         <Icon type="pie-chart" />
                         <span>成员管理</span>
                     </Link>
@@ -27,7 +27,7 @@ export default function MainLink(props) {
                 <SubMenu
                     key="equipment"
                     title={
-                        <Link to="/equipment">
+                        <Link to="/home/equipment" replace>
                             <Icon type="mail" />
                             <span>设备管理</span>
                         </Link>
@@ -41,7 +41,7 @@ export default function MainLink(props) {
                 <SubMenu
                     key="safeCenter"
                     title={
-                        <Link to="safe">
+                        <Link to="/home/safe" replace>
                             <Icon type="appstore" />
                             <span>安全中心</span>
                         </Link>
@@ -53,7 +53,7 @@ export default function MainLink(props) {
                 <SubMenu
                     key="workScopeInfo"
                     title={
-                        <Link to="scope">
+                        <Link to="/home/scope" replace>
                             <Icon type="desktop" />
                             <span>作业面信息</span>
                         </Link>
@@ -65,7 +65,7 @@ export default function MainLink(props) {
                 <SubMenu
                     key="projectSetting"
                     title={
-                        <Link to="/setting">
+                        <Link to="/home/setting" replace>
                             <Icon type="desktop" />
                             <span>项目设置</span>
                         </Link>

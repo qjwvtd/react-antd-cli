@@ -18,7 +18,7 @@ export default class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log('login');
-        routerHistory.push('/');
+        routerHistory.push('/home');
     }
     submitLogin() {
         shakePrevent();

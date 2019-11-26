@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Row, Col, Menu, Icon, Button } from 'antd';
+//主界面Link,router
 import MainLink from './homeLink';
 import MainRoute from './homeRoute';
 
