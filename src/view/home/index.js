@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import MainLink from './homeLink';
 import MainRoute from './homeRoute';
 
-// const { SubMenu } = Menu;
-
 
 export default class Home extends Component {
     constructor(props) {

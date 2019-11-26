@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Menu, Icon, Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
 
@@ -11,50 +12,68 @@ export default function MainLink(props) {
                 <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
             </Button>
             <Menu
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['member']}
+                defaultOpenKeys={['equipment']}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={collapsed}
             >
-                <Menu.Item key="1">
-                    <Icon type="pie-chart" />
-                    <span>通讯录</span>
+                <Menu.Item key="member">
+                    <Link to="/member">
+                        <Icon type="pie-chart" />
+                        <span>成员管理</span>
+                    </Link>
                 </Menu.Item>
                 <SubMenu
-                    key="sub1"
+                    key="equipment"
                     title={
-                        <span>
+                        <Link to="/equipment">
                             <Icon type="mail" />
-                            <span>工程项目</span>
-                        </span>
+                            <span>设备管理</span>
+                        </Link>
                     }
                 >
-                    <Menu.Item key="5">Option 5</Menu.Item>
-                    <Menu.Item key="6">Option 6</Menu.Item>
-                    <Menu.Item key="7">Option 7</Menu.Item>
-                    <Menu.Item key="8">Option 8</Menu.Item>
+                    <Menu.Item key="equipment1">Option 1</Menu.Item>
+                    <Menu.Item key="equipment2">Option 2</Menu.Item>
+                    <Menu.Item key="equipment3">Option 3</Menu.Item>
+                    <Menu.Item key="equipment4">Option 4</Menu.Item>
                 </SubMenu>
                 <SubMenu
-                    key="sub2"
+                    key="safeCenter"
                     title={
-                        <span>
+                        <Link to="safe">
                             <Icon type="appstore" />
-                            <span>我的企业</span>
-                        </span>
+                            <span>安全中心</span>
+                        </Link>
                     }
                 >
-                    <Menu.Item key="9">Option 9</Menu.Item>
-                    <Menu.Item key="10">Option 10</Menu.Item>
-                    <SubMenu key="sub3" title="Submenu">
-                        <Menu.Item key="11">Option 11</Menu.Item>
-                        <Menu.Item key="12">Option 12</Menu.Item>
-                    </SubMenu>
+                    <Menu.Item key="safeCenter1">Option 1</Menu.Item>
+                    <Menu.Item key="safeCenter2">Option 2</Menu.Item>
                 </SubMenu>
-                <Menu.Item key="2">
-                    <Icon type="desktop" />
-                    <span>系统设置</span>
-                </Menu.Item>
+                <SubMenu
+                    key="workScopeInfo"
+                    title={
+                        <Link to="scope">
+                            <Icon type="desktop" />
+                            <span>作业面信息</span>
+                        </Link>
+                    }
+                >
+                    <Menu.Item key="workScopeInfo1">Option 1</Menu.Item>
+                    <Menu.Item key="workScopeInfo2">Option 2</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                    key="projectSetting"
+                    title={
+                        <Link to="/setting">
+                            <Icon type="desktop" />
+                            <span>项目设置</span>
+                        </Link>
+                    }
+                >
+                    <Menu.Item key="projectSetting1">Option 1</Menu.Item>
+                    <Menu.Item key="projectSetting2">Option 2</Menu.Item>
+                </SubMenu>
             </Menu>
         </Fragment>
     );
