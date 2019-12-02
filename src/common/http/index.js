@@ -1,9 +1,14 @@
 import axios from 'axios';
 import { message } from 'antd';
+import { getToken } from '@/common/utils';
+//请求地址
+const __BASEURL = require('./../../../package.json').baseURL;
+//不拦截的白名单
+const whiteList = require('./httpWhiteRoster.js');
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
-    axios.defaults.baseURL = 'http://www.dhwork.cn';
+    axios.defaults.baseURL = __BASEURL;
 }
 //开发环境
 if (process.env.NODE_ENV === 'development') {
@@ -16,12 +21,14 @@ if (process.env.NODE_ENV === 'development') {
 axios.defaults.timeout = 10000;
 
 //http request 拦截器
-// const author = 'Authorization';
-// const token = 'db2c4808-450b-4382-bcde-5844da36efda';
+const author = 'Authorization';
 axios.interceptors.request.use(config => {
-    // if (token) {
-    //     config.headers.common[author] = 'Bearer' + token;
-    // }
+    const token = getToken();
+    if (token) {
+        if (whiteList.indexOf(config.url) === -1) {
+            config.headers.common[author] = 'Bearer ' + token;
+        }
+    }
     return config;
 }, error => Promise.reject(error));
 
@@ -39,12 +46,6 @@ function checkStatus(response) {
         }
         if (response.data.code !== 200) {
             message.error(response.data.msg || '未知异常');
-        }
-        if (response.data.data.constructor === Array && response.data.data.length === 0) {
-            message.error('暂无数据');
-        }
-        if (response.data.data.constructor === Object && JSON.stringify(response.data.data) === '{}') {
-            message.error('暂无数据');
         }
         return response;
     }
@@ -74,7 +75,6 @@ function checkStatus(response) {
 function checkCode(res, errMsg) {
     if (!res) { return; }
     if (!res.status) {
-        console.log(res.data);
         switch (res.data.data.code) {
         case 1:
             message.error(res.data.data.msg || '参数异常');

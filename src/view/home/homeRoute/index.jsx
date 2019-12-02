@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+//首页公共头部
+import HomeHead from '@/view/home/homeHead';
 //404
 import PageNoFind from '@/view/404';
 //成员管理
@@ -14,25 +16,21 @@ import WorkScope from '@/view/workScope';
 import ProjectSetting from '@/view/projectSetting';
 
 
-export default class MainRoute extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: 'this is main route page'
-        };
-    }
-    render() {
-        return (
-            <Fragment>
-                <Switch>
-                    <Route exact path="/home/member" component={MemberManager}></Route>
-                    <Route path="/home/equipment" component={Equipment}></Route>
-                    <Route path="/home/safe" component={SafeCenter}></Route>
-                    <Route path="/home/scope" component={WorkScope}></Route>
-                    <Route path="/home/setting" component={ProjectSetting}></Route>
-                    <Route component={PageNoFind} />
-                </Switch>
-            </Fragment>
-        );
-    }
+export default function HomeRoute(props) {
+    const { title } = props;
+    return (
+        <Fragment>
+            <HomeHead title={title} />
+            <Switch>
+                {/* 首页默认加载成员管理 */}
+                <Route exact path="/home" component={MemberManager}></Route>
+                <Route exact path="/home/member" component={MemberManager}></Route>
+                <Route path="/home/equipment" component={Equipment}></Route>
+                <Route path="/home/safe" component={SafeCenter}></Route>
+                <Route path="/home/scope" component={WorkScope}></Route>
+                <Route path="/home/setting" component={ProjectSetting}></Route>
+                <Route component={PageNoFind} />
+            </Switch>
+        </Fragment>
+    );
 }

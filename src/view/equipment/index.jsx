@@ -11,7 +11,7 @@ export default class Equipment extends Component {
         return (
             <Fragment>
                 {this.state.title}
-                <p>这是设置管理界面</p>
+                <p>这是设备管理界面</p>
             </Fragment>
         );
     }

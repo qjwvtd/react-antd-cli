@@ -7,7 +7,9 @@ import PageNotFound from '@/view/404';
 import Main from '@/view/main';
 import Home from '@/view/home';
 import Login from '@/view/user/login';
-import SetPassword from '@/view/user/setPassword';
+import QrcodeLogin from '@/view/user/qrcodeLogin';
+import SetPwdCheckMobile from '@/view/user/setPassword';
+import SetPwd from '@/view/user/setPassword/setPwd.js';
 
 export default class View extends PureComponent {
     constructor(props) {
@@ -19,10 +21,12 @@ export default class View extends PureComponent {
             <Router history={hashHistory}>
                 <Fragment>
                     <Switch>
-                        <Route path="/home" component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/setPassword" component={SetPassword} />
                         <Route exact path="/" component={Main} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/qrcodeLogin" component={QrcodeLogin} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/setPwdCheckMobile" component={SetPwdCheckMobile} />
+                        <Route path="/setPwd" component={SetPwd} />
                         <Route component={PageNotFound} />
                     </Switch>
                 </Fragment>

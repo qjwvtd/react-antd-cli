@@ -11,7 +11,6 @@ export default class MemberManager extends Component {
         return (
             <Fragment>
                 {this.state.title}
-                <p>这是成员管理界面</p>
             </Fragment>
         );
     }

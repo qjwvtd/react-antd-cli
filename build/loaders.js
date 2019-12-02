@@ -69,7 +69,7 @@ const urlLoader = {
     exclude: /node_modules/
 };
 const fileLoader = {
-    test: /\.(eot|svg|ttf|otf|woff|woff2)/,
+    test: /\.(eot|svg|ttf|otf|woff|woff2|mp3|mp4)/,
     use: [{ loader: 'file-loader', options: { limit: 128, name: 'static/fonts/[name][hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/

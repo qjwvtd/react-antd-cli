@@ -12,7 +12,9 @@ const __proxy = {
     //接口根路径
     '/api': {
         //被代理的请求地址
-        target: 'http://192.168.10.3:5005',
+        // target: 'http://192.168.10.3:5005',
+        // target: 'http://www-test.dhwork.cn',
+        target: 'http://www-dev.dhwork.cn',
         //跨域
         changeOrigin: true,
         //如果是https，会有安全校验，设置secure为false
@@ -37,7 +39,7 @@ module.exports = {
     //项目名称
     projectName: '智安汇平台',
     //版本
-    version: '1.2.0',
+    version: '1.0.0',
     //入口文件
     entry: _src + '/app.js',
     //主工作目录

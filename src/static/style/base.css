@@ -51,6 +51,14 @@ input,select,textarea{
 textarea{overflow: auto}
 /*btn*/
 button{outline:none;text-decoration:none;border:none;cursor:pointer}
+/*标题*/
+h1,h2,h3,h4{
+    font-weight: 6000;
+}
+h1{font-size: 38px;}
+h2{font-size: 30px;}
+h3{font-size: 24px;}
+h4{font-size: 20px;}
 /*浮动*/
 .clearfix:after,.clearfix:before{display:block;height: 0px;clear: both;visibility: hidden;font-size: 0;content: "";}
 .fr {float: right;}

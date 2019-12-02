@@ -1,17 +1,78 @@
-.login-form-container{
+.login-wrap{
+    width: 100%;
+    height: 100%;
     position: relative;
-    height: 720px;
-    .login-form{
+    .login-container{
+        width: 26.6%;
+        min-width: 440px;
         position: absolute;
         z-index: 2;
-        width: 360px;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
+        top: 50%;
+        transform: translate(-50%,-50%);
+        background: #fff;
+        border-radius: 5px;
+        .text-center{
+            padding-bottom: 40px;
+        }
+        .login-main{
+            height:460px;
+            background:rgba(255,255,255,1);
+            box-shadow:0px 12px 24px 8px rgba(245,245,245,1);
+            border-radius:4px;
+            padding: 0 56px;
+            .logo-type-title{
+                text-align: center;
+                padding: 40px 0 20px 0;
+            }
+            .login-form{
+                >.ant-row:nth-child(1){
+                    .ant-input-affix-wrapper .ant-input:not(:first-child) {
+                        padding-left: 60px !important;
+                    }
+                }
+                .ant-input-group-addon {
+                    padding: 0 !important;
+                    height: 38px;
+                    overflow: hidden;
+                    >img{
+                        height: 38px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .forgetPwd,.login-type-qrcode,.login-type-mobile{
+            color: @mainBlue;
+            line-height: 50px;
+        }
+        //二维码登录的样式
+        .qrcodeLoginTips{
+            text-align: center;
+            margin-top: 10px;
+            line-height: 50px;
+        }
+        .qrcodeContainer{
+            width: 240px;
+            height: 240px;
+            margin: 0 auto;
+            background: url('./../images/qrcodeContainer.png') no-repeat;
+            background-size: 100% 100%;
+            >img{
+                width: 88%;
+                height: 88%;
+                margin: 6% auto auto 6%;
+            }
+        }
     }
 }
-
-
-
+.mainFoot{
+    color: #000619;
+    font-size: 0.8em;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    bottom: 32px;
+    opacity: 0.3;
+}

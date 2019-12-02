@@ -1,30 +1,30 @@
 import Cookies from 'js-cookie';
 
 const TokenKey = 'Admin-Token';
-//登录令牌
-export const LOGINSECRET = {
-    id: 'web',
-    secret: 'sKuBjFlMsUiPsKlO'
-};
+
 //token,get
 export function getToken() {
-    const isremember = localStorage.getItem('REMEMBER');
-    if (isremember === 'true') {
-        return Cookies.get(TokenKey);
-    }
-    if (isremember === 'false') {
-        return sessionStorage.getItem(TokenKey);
-    }
+    return Cookies.get(TokenKey);
+    //记住功能先留着
+    // const isremember = localStorage.getItem('REMEMBER');
+    // if (isremember === 'true') {
+    //     return Cookies.get(TokenKey);
+    // }
+    // if (isremember === 'false') {
+    //     return sessionStorage.getItem(TokenKey);
+    // }
 }
 //token,set
 export function setToken(token) {
-    const isremember = localStorage.getItem('REMEMBER');
-    if (isremember === 'true') {
-        Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
-    }
-    if (isremember === 'false') {
-        sessionStorage.setItem(TokenKey, token);
-    }
+    Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
+    //记住功能先留着
+    // const isremember = localStorage.getItem('REMEMBER');
+    // if (isremember === 'true') {
+    //     Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
+    // }
+    // if (isremember === 'false') {
+    //     sessionStorage.setItem(TokenKey, token);
+    // }
 }
 //token,rm
 export function removeToken() {
@@ -145,10 +145,10 @@ export function shakePrevent(delay) {
  * 获取指定的URL参数值
  * URL:http://www.quwan.com/index?name=tyler
  * 参数：paramName URL参数
- * 调用方法:getUrlParams("name")
+ * 调用方法:getUrlParam("name")
  * 返回值:tyler
  */
-export default function getUrlParams(paramName) {
+export function getUrlParam(paramName) {
     const str = window.location.hash;
     const xh = str.indexOf('?');
     const query = str.substr(xh + 1, str.length);

@@ -1,7 +1,6 @@
 /*主界面左右布局*/
 html,body{
     min-width: 1366px;
-    max-width: 1920px;
     margin: 0 auto;
     height: 100%;
     line-height: 1.5;
@@ -33,6 +32,12 @@ body>#root{
             //背景色与antd导航保持一致
             background: #001529; 
             width: 256px;
+            //导航a标签
+            .ant-menu-submenu-title>a{
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+            }
         }
         >div.sass-ui-left.active{
             width: 80px;

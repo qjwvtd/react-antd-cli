@@ -23,7 +23,7 @@ module.exports = {
             4
         ],
         //不能有声明后未被使用的变量或参数
-        "no-unused-vars": [1, { "vars": "all", "args": "after-used" }],
+        "no-unused-vars": [2, { "vars": "all", "args": "after-used" }],
         //防止react组件被错误地标记为未使用
         "react/jsx-uses-react": 1,
         //防止在JSX中使用的变量被错误地标记为未使用
