@@ -17,8 +17,8 @@ axios.defaults.timeout = 10000;
 
 //http request 拦截器
 // const author = 'Authorization';
-// const token = 'db2c4808-450b-4382-bcde-5844da36efda';
 axios.interceptors.request.use(config => {
+    // const token = 'db2c4808-450b-4382-bcde-5844da36efda';
     // if (token) {
     //     config.headers.common[author] = 'Bearer' + token;
     // }
