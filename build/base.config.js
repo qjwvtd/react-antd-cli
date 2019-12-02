@@ -2,6 +2,7 @@
 
 const path = require('path');
 const env = require('./env');
+const baseUrl = require('./../package.json').baseUrl;
 
 /**
  *代理跨域
@@ -14,7 +15,7 @@ const __proxy = {
         //被代理的请求地址
         // target: 'http://192.168.10.3:5005',
         // target: 'http://www-test.dhwork.cn',
-        target: 'http://www-dev.dhwork.cn',
+        target: baseUrl,
         //跨域
         changeOrigin: true,
         //如果是https，会有安全校验，设置secure为false

@@ -3,6 +3,7 @@ import { Modal, Form, Button, Input, message } from 'antd';
 import constant from '@/common/utils/constant.js';
 import { loginWithMobileNote, LOGINSECRET, sendSMSVerificationCode } from '@/common/api/login';
 import { getLastTimeProject } from '@/common/api/public';
+import { createProbationData } from '@/common/api/user';
 import hashHistory from '@/common/router';//路由跳转
 import {setToken} from '@/common/utils/index.js';//存token
 import ProgressPage from '../progressPage';
@@ -125,7 +126,6 @@ class MyForm extends Component{
                 if(res.code === 200){
                     let token = res.data.token;
                     setToken(token);//存token
-                    this.props.hideModal(false);
                     this.getLastEnterProject();
                 }
             });
@@ -134,18 +134,27 @@ class MyForm extends Component{
     // 获取上一次进入项目
     getLastEnterProject(){
         getLastTimeProject({official:0}).then((res)=>{
-            console.log(res);
             if(res.code === 200){
                 let lastProject = res.data;
                 if(lastProject){
                     // 存在，直接进入
                     hashHistory.push('/home');
+                    this.props.hideModal(false);
                 }else{
                     // 不存在，加载试用数据
                     this.props.showProgressEvent(true);
-
-                    // this.props.showProgressEvent(false);
+                    this.getTryOutData();
                 }
+            }
+        });
+    }
+    // 获取试用数据
+    getTryOutData(){
+        createProbationData().then((res)=>{
+            if(res.code === 200){
+                this.props.showProgressEvent(false);
+                this.props.hideModal(false);
+                hashHistory.push('/home');
             }
         });
     }

@@ -31,8 +31,8 @@ const webpackConfig = {
     plugins: [
         //处理.css文件
         new MiniCssExtractPlugin({
-            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name].[hash:8].css',
-            chunkFilename: 'static/css/[name].[hash:8].chunk.css'
+            filename: env.dev ? 'static/[name].css' : env.prod && '/static/[name].[hash:8].css',
+            chunkFilename: env.dev ? 'static/[name].chunk.css' : env.prod && '/static/[name].[hash:8].chunk.css'
         }),
         //构建html
         new HtmlWebpackPlugin({

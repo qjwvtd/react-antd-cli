@@ -1,6 +1,9 @@
-新版本智安汇WebUi
+#####新版本智安汇Web
 
-##项目结构：
+[![react version](https://www.npmjs.com/package/react)]
+[![react-dom version](https://www.npmjs.com/package/react-dom)]
+
+###项目结构：
 
 +build : webpack 配置目录
 
@@ -42,4 +45,31 @@
 ###访问
 ```javascript
 *http://localhost:9000
+```
+
+###部署,测试
+```javascript
+
+##测试环境部署步骤
+
+*1,修改package.json文件中的baseUrl为dev接口请求地址
+
+*2,npm install
+
+*3,npm run dev:test
+
+*4,http:localhost:9000
+
+##生产环境部署步骤
+
+*1,修改package.json文件中的baseUrl为prod接口请求地址
+
+*2,npm install
+
+*3,npm run build
+
+*4,npm run build:test
+
+*5,http:localhost:3000
+
 ```

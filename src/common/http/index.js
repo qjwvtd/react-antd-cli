@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === 'development') {
 axios.defaults.timeout = 10000;
 
 //http request 拦截器
-<<<<<<< HEAD
 const author = 'Authorization';
 axios.interceptors.request.use(config => {
     const token = getToken();
@@ -30,14 +29,6 @@ axios.interceptors.request.use(config => {
             config.headers.common[author] = 'Bearer ' + token;
         }
     }
-=======
-// const author = 'Authorization';
-axios.interceptors.request.use(config => {
-    // const token = 'db2c4808-450b-4382-bcde-5844da36efda';
-    // if (token) {
-    //     config.headers.common[author] = 'Bearer' + token;
-    // }
->>>>>>> e395d73c43880e8ae48c255f74c849bfc0b67708
     return config;
 }, error => Promise.reject(error));
 
