@@ -36,83 +36,76 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
 function checkStatus(response) {
+    console.log(response);
     if (!response) {
         message.error('网络故障,请检查您的网络');
         return;
     }
-    if (response.status === 200 || response.status === 304) {
+    //请求成功
+    if (response.status === 200) {
         if (response.data.code === 401) {
             message.error('登录已过期,请重新登录');
         }
         if (response.data.code !== 200) {
             message.error(response.data.msg || '未知异常');
         }
+        response.msg = null;
         return response;
     }
-    if (response.status === 401) {
-        message.error('请求授权失败');
-    }
-    if (response.status === 401) {
-        message.error('请求授权失败');
-    }
-    if (response.status === 403) {
-        message.error('请求不允许');
-    }
-    if (response.status === 404) {
-        message.error('没有发现文件、查询或URl');
-    }
-    if (response.status === 405) {
-        message.error('Request-Line字段定义的方法不允许');
-    }
-    if (response.status >= 500) {
-        message.error('服务器内部错误,' + response.statusText);
-    }
-    if (response.status === 504) {
-        message.error('网关超时,' + response.statusText);
+    //请求失败
+    if (response.status !== 200) {
+        const statusArr = [
+            { code: 401, message: '请求授权失败' },
+            { code: 403, message: '请求不允许' },
+            { code: 404, message: '没有发现文件、查询地址或URl' },
+            { code: 405, message: 'Request-Line字段定义的方法不允许' },
+            { code: 500, message: '服务器内部错误,' + response.statusText },
+            { code: 502, message: 'Nginx配置网关受限或超时等,' + response.statusText },
+            { code: 503, message: '服务器访问受限,' + response.statusText },
+            { code: 504, message: '网关超时,' + response.statusText }
+        ];
+        for (let i = 0; i < statusArr.length; i++) {
+            const item = statusArr[i];
+            if (item.code === response.status) {
+                return { data: response.data, msg: item.message };
+            }
+        }
     }
 }
 
-function checkCode(res, errMsg) {
+function checkCode(res) {
     if (!res) { return; }
-    if (!res.status) {
-        switch (res.data.data.code) {
-        case 1:
-            message.error(res.data.data.msg || '参数异常');
-            break;
-        case 2:
-            message.error('未登录！');
-            break;
-        case 3:
-            message.error('没有权限');
-            break;
-        default:
-            errMsg ? message.error(errMsg) : message.error(res.data.message || '未知异常');
+    try {
+        if (res.msg) {
+            message.error(res.msg);
         }
+    } catch (error) {
+        console.log(error);
     }
     return res.data;
 }
 
 export default {
-    POST(url, data, errMsg) {
-        return axios.post(url, data, {}).then(checkStatus).then(res => checkCode(res, errMsg));
+    POST(url, data) {
+        return axios.post(url, data, {}).then(checkStatus).then(res => checkCode(res));
     },
-    GET(url, params, errMsg) {
+    GET(url, params) {
         return axios.get(url, {
             params: {
                 _t: +(new Date()),
                 ...params
             }
-        }).then(checkStatus).then(res => checkCode(res, errMsg));
+        }).then(checkStatus).then(res => checkCode(res));
     },
-    DELETE(url, params, errMsg) {
+    DELETE(url, params) {
         return axios.delete(url, {
             params: {
                 _t: +(new Date()),
                 ...params
             }
-        }).then(checkStatus).then(res => checkCode(res, errMsg));
+        }).then(checkStatus).then(res => checkCode(res));
     },
-    PUT(url, data, errMsg) {
-        return axios.put(url, data, {}).then(checkStatus).then(res => checkCode(res, errMsg));
+    PUT(url, data) {
+        return axios.put(url, data, {}).then(checkStatus).then(res => checkCode(res));
     }
 };
