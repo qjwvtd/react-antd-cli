@@ -36,11 +36,10 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
 function checkStatus(response) {
-    if (!response) {
-        message.error('网络故障,请检查您的网络');
-        return;
-    }
     let res = null;
+    if (!response) {
+        res = { data: { data: null, code: null }, msg: '网络故障,请检查您的网络' };
+    }
     //请求成功
     if (response.status === 200) {
         //接口处理成功
@@ -55,22 +54,18 @@ function checkStatus(response) {
     }
     //请求失败
     if (response.status !== 200) {
-        const statusArr = [
-            { code: 401, message: '请求授权失败' },
-            { code: 403, message: '请求不允许' },
-            { code: 404, message: '没有发现文件、查询地址或URl' },
-            { code: 405, message: 'Request-Line字段定义的方法不允许' },
-            { code: 500, message: '服务器内部错误,' + response.statusText },
-            { code: 502, message: 'Nginx配置网关受限或超时等,' + response.statusText },
-            { code: 503, message: '服务器访问受限,' + response.statusText },
-            { code: 504, message: '网关超时,' + response.statusText }
-        ];
-        for (let i = 0; i < statusArr.length; i++) {
-            const item = statusArr[i];
-            if (item.code === response.status) {
-                res = { data: response.data, msg: item.message };
-            }
-        }
+        const statusObj = {
+            401: '请求授权失败',
+            403: '请求不允许,无操作权限',
+            404: '没有发现文件、查询地址或URl',
+            405: 'Request-Line字段定义的方法不允许',
+            500: '服务器内部错误,' + response.statusText,
+            502: 'Nginx配置网关受限或超时等,' + response.statusText,
+            503: '服务器访问受限,' + response.statusText,
+            504: '网关超时,' + response.statusText
+        };
+        const errormsg = statusObj[response.status] || '未知错误';
+        res = { data: response.data, msg: errormsg };
     }
     //捕获
     try {
@@ -107,3 +102,4 @@ export default {
         return axios.put(url, data, {}).then(checkStatus);
     }
 };
+
