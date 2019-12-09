@@ -27,4 +27,4 @@ export const sendSMSVerificationCode = data => http.POST('/api/versatile/v1/sms/
 // 发送短信验证码(已注册重置密码)
 export const sendResetSMSVerificationCode = data => http.POST('/api/versatile/v1/sms/reset', data);
 //登录界面的忘记密码,用于修改密码,传短信,密码,手机
-export const forgetPwdWithLogin = data => http.PUT('/api/account/v1/user/fpw', data);
+export const updatePassword = data => http.PUT('/api/account/v1/user/fpw', data);

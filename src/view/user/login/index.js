@@ -5,7 +5,7 @@ import { Form, Icon, Input, Button, Row, Col } from 'antd';
 import { getImgCode64 } from '@/common/api/login';
 import { shakePrevent, setToken } from '@/common/utils';
 import constants from '@/common/utils/constant.js';
-import { setCurrentProjectId } from '@/common/store/storage';
+import { setCurrentProjectId, setCurrentUserType } from '@/common/store/storage';
 
 import Logo from '@/view/component/logo';
 
@@ -93,6 +93,7 @@ class LoginForm extends PureComponent {
             // console.log(res);
             if (res.code === 200) {
                 setToken(res.data.token);
+                setCurrentUserType(2);
                 setTimeout(() => {
                     //获取最近使用的项目
                     getLastTimeProject(null).then((response) => {

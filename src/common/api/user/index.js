@@ -1,4 +1,4 @@
 import http from '@/common/http';
 
-//生成试用用户数据
-export const createProbationData = data => http.GET('api/enterprise/v1/user/create/probation/data', data);
+// 获取用户信息 包括用户信息，部门信息，管理项目信息
+export const getUser = data => http.GET('api/enterprise/v1/user/get/user', data);

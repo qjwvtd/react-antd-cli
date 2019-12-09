@@ -47,9 +47,19 @@ const cssLoader = {
 const lessLoader = {
     test: /\.less$/,
     use: [
-        MiniCssExtractPlugin.loader,
-        { loader: 'css-loader' },
-        { loader: 'less-loader' }
+        { loader: 'style-loader' },
+        { loader: 'css-loader' }, // translates CSS into CommonJS
+        {
+            loader: 'less-loader', // compiles Less to CSS
+            options: {
+                modifyVars: {
+                    // 'primary-color': '#1DA57A'
+                    // or
+                    // 'hack': `true; @import "your-less-file-path.less";`,
+                },
+                javascriptEnabled: true,
+            }
+        }
     ],
     include: __include__dirname,
     exclude: /node_modules/

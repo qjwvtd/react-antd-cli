@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-//首页公共头部
-import HomeHead from '@/view/home/homeHead';
 //404
 import PageNoFind from '@/view/404';
 //成员管理
@@ -16,11 +14,9 @@ import WorkScope from '@/view/workScope';
 import ProjectSetting from '@/view/projectSetting';
 
 
-export default function HomeRoute(props) {
-    const { title } = props;
+export default function HomeRoute() {
     return (
         <Fragment>
-            <HomeHead title={title} />
             <Switch>
                 {/* 首页默认加载成员管理 */}
                 <Route exact path="/home" component={MemberManager}></Route>

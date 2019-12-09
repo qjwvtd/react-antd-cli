@@ -4,6 +4,16 @@ const path = require('path');
 const env = require('./env');
 const baseUrl = require('./../package.json').baseUrl;
 
+function joinName(pathString) {
+    return path.resolve(__dirname, pathString);
+}
+//src,工作目录
+const _src = joinName('./../src');
+//public,开发环境热更新目录
+const _public = joinName('./../public');
+//bundle,生产环境构建目录
+const _bundle = joinName('./../bundle');
+
 /**
  *代理跨域
  *同webpack-dev-server的proxy设置一样,
@@ -26,15 +36,6 @@ const __proxy = {
         }
     }
 };
-function joinName(pathString) {
-    return path.join(__dirname.replace('build', pathString)).replace(/\\/g, '/');
-}
-//src,工作目录
-const _src = joinName('src');
-//public,开发环境热更新目录
-const _public = joinName('public');
-//bundle,生产环境构建目录
-const _bundle = joinName('bundle');
 
 module.exports = {
     //项目名称

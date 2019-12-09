@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 //主界面Link,router
 import HomeLink from './homeLink';
 import HomeRoute from './homeRoute';
+import HomeHead from './homeHead';
 
 export default class Home extends Component {
     constructor(props) {
@@ -28,15 +29,18 @@ export default class Home extends Component {
         return (
             <Fragment>
                 <div className="sass-ui-container">
-                    <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"}>
-                        <HomeLink
-                            collapsed={this.state.collapsed}
-                            collapsedEvent={() => this.toggleCollapsed()}
-                            linkClickEvent={(t) => this.homeLinkClick(t)}
-                        />
-                    </div>
-                    <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"}>
-                        <HomeRoute title={this.state.currentTitle} />
+                    <HomeHead />
+                    <div className="sass-ui-content">
+                        <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"}>
+                            <HomeLink
+                                collapsed={this.state.collapsed}
+                                collapsedEvent={() => this.toggleCollapsed()}
+                                linkClickEvent={(t) => this.homeLinkClick(t)}
+                            />
+                        </div>
+                        <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"}>
+                            <HomeRoute />
+                        </div>
                     </div>
                 </div>
             </Fragment>

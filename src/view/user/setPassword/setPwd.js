@@ -5,7 +5,7 @@ import { shakePrevent, getUrlParam } from '@/common/utils';
 import constants from '@/common/utils/constant.js';
 
 import hostoryRoute from '@/common/router';
-import { sendResetSMSVerificationCode, forgetPwdWithLogin } from '@/common/api/login';
+import { sendResetSMSVerificationCode, updatePassword } from '@/common/api/login';
 
 import Logo from '@/view/component/logo';
 import MainFoot from '@/view/component/foot';
@@ -28,14 +28,14 @@ class SetpasswordForm extends Component {
         //按钮交互
         const btnChangeFunc = () => {
             let count = 60;
-            const interval = setInterval(() => {
+            this.interval = setInterval(() => {
                 let btnText = '';
                 if (count > 0) {
                     count = count - 1;
                     btnText = count + 's后重新获取';
                 }
                 if (count === 0) {
-                    clearInterval(interval);
+                    clearInterval(this.interval);
                     btnText = '获取验证码';
                 }
                 this.setState({
@@ -47,7 +47,7 @@ class SetpasswordForm extends Component {
         sendResetSMSVerificationCode({ phone: this.state.mobile }).then((res) => {
             if (res.code === 200) {
                 btnChangeFunc();
-                message.success('短信已发送,请注意查收咯,^0^!');
+                message.success('短信已发送,请注意查收,^0^!');
             }
         });
     }
@@ -94,10 +94,13 @@ class SetpasswordForm extends Component {
             password: this.state.password,
             phone: this.state.mobile
         };
-        forgetPwdWithLogin(sendData).then((res) => {
+        updatePassword(sendData).then((res) => {
             if (res.code === 200) {
                 message.success('密码已修改,^0^!');
-                hostoryRoute.push('/login');
+                clearInterval(this.interval);
+                setTimeout(() => {
+                    hostoryRoute.push('/login');
+                }, 100);
             }
         });
     }

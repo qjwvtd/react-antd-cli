@@ -17,6 +17,9 @@ export default {
     },
     //storage
     storage: {
-        currentProjectId: 'currentProjectId'
+        //当前项目ID
+        currentProjectId: 'currentProjectId',
+        //当前用户类型
+        currentUserType: 'currentUserType'
     }
 };

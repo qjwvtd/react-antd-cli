@@ -31,48 +31,7 @@ export function removeToken() {
     sessionStorage.removeItem(TokenKey);
     return Cookies.remove(TokenKey);
 }
-export function setLocalStorage(key, value) {
-    window.localStorage.setItem(key, JSON.stringify(value));
-}
 
-export function getLocalStorage(key) {
-    let obj = JSON.parse(window.localStorage.getItem(key));
-    if (obj && obj !== 'undefined' && obj !== 'null') {
-        return obj;
-    }
-    return '';
-}
-
-export function removeLocalStorage(key) {
-    if (key) {
-        window.localStorage.removeItem(key);
-    } else {
-        for (let i in arguments) {
-            window.localStorage.removeItem(arguments[i]);
-        }
-    }
-}
-export function setSessionStorage(key, value) {
-    window.sessionStorage.setItem(key, JSON.stringify(value));
-}
-
-export function getSessionStorage(key) {
-    let obj = window.sessionStorage.getItem(key);
-    if (obj && obj !== 'undefined' && obj !== 'null') {
-        return JSON.parse(obj);
-    }
-    return '';
-}
-
-export function removeSessionStorage(key) {
-    if (key) {
-        window.sessionStorage.removeItem(key);
-    } else {
-        for (let i in arguments) {
-            window.sessionStorage.removeItem(arguments[i]);
-        }
-    }
-}
 //uuid
 export function getUUid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

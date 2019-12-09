@@ -7,6 +7,7 @@ var port = 3000;
 //定位静态资源到bundle目录
 var root = __dirname.replace('build', 'bundle');
 app.use(express.static(path.join(root)));
+// var __env = process.env.NODE_ENV;
 //代理请求地址
 var options = {
     target: "http://www-dev.dhwork.cn",
