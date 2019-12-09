@@ -120,3 +120,56 @@ export function getUrlParam(paramName) {
     }
     return false;
 }
+/**
+ * react阻止当前事件冒泡
+ * @param e,当前事件触发的事件对象,调用:stopeEventPropagation(e)
+*/
+export function stopeEventPropagation(e) {
+    e.nativeEvent.stopImmediatePropagation();
+    e.stopPropagation();
+}
+/**文本框chang事件防抖类
+ * @param fn,写自己的处理逻辑
+ * @param delay,延迟多少毫秒拿到结果,默认2000
+ * @param value,文本框输入的值
+ * debounce.init(fn, delay)(value);
+ * 如:debounce.init(() => {console.log('在这里写请求')}, 1000)('文本框输入的值');
+ **/
+export const debounce = {
+    timerId: null,
+    init(fn, delay) {
+        return (...parms) => {
+            let args = parms;
+            if (this.timerId) { clearTimeout(this.timerId); }
+            this.timerId = setTimeout(() => {
+                fn.apply(this, args);
+            }, delay || 2000);//默认2秒
+        };
+    }
+};
+/**
+*根据key,value,从树里面找到一个节点,return当前节点
+*@param treeList,标准的树型结构,必须要有children字段
+*@param key,查询的关键属性
+*@param value,key的值
+*如:queryFindTreeNode(treeList,'id',1),查找treeList中id为3的节点
+**/
+export function queryFindTreeNode(treeList, key, value) {
+    let result = null;
+    if (!treeList) {
+        return;
+    }
+    for (let i in treeList) {
+        if (result !== null) {
+            break;
+        }
+        let item = treeList[i];
+        if (item[key] === value) {
+            result = item;
+            break;
+        } else if (item.children && item.children.length > 0) {
+            result = queryFindTreeNode(item.children, key, value);
+        }
+    }
+    return result;
+}
