@@ -36,20 +36,21 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
 function checkStatus(response) {
-    let res = null;
+    let errorMsgTips = null;
     if (!response) {
-        res = { data: { data: null, code: null }, msg: '网络故障,请检查您的网络' };
+        errorMsgTips = '网络故障,请检查您的网络';
+        message.error(errorMsgTips);
+        return { data: null, code: null, msg: errorMsgTips };
     }
     //请求成功
     if (response.status === 200) {
         //接口处理成功
         if (response.data.code === 200) {
-            response.msg = null;
-            res = response;
+            errorMsgTips = null;
         }
         //接口处理失败
         if (response.data.code !== 200) {
-            res = { data: response.data, msg: response.data.msg };
+            errorMsgTips = response.data.msg;
         }
     }
     //请求失败
@@ -64,18 +65,17 @@ function checkStatus(response) {
             503: '服务器访问受限,' + response.statusText,
             504: '网关超时,' + response.statusText
         };
-        const errormsg = statusObj[response.status] || '未知错误';
-        res = { data: response.data, msg: errormsg };
+        errorMsgTips = statusObj[response.status] || '未知错误';
     }
     //捕获
     try {
-        if (res.msg && res.data.code !== 200) {
-            message.error(res.msg);
+        if (errorMsgTips) {
+            message.error(errorMsgTips);
         }
     } catch (error) {
         console.log(error);
     }
-    return res.data;
+    return response.data;
 }
 
 export default {

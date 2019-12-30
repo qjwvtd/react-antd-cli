@@ -12,7 +12,12 @@ const env = require('./env');
 const __include__dirname = path.resolve(__dirname, baseConfig.workPath);
 const babelLoader = {
     test: /\.(js|jsx)$/,
-    use: { loader: 'babel-loader', options: { presets: ['env', 'react', 'stage-0'] } },
+    use: {
+        loader: 'babel-loader', options: {
+            presets: ['env', 'react', 'stage-0'],
+            plugins: ['transform-decorators-legacy', 'transform-decorators']
+        }
+    },
     include: __include__dirname,
     exclude: /node_modules/
 };

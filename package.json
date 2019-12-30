@@ -12,9 +12,8 @@
     "lint": "eslint --fix --ext .js,.jsx src"
   },
   "dependencies": {
-    "react": "16.8.4",
-    "react-dom": "16.8.4",
-    "react-router-dom": "4.3.1"
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "devDependencies": {
     "antd": "^3.25.1",
@@ -46,13 +45,13 @@
     "mobx": "^5.15.0",
     "mobx-react": "^6.1.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "react-router-dom": "^5.1.2",
     "sass-loader": "7.0.3",
     "style-loader": "0.20.3",
     "uglifyjs-webpack-plugin": "1.2.5",
     "url-loader": "1.0.1",
     "webpack": "4.12.2",
     "webpack-cli": "^3.2.3",
-    "webpack-command": "0.3.1",
     "webpack-dev-server": "3.1.14",
     "webpack-merge": "4.1.3"
   },
