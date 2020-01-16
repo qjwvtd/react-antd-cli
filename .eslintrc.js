@@ -17,7 +17,7 @@ module.exports = {
     extends: "eslint:recommended",
     rules: {
         //强制4个缩进
-        indent: ["error", 4],
+        "indent": ["error", 4],
         //不能有声明后未被使用的变量或参数
         "no-unused-vars": [2, { vars: "all", args: "after-used" }],
         //防止react组件被错误地标记为未使用
@@ -32,7 +32,7 @@ module.exports = {
         //是否禁止console
         "no-console": "off",
         //强制正确的分号结尾
-        semi: ["error", "always"],
+        "semi": ["error", "always"],
         //禁止出现多余的分号,如:const a = 1;;
         "no-extra-semi": "error",
         //分号必须写在行尾，禁止在行首出现
@@ -51,7 +51,7 @@ module.exports = {
         //new时必须加小括号
         "new-parens": 2,
         // 使用 === 替代 ==
-        eqeqeq: [2, "allow-null"],
+        "eqeqeq": [2, "allow-null"],
         // 控制逗号前后的空格
         "comma-spacing": [
             2,
@@ -63,7 +63,7 @@ module.exports = {
         //禁止行尾有空格
         "no-trailing-spaces": "error",
         //if 后面必须要有 {，除非是单行 if
-        curly: ["error", "multi-line", "consistent"],
+        "curly": ["error", "multi-line", "consistent"],
         //在return,throw,continue,break之后出现代码告警
         "no-unreachable": "warn",
         //外部作用域中的变量不能与它所包含的作用域中的变量或参数同名

@@ -1,4 +1,9 @@
 import http from '@/common/http';
+const server = require('@/common/api');
 
-// 获取用户信息 包括用户信息，部门信息，管理项目信息
-export const getUser = data => http.GET('api/enterprise/v1/user/get/user', data);
+// 获取用户信息
+export const getUser = data => http.GET(server.business + '/user/get/user', data);
+// 修改密码
+export const updatepwd = data => http.PUT(server.account + '/user/upw', data);
+// 获取当前用户信息
+export const getUserInfo = data => http.GET(server.account + '/user/info', data);

@@ -1,0 +1,74 @@
+/*主界面左右布局*/
+html,body{
+    min-width: 1366px;
+    margin: 0 auto;
+    height: 100%;
+    line-height: 1.5;
+}
+body>#root{
+    width: 100%;
+    height: 100%;
+    >section.ant-layout{
+        height: 100%;
+    }
+    .ant-layout-header{
+        background: #1c2327 !important;
+        color: #ccc;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 15px;
+        .ant-btn-group{
+            .ant-btn{
+                background: transparent;
+                border: none;
+                color: #fff;
+            }
+        }
+    }
+    .ant-layout-sider{
+        background: #373d41 !important;
+        color: #fff;
+        .ant-menu{
+            background: transparent !important;
+            .ant-menu-submenu-title{
+                color: #fff !important;
+                >span{
+                    display: block;
+                    height: 100%;
+                    >span{
+                        display: inline-block;
+                        width: calc(100% - 24px);
+                        height: 100%;
+                    }
+                }
+            }
+            .ant-menu-item a{
+                color: #fff;
+            }
+            .ant-menu-item-selected > a{
+                color: #fff;
+            }
+            .ant-menu-submenu-selected .ant-menu-item-selected{
+                background: #1890ff;
+            }
+            .ant-menu-inline .ant-menu-item:not(:last-child){
+                margin-bottom: 0;
+            }
+            .ant-menu-sub{
+                background: #464b4e !important;
+            }
+        }
+    }
+    .ant-layout-content{
+        overflow: hidden;
+        overflow-y: auto;
+        .main-content{
+            height: 100%;
+            width: 100%;
+            padding: 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+    }
+}

@@ -6,18 +6,16 @@ import View from './view';
 /**
  * import css
  * **/
-import '@/static/style/index.less';
+import '@/assets/style/index.less';
 
 //国际化,默认中文
-function App(props) {
-    const { } = props;
+function App() {
     return (
         <ConfigProvider locale={zhCN}>
             <View />
         </ConfigProvider>
     );
 }
-
 ReactDOM.render(
     <App />,
     document.getElementById('root')

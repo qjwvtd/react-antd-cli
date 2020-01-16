@@ -2,7 +2,6 @@
 
 const path = require('path');
 const env = require('./env');
-const baseUrl = require('./../package.json').baseUrl;
 
 function joinName(pathString) {
     return path.resolve(__dirname, pathString);
@@ -23,9 +22,8 @@ const __proxy = {
     //接口根路径
     '/api': {
         //被代理的请求地址
-        // target: 'http://192.168.10.3:5005',
+        target: 'http://www-dev.dhwork.cn',
         // target: 'http://www-test.dhwork.cn',
-        target: baseUrl,
         //跨域
         changeOrigin: true,
         //如果是https，会有安全校验，设置secure为false
@@ -39,9 +37,9 @@ const __proxy = {
 
 module.exports = {
     //项目名称
-    projectName: '智安汇平台',
+    projectName: '智安汇运营后台',
     //版本
-    version: '1.0.0',
+    version: '1.0',
     //入口文件
     entry: _src + '/app.js',
     //主工作目录

@@ -1,0 +1,76 @@
+//强制隐藏高德地图LOGO
+.amap-logo,.amap-copyright{
+    display: none !important;
+}
+//公共页尾
+.mainFoot{
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: rgb(128, 128, 128);
+}
+//按钮组时调整边距
+.ui-btns-rows{
+    .ant-btn{
+        margin-right: 10px;
+    }
+}
+//右侧容器div
+.ui-content-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+// total Row
+.ui-total-row{
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    .total_box{
+        border-bottom: 1px solid #e8e8e8;
+        font-size: 1.14em;
+        height: 40px;
+        line-height: 40px;
+    }
+    .ant-col{
+        margin-right: 16px;
+        .total_num{
+            font-weight: 600;
+        }
+    }
+}
+//search Row
+.ui-search-row{
+    padding: 16px 16px 0 16px;
+    .ant-col{
+        .ant-input{
+            width: calc(100% - 70px);
+        }
+    }
+}
+//table Row
+.ui-table-row,.ui-content-row{
+    padding: 16px 16px 0 16px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+//公共的分页布局容器div
+.ui-pagination-layout{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid #f5f5f5;
+}

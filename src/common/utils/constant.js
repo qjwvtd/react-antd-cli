@@ -4,6 +4,8 @@ export default {
     reg: {
         //用户名
         name: /^\w{1,20}|[\u4e00-\u9fa5]+$/,
+        //部门名称
+        deptName: /^\w{1,30}|[\u4e00-\u9fa5]+$/,
         //手机
         mobile: /^1(3|4|5|6|7|8|9)\d{9}$/,
         //密码
@@ -14,12 +16,5 @@ export default {
         note: /^\d{4}$/,
         //正整数和负整数
         altitude: /^(-([1-9]|[1-9][0-9])*)|([1-9]|[1-9][0-9]*)$/
-    },
-    //storage
-    storage: {
-        //当前项目ID
-        currentProjectId: 'currentProjectId',
-        //当前用户类型
-        currentUserType: 'currentUserType'
     }
 };

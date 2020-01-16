@@ -34,7 +34,7 @@ export function removeToken() {
 
 //uuid
 export function getUUid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         let r = Math.random() * 16 | 0,
             v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
@@ -108,7 +108,7 @@ export function shakePrevent(delay) {
  * 返回值:tyler
  */
 export function getUrlParam(paramName) {
-    const str = window.location.hash;
+    const str = window.location.search;
     const xh = str.indexOf('?');
     const query = str.substr(xh + 1, str.length);
     const vars = query.split('&');
@@ -159,7 +159,7 @@ export function queryFindTreeNode(treeList, key, value) {
     if (!treeList) {
         return;
     }
-    for (let i in treeList) {
+    for (let i = 0; i < treeList.length; i++) {
         if (result !== null) {
             break;
         }
@@ -172,4 +172,61 @@ export function queryFindTreeNode(treeList, key, value) {
         }
     }
     return result;
+}
+//下载文件
+export function downloadFile(url) {
+    if (!url) { throw '缺少必要参数url'; }
+    if (navigator.userAgent.indexOf('Trident') > -1) {
+        //ie
+        window.open(url, '_blank');
+    } else {
+        //非ie
+        const a = document.createElement('a'); // 创建a标签
+        const e = document.createEvent('MouseEvents'); // 创建鼠标事件对象
+        e.initEvent('click', false, false); // 初始化事件对象
+        a.href = url; // 设置下载地址
+        a.download = ''; // 设置下载文件名
+        a.dispatchEvent(e);
+    }
+}
+/**
+ * 日期格式化
+ */
+export function dateformat(fmt, date) {
+    const str = date || new Date();
+    let o = {
+        'M+': str.getMonth() + 1, //月份
+        'd+': str.getDate(), //日
+        'h+': str.getHours(), //小时
+        'm+': str.getMinutes(), //分
+        's+': str.getSeconds(), //秒
+        'q+': Math.floor((str.getMonth() + 3) / 3), //季度
+        'S': str.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (str.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (let k in o) {
+        if (new RegExp('(' + k + ')').test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+        }
+    }
+    return fmt;
+}
+// base64 转file,并生成表单数据
+export function dataURLtoFile(dataurl, fileName) {
+    fileName = fileName || 'avatarfile';
+    let arr = dataurl.split(',');
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let fileType = mime.substr(mime.indexOf('/') + 1, mime.length - 1);
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    const file = new File([u8arr], fileName + '.' + fileType, { type: mime });
+    const formData = new FormData();
+    formData.append('file', file);
+    return formData;
 }

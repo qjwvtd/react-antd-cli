@@ -1,4 +1,4 @@
-#####新版本智安汇Web
+#####智安汇运营后台UI
 [![react version](https://img.shields.io/npm/v/react.svg?style=flat)]
 [![react-dom version](https://img.shields.io/npm/v/react-dom.svg?style=flat)]
 
@@ -13,7 +13,7 @@
 
     +common : 公共库,JS,接口, 工具类,store等
 
-    +static : 静态资源,图片,CSS,字体文件等
+    +assets : 静态资源,图片,CSS,字体文件等
 
     +view : 源文件目录
 ```

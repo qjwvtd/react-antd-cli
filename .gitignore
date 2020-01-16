@@ -1,12 +1,15 @@
 .idea
 .vscode
 .DS_Store
+bundle
 node_modules
 .idea/
 .vscode/
 .DS_Store/
+bundle/
 node_modules/
 /.idea/
 /.vscode/
 /.DS_Store/
+/bundle/
 /node_modules/

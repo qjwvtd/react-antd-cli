@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { getToken } from '@/common/utils';
+import rotes from '@/common/router';
+import { getToken, removeToken } from '@/common/utils';
+
 //请求地址
 const __BASEURL = require('./../../../package.json').baseURL;
 //不拦截的白名单
@@ -42,6 +44,15 @@ function checkStatus(response) {
         message.error(errorMsgTips);
         return { data: null, code: null, msg: errorMsgTips };
     }
+    //token失效
+    if (response.data.code === 401) {
+        message.error('登录已过期,请重新登录');
+        rotes.push('/login');
+        localStorage.clear();
+        sessionStorage.clear();
+        removeToken();
+        return;
+    }
     //请求成功
     if (response.status === 200) {
         //接口处理成功
@@ -50,7 +61,19 @@ function checkStatus(response) {
         }
         //接口处理失败
         if (response.data.code !== 200) {
-            errorMsgTips = response.data.msg;
+            errorMsgTips = response.data.msg || '接口处理失败,code:' + response.data.code + ',未知错误';
+        }
+        //登录消息处理1005
+        if (response.data.code === 1005) {
+            errorMsgTips = '验证码错误';
+        }
+        //登录消息处理1006
+        if (response.data.code === 1006) {
+            errorMsgTips = '用户不存在';
+        }
+        //登录消息处理1007
+        if (response.data.code === 1007) {
+            errorMsgTips = '您的账号密码不匹配，请重新输入密码';
         }
     }
     //请求失败
@@ -102,4 +125,3 @@ export default {
         return axios.put(url, data, {}).then(checkStatus);
     }
 };
-

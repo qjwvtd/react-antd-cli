@@ -1,0 +1,15 @@
+//antd card组件内边距
+.ant-card-body{padding: 16px;}
+//antd table btn
+.ant-table .ant-btn{
+    padding: 0 6px 0 0;
+}
+//ant-tabs父元素有高度的前提下
+.ant-tabs{
+    height: 100%;
+    .ant-tabs-content{
+        height: calc(100% - 120px);//送去自身TAB和分页的高度
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}

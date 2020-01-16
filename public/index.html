@@ -5,11 +5,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <style>
+    .ui-loading {
+      position: fixed;
+      z-index: 998;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      background: #fff;
+    }
+
+    .ui-loading-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%)
+    }
+
+    .ui-loading-box .ui-loading-pie {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+      border: 2px solid;
+      border-color: #1890ff #1890ff transparent;
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: loadingAnimate 1s linear infinite
+    }
+
+    .ui-loading-box p {
+      position: absolute;
+      z-index: 1999;
+      top: 15px;
+      width: 100%;
+      color: #1890ff;
+      text-align: center;
+      height: 20px;
+      line-height: 20px;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+    }
+
+    @keyframes loadingAnimate {
+      0% {
+        transform: rotate(0)
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <!-- 引入高德地图 -->
+  <script type="text/javascript"
+    src="https://webapi.amap.com/maps?v=1.4.15&key=02b6dbbc2d0d9d37640df2c0178271a3&plugin=AMap.PolyEditor,AMap.MouseTool,AMap.CircleEditor,AMap.RectangleEditor,AMap.Geocoder,AMap.Polygon,AMap.Circle,AMap.Scale,Map3D,ElasticMarker"></script>
+
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div class="ui-loading">
+      <div class="ui-loading-box">
+        <div class="ui-loading-pie"></div>
+        <p>加载中</p>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

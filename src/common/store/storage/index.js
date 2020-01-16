@@ -1,29 +1,45 @@
-import constant from '@/common/utils/constant.js';
+const storageName = require('./storageName.js');
 /**
 *设置当前项目ID
 *@params pid,当前获取的项目ID
 */
 export function setCurrentProjectId(pid) {
-    sessionStorage.setItem(constant.storage.currentProjectId, JSON.stringify(pid ? pid : null));
+    sessionStorage.setItem(storageName.currentProjectId, JSON.stringify(pid ? pid : null));
 }
 /**获取当前项目ID**/
 export function getCurrentProjectId() {
-    return JSON.parse(sessionStorage.getItem(constant.storage.currentProjectId));
+    return JSON.parse(sessionStorage.getItem(storageName.currentProjectId));
 }
 /**
- * 设置当前用户类型[正式用户还是试用用户]
- * @params type,1试用用户,2正式用户
- * **/
-export function setCurrentUserType(type) {
-    if (!type) {
-        throw new Error('缺少必要参数,当前用户类型');
-    }
-    const data = { type: type, description: type === 1 ? '试用用户' : type === 2 && '正式用户' };
-    sessionStorage.setItem(constant.storage.currentUserType, JSON.stringify(data));
+*设置当前用户
+*@param obj,object,当前用户基本信息
+**/
+export function setCurrentUser(obj) {
+    sessionStorage.setItem(storageName.currentUserInfo, JSON.stringify(obj || null));
 }
-/**获取当前用户类型[正式用户还是试用用户]**/
-export function getCurrentUserType() {
-    return JSON.parse(sessionStorage.getItem(constant.storage.currentUserType));
+/**获取当前用户,返回当前用户*/
+export function getCurrentUser() {
+    return JSON.parse(sessionStorage.getItem(storageName.currentUserInfo));
+}
+//获取当前用户ID
+export function getCurrentUserId() {
+    return getCurrentUser().id;
+}
+//设置主导航KEY,array
+export function setCurrentMenuKeys(keys) {
+    sessionStorage.setItem(storageName.currentMenuKeys, JSON.stringify(keys));
+}
+//获取主导航KEY
+export function getCurrentMenuKeys() {
+    return JSON.parse(sessionStorage.getItem(storageName.currentMenuKeys));
+}
+//设置子导航submenu的key
+export function setCurrentSubMenuKeys(keys) {
+    sessionStorage.setItem(storageName.currentSubmenuKeys, JSON.stringify(keys));
+}
+//获取子导航submenu的key
+export function getCurrentSubMenuKeys() {
+    return JSON.parse(sessionStorage.getItem(storageName.currentSubmenuKeys));
 }
 export function setLocalStorage(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value));
