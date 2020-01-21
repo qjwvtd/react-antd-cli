@@ -230,3 +230,7 @@ export function dataURLtoFile(dataurl, fileName) {
     formData.append('file', file);
     return formData;
 }
+//强制跳转到某个界面,如:hashHistoryOpenView('/home),强制跳转到home界面
+export function hashHistoryOpenView(path) {
+    window.location.replace(window.location.origin + '#' + path);
+}
