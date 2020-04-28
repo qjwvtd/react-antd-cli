@@ -17,7 +17,7 @@ module.exports = {
     extends: "eslint:recommended",
     rules: {
         //强制4个缩进
-        indent: ["error", 4],
+        indent: ["error", 4, { SwitchCase: 1 }],
         //不能有声明后未被使用的变量或参数
         "no-unused-vars": [2, { vars: "all", args: "after-used" }],
         //防止react组件被错误地标记为未使用
