@@ -1,6 +1,6 @@
 #####智安汇运营后台UI
-[![react version](https://img.shields.io/npm/v/react.svg?style=flat)]
-[![react-dom version](https://img.shields.io/npm/v/react-dom.svg?style=flat)]
+![react version](https://img.shields.io/npm/v/react.svg?style=flat)
+![react-dom version](https://img.shields.io/npm/v/react-dom.svg?style=flat)
 
 ###项目结构：
 
