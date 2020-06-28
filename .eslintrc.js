@@ -36,6 +36,8 @@ module.exports = {
         "no-console": "off",
         //强制正确的分号结尾
         semi: ["error", "always"],
+        //禁止使用undefined
+        "no-undefined": 2,
         //禁止出现多余的分号,如:const a = 1;;
         "no-extra-semi": "error",
         //分号必须写在行尾，禁止在行首出现
