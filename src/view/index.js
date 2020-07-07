@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+// import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //全局顶层模块
 import PageNotFound from '@/view/404';
 import Home from '@/view/home';
