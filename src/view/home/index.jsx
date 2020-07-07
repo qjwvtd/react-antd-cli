@@ -20,6 +20,7 @@ const Home = observer(() => {
     }
     useEffect(() => {
         !user.data.id && user.init();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user.data.id]);
     const homeRenderNode = <Fragment>
         <Layout>

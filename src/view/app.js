@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { Router, Route, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
 //router
 import routerHistory from '@/common/router';
 //全局顶层模块
@@ -10,7 +10,7 @@ import Login from './user/login';
 import SetPassword from './user/setPassword';
 
 
-export default class App extends PureComponent {
+export default class App extends Component {
     constructor(props) {
         super(props);
     }
@@ -18,13 +18,13 @@ export default class App extends PureComponent {
     render() {
         return (
             <Router history={routerHistory}>
-                <React.Fragment>
+                <Switch>
+                    <Route exact path="/" component={Home} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/setPassword" component={SetPassword} />
-                    <Route exact path="/" component={Home} />
                     <Route path="/main" component={Main} />
-                </React.Fragment>
+                </Switch>
             </Router>
         );
     }

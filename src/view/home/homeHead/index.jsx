@@ -1,12 +1,12 @@
 import React, { Fragment, PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Dropdown, Menu, Icon, Popover } from 'antd';
+import { Row, Col, Dropdown, Menu, Icon } from 'antd';
 
 import { removeToken } from '@/common/utils';
 
 import Logo from '@/view/component/logo';
 
-const avtar = require('@/static/images/avtar.svg');
+const avtar = require('@/assets/images/avtar.png');
 
 export default class HomeHead extends PureComponent {
     constructor(props) {
@@ -36,16 +36,13 @@ export default class HomeHead extends PureComponent {
     render() {
         return (
             <Fragment>
-                <Row className="sass-ui-head">
+                <Row className="sass-ui-head" style={{ height: '44px', lineHeight: '44px', borderBottom: '1px solid #ccc' }}>
                     <Col span={12} className="head-logo">
                         <Logo link={'/'} />
                     </Col>
-                    <Col span={12} className="head-status">
+                    <Col span={11} className="head-status text-right">
                         <div>
-                            <img src={avtar} title="头像" />
-                            <Popover placement="bottomRight" content={this.dropdownMenu()} trigger="click">
-                                <span>贺蓬阳<Icon type="caret-down" /></span>
-                            </Popover>
+                            <img src={avtar} title="头像" style={{ width: '32px' }} />
                             <Dropdown overlay={() => this.dropdownMenu()} placement="bottomRight">
                                 <span>贺蓬阳<Icon type="caret-down" /></span>
                             </Dropdown>

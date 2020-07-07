@@ -57,7 +57,7 @@ module.exports = {
         //开发环境host
         host: "localhost",
         //开发环境端口
-        port: 9000,
+        port: 2333,
         //开启代理
         proxy: __proxy
     },

@@ -30,15 +30,15 @@ export default class Home extends Component {
             <Fragment>
                 <div className="sass-ui-container">
                     <HomeHead />
-                    <div className="sass-ui-content">
-                        <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"}>
+                    <div className="sass-ui-content" style={{ overflow: 'hidden', width: '100%' }}>
+                        <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"} style={{ float: 'left', width: '200px' }}>
                             <HomeLink
                                 collapsed={this.state.collapsed}
                                 collapsedEvent={() => this.toggleCollapsed()}
                                 linkClickEvent={(t) => this.homeLinkClick(t)}
                             />
                         </div>
-                        <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"}>
+                        <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"} style={{ float: 'right', textAlign: 'center', width: 'calc(100% - 200px)' }}>
                             <HomeRoute />
                         </div>
                     </div>

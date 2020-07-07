@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Menu, Icon, Button } from 'antd';
+import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
@@ -26,17 +26,13 @@ export default class HomeLink extends PureComponent {
         }
     }
     render() {
-        const { collapsed, collapsedEvent, linkClickEvent } = this.props;
+        const { linkClickEvent } = this.props;
         return (
             <Fragment>
-                <Button type="primary" onClick={() => collapsedEvent()} style={{ margin: '10px auto' }}>
-                    <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
-                </Button>
                 <Menu
                     mode="inline"
                     openKeys={this.state.openKeys}
                     onOpenChange={this.onChangeMunuEvent.bind(this)}
-                    inlineCollapsed={collapsed}
                 >
                     <Menu.Item key="member">
                         <Link to="/home/member" replace onClick={() => linkClickEvent('成员管理')}>
@@ -57,30 +53,6 @@ export default class HomeLink extends PureComponent {
                         <Menu.Item key="equipment2">Option 2</Menu.Item>
                         <Menu.Item key="equipment3">Option 3</Menu.Item>
                         <Menu.Item key="equipment4">Option 4</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="safeCenter"
-                        title={
-                            <Link to="/home/safe" replace onClick={() => linkClickEvent('安全中心')}>
-                                <Icon type="appstore" />
-                                <span>安全中心</span>
-                            </Link>
-                        }
-                    >
-                        <Menu.Item key="safeCenter1">Option 1</Menu.Item>
-                        <Menu.Item key="safeCenter2">Option 2</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="workScopeInfo"
-                        title={
-                            <Link to="/home/scope" replace onClick={() => linkClickEvent('作业面信息')}>
-                                <Icon type="desktop" />
-                                <span>作业面信息</span>
-                            </Link>
-                        }
-                    >
-                        <Menu.Item key="workScopeInfo1">Option 1</Menu.Item>
-                        <Menu.Item key="workScopeInfo2">Option 2</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="projectSetting"
