@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 //主界面Link,router
 import HomeLink from './homeLink';
-import HomeRoute from './homeRoute';
 import HomeHead from './homeHead';
 
-export default class Home extends Component {
+export default class HomeWapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +38,7 @@ export default class Home extends Component {
                             />
                         </div>
                         <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"} style={{ float: 'right', textAlign: 'center', width: 'calc(100% - 200px)' }}>
-                            <HomeRoute />
+                            {this.props.children}
                         </div>
                     </div>
                 </div>
