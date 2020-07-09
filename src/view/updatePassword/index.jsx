@@ -11,8 +11,8 @@ import routerHistory from '@/common/router';
 const { Header, Content } = Layout;
 
 @observer
-class PasswordForm extends Component{
-    constructor(props){
+class PasswordForm extends Component {
+    constructor(props) {
         super(props);
         this.state = {
             oldpwd: null,
@@ -29,9 +29,9 @@ class PasswordForm extends Component{
         this.getCurrentUser();
     }
     // 获取当前用户信息
-    getCurrentUser(){
-        getUserInfo().then((res)=>{
-            if(res.code === 200){
+    getCurrentUser() {
+        getUserInfo().then((res) => {
+            if (res.code === 200) {
                 this.setState({
                     userInfo: res.data
                 });
@@ -59,7 +59,7 @@ class PasswordForm extends Component{
             });
             return callback('请输入密码');
         }
-        if(value.length < 8 || value.length > 16){
+        if (value.length < 8 || value.length > 16) {
             this.setState({
                 isNewDis: false
             });
@@ -78,7 +78,7 @@ class PasswordForm extends Component{
             });
             return callback('请输入密码');
         }
-        if(value !== this.state.newpwd) {
+        if (value !== this.state.newpwd) {
             this.setState({
                 isConfirmDis: false
             });
@@ -90,19 +90,19 @@ class PasswordForm extends Component{
         });
     }
     // 提交
-    handleSubmit(){
+    handleSubmit() {
         let info = {
             newPassword: this.state.newpwd,
             oldPassword: this.state.oldpwd
         };
-        updatepwd(info).then((res)=>{
-            if(res.code === 200){
+        updatepwd(info).then((res) => {
+            if (res.code === 200) {
                 message.success('修改成功');
                 user.logout();
                 Modal.success({
                     content: '修改成功，请重新登录',
                     okText: '重新登录',
-                    onOk:()=>{
+                    onOk: () => {
                         routerHistory.push("/login");
                     }
                 });
@@ -162,8 +162,8 @@ class PasswordForm extends Component{
                     </Form.Item>
                     <Form.Item className='pwd_btn_group'>
                         <Button type='primary' disabled={!isBtnDis} onClick={() => this.handleSubmit()}>确认</Button>
-                        <Link to='/home'>
-                            <Button style={{ marginLeft:'16px' }}>返回</Button>
+                        <Link to='/home/member'>
+                            <Button style={{ marginLeft: '16px' }}>返回</Button>
                         </Link>
                     </Form.Item>
                 </Form>

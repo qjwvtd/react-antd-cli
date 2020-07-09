@@ -2,8 +2,8 @@
 // import { message } from 'antd';
 const history = require('history');
 //5.0以后版本创建路由的4种方式
-const CreateRouterHistory = history.createBrowserHistory;
-// const CreateRouterHistory = history.createHashHistory;
+// const CreateRouterHistory = history.createBrowserHistory;
+const CreateRouterHistory = history.createHashHistory;
 // const CreateRouterHistory = history.createMemoryHistory;
 // const CreateRouterHistory = history.createTransitionManager;
 

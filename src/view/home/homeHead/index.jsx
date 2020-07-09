@@ -21,7 +21,7 @@ export default class HomeHead extends PureComponent {
                 <div>项目3</div>
             </Menu.Item>
             <Menu.Item>
-                账号设置
+                <Link to="/updatePassword">更新密码</Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/" onClick={() => this.logout()}>退出登录</Link>

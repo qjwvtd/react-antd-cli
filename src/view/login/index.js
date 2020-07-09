@@ -1,19 +1,14 @@
 /*手机号登录*/
 import React, { Component, Fragment, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import { Route } from 'react-router-dom';
 import { Form, Icon, Input, Button, Row, Col, Layout } from 'antd';
 import { getImgCode64 } from '@/common/api/login';
-import { setToken, removeToken } from '@/common/utils';
+import { setToken } from '@/common/utils';
 import constants from '@/common/utils/constant.js';
-
 import Logo from '@/view/component/logo';
-
 import MainFoot from '@/view/component/foot';
-
-import { loginWithMobilePassword, LOGINSECRET } from '@/common/api/login';
-
-import routerHistory from '@/common/router';
-
+import { LOGINSECRET } from '@/common/api/login';
 import user from '@/common/store/user';
 
 const { Header, Content } = Layout;
@@ -84,34 +79,26 @@ class LoginForm extends Component {
         });
         callback();
     }
-    //提交登录
-    submitLogin() {
-        //模拟登录结束
-        const sendData = {
-            clientId: LOGINSECRET.id,
-            clientSecret: LOGINSECRET.secret,
-            key: LOGINSECRET.key,
-            password: this.state.password,
-            phone: this.state.mobile,
-            verifyCode: this.state.verifyCode
-        };
-        //调用登录接口
-        loginWithMobilePassword(sendData).then((res) => {
-            if (res.code === 200) {
-                setToken(res.data.token);
-                user.init();
-                setTimeout(() => {
-                    routerHistory.push("/home");
-                }, 100);
-            } else {
-                removeToken();
-            }
-            //验证码错误
-            if (res.code === 1005) {
-                this.initCode();
-            }
-        });
+    //登录按钮
+    loginButton() {
+        const btnDisabled = this.state.isMobile && this.state.isPassword && this.state.isVerfiCode;
+        return <Route render={({ history }) => (
+            <Button
+                type="primary"
+                block
+                size="large"
+                disabled={!btnDisabled}
+                onClick={() => {
+                    setToken('086b294d-37b5-405a-9650-155ce683a81e');
+                    history.push("/home/member");
+                }}
+            >
+                登  录
+            </Button>
+        )} />;
     }
+    //提交登录
+    // submitLogin() { }
     initCode() {
         const sendData = {
             "height": 40,
@@ -142,7 +129,6 @@ class LoginForm extends Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const btnDisabled = this.state.isMobile && this.state.isPassword && this.state.isVerfiCode;
         return (
             <Form className="login-form">
                 <Form.Item>
@@ -200,7 +186,7 @@ class LoginForm extends Component {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" block size="large" htmlType="submit" disabled={!btnDisabled} onClick={() => this.submitLogin()}>登  录</Button>
+                    {this.loginButton()}
                 </Form.Item>
             </Form>
         );

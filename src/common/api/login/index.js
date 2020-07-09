@@ -1,7 +1,8 @@
 import http from '@/common/http';
-import { getUUid } from '@/common/utils';
+import {
+    getUUid
+} from '@/common/utils';
 const server = require('@/common/api');
-
 //登录令牌
 export const LOGINSECRET = {
     id: 'web',
@@ -18,6 +19,5 @@ export const LOGINSECRET = {
  * @param "stringNum": 4,
  * @param "width": 100
  * */
+
 export const getImgCode64 = data => http.POST(server.versatile + '/verifyCode/base64', data);
-//手机号和密码登录
-export const loginWithMobilePassword = data => http.POST(server.authentication + '/authorize/mobile', data);

@@ -14,8 +14,7 @@ export default function HomeRoute() {
     return <Fragment>
         <Switch>
             {/* 首页默认加载成员管理 */}
-            <Route exact path="/home" component={MemberManager}></Route>
-            <Route exact path="/home/member" component={MemberManager}></Route>
+            <Route path="/home/member" component={MemberManager}></Route>
             <Route path="/home/equipment" component={Equipment}></Route>
             <Route path="/home/setting" component={ProjectSetting}></Route>
             <Route component={PageNoFind} />

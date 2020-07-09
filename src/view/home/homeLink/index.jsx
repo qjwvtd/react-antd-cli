@@ -9,14 +9,13 @@ export default class HomeLink extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            menuKeys: ['member', 'equipment', 'safeCenter', 'workScopeInfo', 'projectSetting'],
+            menuKeys: ['member', 'equipment', 'projectSetting'],
             openKeys: ['member']
         };
     }
     //点击菜单，收起其他展开的所有菜单，保持菜单聚焦简洁。
     onChangeMunuEvent(openKeys) {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        console.log(openKeys);
         if (this.state.menuKeys.indexOf(latestOpenKey) === -1) {
             this.setState({ openKeys });
         } else {
