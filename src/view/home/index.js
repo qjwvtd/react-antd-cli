@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 //主界面Link,router
 import HomeLink from './homeLink';
 import HomeHead from './homeHead';
+//store
+import user from '@/common/store/user';
 
 export default class HomeWapper extends Component {
     constructor(props) {
@@ -23,7 +25,9 @@ export default class HomeWapper extends Component {
             currentTitle: title
         });
     }
-    componentDidMount() { }
+    componentDidMount() {
+        !user.data.id && user.init();
+    }
     render() {
         return (
             <Fragment>

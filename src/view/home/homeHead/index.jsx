@@ -1,6 +1,7 @@
 import React, { Fragment, PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Dropdown, Menu, Icon } from 'antd';
+import { Row, Col, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 import { removeToken } from '@/common/utils';
 
@@ -44,7 +45,7 @@ export default class HomeHead extends PureComponent {
                         <div>
                             <img src={avtar} title="头像" style={{ width: '32px' }} />
                             <Dropdown overlay={() => this.dropdownMenu()} placement="bottomRight">
-                                <span>贺蓬阳<Icon type="caret-down" /></span>
+                                <span>贺蓬阳<DownOutlined /></span>
                             </Dropdown>
                         </div>
                     </Col>
@@ -52,5 +53,4 @@ export default class HomeHead extends PureComponent {
             </Fragment>
         );
     }
-
 }

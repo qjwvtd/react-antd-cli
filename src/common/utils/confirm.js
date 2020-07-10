@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, Icon } from 'antd';
+import { Modal } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 export default function Confirm(options, okFn, cancalFn) {
     const opt = { ...options };
@@ -7,7 +8,7 @@ export default function Confirm(options, okFn, cancalFn) {
     delete options.onCancel;
     Modal.confirm({
         ...opt,
-        icon: <Icon type="exclamation" />,
+        icon: <QuestionCircleOutlined />,
         onOk: () => {
             okFn();
         },

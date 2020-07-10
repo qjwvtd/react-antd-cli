@@ -12,15 +12,12 @@ module.exports = {
     env: {
         browser: true, // 开发环境配置表示可以使用浏览器的方法
         node: true, //
-        es6: true
+        es6: true,
     },
     extends: "eslint:recommended",
     rules: {
         //强制4个缩进
         indent: ["error", 4],
-        //react-hooks配置
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
         //不能有声明后未被使用的变量或参数
         "no-unused-vars": [2, { vars: "all", args: "after-used" }],
         //防止react组件被错误地标记为未使用
@@ -28,16 +25,20 @@ module.exports = {
         //防止在JSX中使用的变量被错误地标记为未使用
         "react/jsx-uses-vars": 2,
         "react/jsx-uses-react": 2,
+        // 检查 Hook 的规则
+        "react-hooks/rules-of-hooks": "error",
+        // 检查 effect 的依赖
+        "react-hooks/exhaustive-deps": "warn",
         //未定义前不能使用
         "no-use-before-define": "error",
         "no-sparse-arrays": "error",
         "comma-dangle": ["error", "never"],
         //是否禁止console
         "no-console": "off",
-        //强制正确的分号结尾
-        semi: ["error", "always"],
         //禁止使用undefined
         "no-undefined": 2,
+        //强制正确的分号结尾
+        semi: ["error", "always"],
         //禁止出现多余的分号,如:const a = 1;;
         "no-extra-semi": "error",
         //分号必须写在行尾，禁止在行首出现
@@ -55,15 +56,15 @@ module.exports = {
         "no-with": 2,
         //new时必须加小括号
         "new-parens": 2,
-        // 使用 === 替代 ==,必须使用全等
+        // 使用 === 替代 ==
         eqeqeq: [2, "allow-null"],
         // 控制逗号前后的空格
         "comma-spacing": [
             2,
             {
                 before: false,
-                after: true
-            }
+                after: true,
+            },
         ],
         //禁止行尾有空格
         "no-trailing-spaces": "error",
@@ -75,13 +76,5 @@ module.exports = {
         "no-shadow": 2,
         //调用函数时,函数名与()之间不能有空格
         "no-spaced-func": 2,
-        //禁止对null使用==或!=运算符
-        "no-eq-null": 2,
-        //禁止使用eval
-        "no-eval": 0,
-        //禁止省略浮点数中的0 .5 3.
-        "no-floating-decimal": 2,
-        //强制驼峰法命名
-        "camelcase": 2
-    }
+    },
 };

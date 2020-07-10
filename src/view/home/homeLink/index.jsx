@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
+import { TeamOutlined, GroupOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
@@ -35,7 +36,7 @@ export default class HomeLink extends PureComponent {
                 >
                     <Menu.Item key="member">
                         <Link to="/home/member" replace onClick={() => linkClickEvent('成员管理')}>
-                            <Icon type="pie-chart" />
+                            <TeamOutlined />
                             <span>成员管理</span>
                         </Link>
                     </Menu.Item>
@@ -43,7 +44,7 @@ export default class HomeLink extends PureComponent {
                         key="equipment"
                         title={
                             <Link to="/home/equipment" replace onClick={() => linkClickEvent('设备管理')}>
-                                <Icon type="mail" />
+                                <GroupOutlined />
                                 <span>设备管理</span>
                             </Link>
                         }
@@ -57,7 +58,7 @@ export default class HomeLink extends PureComponent {
                         key="projectSetting"
                         title={
                             <Link to="/home/setting" replace onClick={() => linkClickEvent('项目设置')}>
-                                <Icon type="desktop" />
+                                <SettingOutlined />
                                 <span>项目设置</span>
                             </Link>
                         }

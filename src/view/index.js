@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from '@/common/router';
 //全局顶层模块
 import PageNotFound from '@/view/404';
 import Main from '@/view/main';
@@ -12,21 +13,17 @@ import MemberManager from '@/view/member';
 import Equipment from '@/view/equipment';
 //项目设置
 import ProjectSetting from '@/view/projectSetting';
-//store
-import user from '@/common/store/user';
+
 
 export default function View() {
-    useEffect(() => {
-        !user.data.id && user.init();
-    }, []);
-    return (
-        <Router>
+    return <Fragment>
+        <Router history={history}>
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route path="/home">
                     <HomeWapper>
                         {/* 首页默认加载成员管理 */}
-                        <Route path="/home/member" component={MemberManager}></Route>
+                        <Route exact path="/home/member" component={MemberManager}></Route>
                         <Route path="/home/equipment" component={Equipment}></Route>
                         <Route path="/home/setting" component={ProjectSetting}></Route>
                     </HomeWapper>
@@ -36,5 +33,5 @@ export default function View() {
                 <Route component={PageNotFound} />
             </Switch>
         </Router>
-    );
+    </Fragment>;
 }

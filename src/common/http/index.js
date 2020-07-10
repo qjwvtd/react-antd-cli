@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
-import rotes from '@/common/router';
+import history from '@/common/router';
 import { getToken, removeToken } from '@/common/utils';
 
 //请求地址
@@ -47,7 +47,7 @@ function checkStatus(response) {
     //token失效
     if (response.data.code === 401) {
         message.error('登录已过期,请重新登录');
-        rotes.push('/login');
+        history.push('/login');
         localStorage.clear();
         sessionStorage.clear();
         removeToken();
