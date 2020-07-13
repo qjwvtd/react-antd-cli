@@ -47,7 +47,7 @@ module.exports = {
     //开发环境
     dev: {
         //输出文件'
-        filename: env.dev ? 'static/js/[name].js' : env.prod && 'static/js/[name].[hash:8].js',
+        filename: env.dev ? 'static/js/[name].js' : env.prod && './static/js/[name].[hash:8].js',
         //开发环境代码构建编译目录
         path: path.resolve(__dirname, _public),
         //开发环境热更新目录必须是输出路径的绝对路径
@@ -64,7 +64,7 @@ module.exports = {
     //生产环境,打包到根目录的bundle
     prod: {
         //输出文件'
-        filename: 'static/js/[name].[hash:8].js',
+        filename: './static/js/[name].[hash:8].js',
         //生产环境代码输出目录
         path: path.resolve(__dirname, _bundle)
     }
