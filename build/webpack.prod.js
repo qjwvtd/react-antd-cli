@@ -50,12 +50,14 @@ webpackConfig.optimization = {
             cache: true,
             parallel: true, // 开启并行压缩，充分利用cpu
             sourceMap: false,
-            extractComments: false, // 移除注释
+            extractComments: true, // 移除注释
             uglifyOptions: {
                 compress: {
                     unused: true,
                     warnings: false,
-                    drop_debugger: true
+                    drop_debugger: true,
+                    drop_console: true,//console
+                    pure_funcs: ['console.log']//移除console
                 },
                 output: {
                     comments: false
