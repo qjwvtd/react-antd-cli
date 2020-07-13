@@ -5,6 +5,7 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');//这个包要注意webpack的版本,需要4.0以上版本
 const baseConfig = require('./base.config');
 //env
 const env = require('./env');
@@ -51,21 +52,13 @@ const cssLoader = {
 };
 const lessLoader = {
     test: /\.less$/,
-    use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' }, // translates CSS into CommonJS
-        {
-            loader: 'less-loader', // compiles Less to CSS
-            options: {
-                modifyVars: {
-                    // 'primary-color': '#1DA57A'
-                    // or
-                    // 'hack': `true; @import "your-less-file-path.less";`,
-                },
-                javascriptEnabled: true,
-            }
-        }
-    ],
+    use: ExtractTextPlugin.extract({
+        use: [
+            { loader: 'css-loader' },
+            { loader: 'less-loader', options: { javascriptEnabled: true } }
+        ],
+        fallback: 'style-loader'
+    }),
     include: __include__dirname,
     exclude: /node_modules/
 };

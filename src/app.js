@@ -4,7 +4,7 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import View from './view';
 /**
- * import css
+ * import less
  * **/
 import '@/assets/style/index.less';
 

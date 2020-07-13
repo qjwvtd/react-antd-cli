@@ -13,7 +13,7 @@
 
     +common : 公共库,JS,接口, 工具类,store等
 
-    +assets : 静态资源,图片,CSS,字体文件等
+    +assets : 静态资源,图片,CSS,字体文件等,使用less作为CSS预处理语言
 
     +view : 源文件目录
 ```
