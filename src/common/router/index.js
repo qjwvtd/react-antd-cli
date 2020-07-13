@@ -2,8 +2,8 @@
  * 5.0以后版本创建路由的4种方式,
  * [createBrowserHistory,createHashHistory,createMemoryHistory,createTransitionManager]
  */
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory();
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 history.listen((location, action) => {
     //dosomething
     console.log(action, location);

@@ -74,13 +74,13 @@ const sassLoader = {
 };
 const urlLoader = {
     test: /\.(png|jpg|jpeg|gif)$/,
-    use: [{ loader: 'url-loader', options: { limit: 128, name: env.dev ? 'static/img/[name][hash:8].[ext]' : env.prod && '/static/img/[name][hash:8].[ext]' } }],
+    use: [{ loader: 'url-loader', options: { limit: 128, name: env.dev ? 'static/img/[name]_[hash:8].[ext]' : env.prod && '/static/img/[name]_[hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };
 const fileLoader = {
     test: /\.(eot|svg|ttf|otf|woff|woff2|mp3|mp4)/,
-    use: [{ loader: 'file-loader', options: { limit: 128, name: env.dev ? 'static/fonts/[name][hash:8].[ext]' : env.prod && '/static/fonts/[name][hash:8].[ext]' } }],
+    use: [{ loader: 'file-loader', options: { limit: 128, name: env.dev ? 'static/fonts/[name]_[hash:8].[ext]' : env.prod && '/static/fonts/[name]_[hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };

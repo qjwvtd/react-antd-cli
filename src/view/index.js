@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import history from '@/common/router';
 //全局顶层模块
 import PageNotFound from '@/view/404';
@@ -33,5 +33,5 @@ export default function View() {
                 <Route component={PageNotFound} />
             </Switch>
         </Router>
-    </Fragment>;
+    </Fragment >;
 }
