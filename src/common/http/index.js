@@ -2,11 +2,10 @@ import axios from 'axios';
 import { message } from 'antd';
 import history from '@/common/router';
 import { getToken, removeToken } from '@/common/utils';
-
+//不拦截token的白名单
+import whiteList from './httpWhiteRoster.js';
 //请求地址
 const __BASEURL = require('./../../../package.json').baseURL;
-//不拦截的白名单
-const whiteList = require('./httpWhiteRoster.js');
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {

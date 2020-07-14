@@ -63,9 +63,9 @@ module.exports = {
     },
     //生产环境,打包到根目录的bundle
     prod: {
-        //输出文件'
-        filename: 'static/js/[name]_[hash:8].js',
         //生产环境代码输出目录
-        path: path.resolve(__dirname, _bundle)
+        path: _bundle,
+        //输出文件'
+        filename: 'static/js/[name]_[hash:8].js'
     }
 };

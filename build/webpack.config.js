@@ -32,12 +32,12 @@ const webpackConfig = {
     plugins: [
         //处理.css文件
         new MiniCssExtractPlugin({
-            filename: env.dev ? 'static/css/[name].css' : env.prod && '/static/css/[name]_[hash:8].css',
-            chunkFilename: env.dev ? 'static/css/[name]_chunk.css' : env.prod && '/static/css/[name]_chunk_[hash:8].css'
+            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name]_[hash:8].css',
+            chunkFilename: env.dev ? 'static/css/[name]_chunk.css' : env.prod && 'static/css/[name]_chunk_[hash:8].css'
         }),
         //处理.less文件
         new ExtractTextPlugin({
-            filename: env.dev ? 'static/css/[name].css' : env.prod && '/static/css/[name]_[hash:8].css',
+            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name]_[hash:8].css',
             allChunks: true
         }),
         //构建html

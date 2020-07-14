@@ -62,6 +62,13 @@ const lessLoader = {
     include: __include__dirname,
     exclude: /node_modules/
 };
+const scssLoader = {
+    test: /\.scss$/,
+    use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'sass-loader']
+    })
+};
 const sassLoader = {
     test: /\.scss$/,
     use: [
@@ -85,5 +92,5 @@ const fileLoader = {
     exclude: /node_modules/
 };
 module.exports = [
-    happypackLoader, babelLoader, esLintLoader, cssLoader, lessLoader, sassLoader, urlLoader, fileLoader
+    happypackLoader, babelLoader, esLintLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
 ];

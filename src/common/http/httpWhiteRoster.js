@@ -1,5 +1,5 @@
 //接口白名单,不需要传token的接口
-module.exports = [
+const whiteList = [
     '/api/versatile/v1/verifyCode/base64',
     '/api/authentication/v1/authorize/mobile',
     '/api/authentication/v1/authorize/sms',
@@ -7,3 +7,4 @@ module.exports = [
     '/api/versatile/v1/sms/reset',
     '/api/account/v1/user/fpw'
 ];
+export default whiteList;
