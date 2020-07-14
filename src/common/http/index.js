@@ -5,10 +5,13 @@ import { getToken, removeToken } from '@/common/utils';
 //不拦截token的白名单
 import whiteList from './httpWhiteRoster.js';
 //请求地址
-const __BASEURL = require('./../../../package.json').baseURL;
+let __BASEURL = require('./../../../package.json').baseURL;
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
+    if (!__BASEURL) {
+        __BASEURL = window.location.origin;
+    }
     axios.defaults.baseURL = __BASEURL;
 }
 //开发环境
