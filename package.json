@@ -1,5 +1,6 @@
 {
   "name": "dh-admin",
+  "sideEffects": false,
   "version": "1.1.0",
   "baseUrl": null,
   "description": "this is some description",

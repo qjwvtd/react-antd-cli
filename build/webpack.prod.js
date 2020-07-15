@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackConfig = require('./webpack.config.js');
-const __base = require('./base.config.js');
+const base = require('./base.config.js');
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({
@@ -16,7 +16,7 @@ const defineMyEnv = new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
 });
 //清除已经build过的文件
-const clearFiles = new CleanWebpackPlugin([__base.prod.path]);
+const clearFiles = new CleanWebpackPlugin();
 
 webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(clearFiles);
@@ -81,6 +81,5 @@ webpackConfig.optimization = {
 };
 module.exports = merge(webpackConfig, {
     mode: 'production',
-    output: __base.prod
-    // devtool: 'cheap-module-source-map'
+    output: base.prod
 });

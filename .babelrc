@@ -1,13 +1,4 @@
 {
-    "plugins": [
-        "transform-decorators-legacy",
-        [
-            "transform-runtime",
-            {
-                "polyfill": false
-            }
-        ]
-    ],
     "presets": [
         [
             "env",
@@ -17,5 +8,14 @@
         ],
         "stage-0",
         "react"
+    ],
+    "plugins": [
+        "transform-decorators-legacy",
+        [
+            "transform-runtime",
+            {
+                "polyfill": false
+            }
+        ]
     ]
 }
