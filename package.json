@@ -6,8 +6,8 @@
   "description": "this is some description",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --config ./build/webpack.dev.js --progress --watch",
-    "build": "cross-env NODE_ENV=production webpack -p --mode production --config ./build/webpack.prod.js --progress",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode=development --config ./build/webpack.dev.js --progress --watch",
+    "build": "cross-env NODE_ENV=production webpack -p --mode=production --config ./build/webpack.prod.js --progress",
     "dev:test": "npm start",
     "build:test": "node build/server.js",
     "lint": "eslint --fix --ext .js,.jsx src"

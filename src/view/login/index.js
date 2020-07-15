@@ -43,7 +43,7 @@ const LoginForm = observer(() => {
                 disabled={!btnDisabled}
                 onClick={() => {
                     setToken('086b294d-37b5-405a-9650-155ce683a81e');
-                    history.push("/home/member");
+                    history.push("/home/module1");
                 }}
             >
                 登  录

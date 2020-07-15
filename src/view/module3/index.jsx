@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class ProjectSetting extends Component {
+export default class Module3 extends Component {
     constructor(props) {
         super(props);
         this.state = {

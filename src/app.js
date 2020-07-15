@@ -11,7 +11,7 @@ import '@/assets/style/index.less';
 //国际化,默认中文
 function App() {
     return (
-        <ConfigProvider locale={zhCN}>
+        <ConfigProvider locale={zhCN} componentSize={'middle'}>
             <View />
         </ConfigProvider>
     );

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class MemberManager extends Component {
+export default class Module1 extends Component {
     constructor(props) {
         super(props);
         this.state = {

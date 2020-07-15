@@ -8,12 +8,12 @@ import Main from '@/view/main';
 import HomeWapper from '@/view/home';
 import Login from '@/view/login';
 import UpdatePassword from '@/view/updatePassword';
-//成员管理
-import MemberManager from '@/view/member';
-//设备管理
-import Equipment from '@/view/equipment';
-//项目设置
-import ProjectSetting from '@/view/projectSetting';
+//1
+import Module1 from '@/view/module1';
+//2
+import Module2 from '@/view/module2';
+//3
+import Module3 from '@/view/module3';
 
 
 export default function View() {
@@ -24,9 +24,9 @@ export default function View() {
                 <Route path="/home">
                     <HomeWapper>
                         {/* 首页默认加载成员管理 */}
-                        <Route exact path="/home/member" component={MemberManager}></Route>
-                        <Route path="/home/equipment" component={Equipment}></Route>
-                        <Route path="/home/setting" component={ProjectSetting}></Route>
+                        <Route exact path="/home/module1" component={Module1}></Route>
+                        <Route path="/home/module2" component={Module2}></Route>
+                        <Route path="/home/module3" component={Module3}></Route>
                     </HomeWapper>
                 </Route>
                 <Route path="/login" component={Login} />

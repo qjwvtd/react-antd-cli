@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class Equipment extends Component {
+export default class Module2 extends Component {
     constructor(props) {
         super(props);
         this.state = {

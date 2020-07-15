@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom';
 const { SubMenu } = Menu;
 
 export default class HomeLink extends PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
-            menuKeys: ['member', 'equipment', 'projectSetting'],
-            openKeys: ['member']
+            menuKeys: ['module1', 'module2', 'module3'],
+            openKeys: ['module1']
         };
     }
     //点击菜单，收起其他展开的所有菜单，保持菜单聚焦简洁。
@@ -34,37 +33,37 @@ export default class HomeLink extends PureComponent {
                     openKeys={this.state.openKeys}
                     onOpenChange={this.onChangeMunuEvent.bind(this)}
                 >
-                    <Menu.Item key="member">
-                        <Link to="/home/member" replace onClick={() => linkClickEvent('成员管理')}>
+                    <Menu.Item key="module1">
+                        <Link to="/home/module1" replace onClick={() => linkClickEvent('模块1')}>
                             <TeamOutlined />
-                            <span>成员管理</span>
+                            <span>模块1</span>
                         </Link>
                     </Menu.Item>
                     <SubMenu
-                        key="equipment"
+                        key="module2"
                         title={
-                            <Link to="/home/equipment" replace onClick={() => linkClickEvent('设备管理')}>
+                            <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
                                 <GroupOutlined />
-                                <span>设备管理</span>
+                                <span>模块2</span>
                             </Link>
                         }
                     >
-                        <Menu.Item key="equipment1">Option 1</Menu.Item>
-                        <Menu.Item key="equipment2">Option 2</Menu.Item>
-                        <Menu.Item key="equipment3">Option 3</Menu.Item>
-                        <Menu.Item key="equipment4">Option 4</Menu.Item>
+                        <Menu.Item key="module21">Option 1</Menu.Item>
+                        <Menu.Item key="module22">Option 2</Menu.Item>
+                        <Menu.Item key="module23">Option 3</Menu.Item>
+                        <Menu.Item key="module24">Option 4</Menu.Item>
                     </SubMenu>
                     <SubMenu
-                        key="projectSetting"
+                        key="module13"
                         title={
-                            <Link to="/home/setting" replace onClick={() => linkClickEvent('项目设置')}>
+                            <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
                                 <SettingOutlined />
-                                <span>项目设置</span>
+                                <span>模块3</span>
                             </Link>
                         }
                     >
-                        <Menu.Item key="projectSetting1">Option 1</Menu.Item>
-                        <Menu.Item key="projectSetting2">Option 2</Menu.Item>
+                        <Menu.Item key="module31">Option 1</Menu.Item>
+                        <Menu.Item key="module32">Option 2</Menu.Item>
                     </SubMenu>
                 </Menu>
             </Fragment>
