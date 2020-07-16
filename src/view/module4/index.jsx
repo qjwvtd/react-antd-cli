@@ -1,7 +1,9 @@
 // 工作区统计
 import React, { Fragment, useReducer, useContext } from 'react';
-import { Row, Col, Button } from 'antd';
-import { store, Context, reducer } from './store';
+import { Row, Col, DatePicker, Button } from 'antd';
+import moment from 'moment';
+import { store, Context, reducer, dateFormat } from './store';
+const { RangePicker } = DatePicker;
 function Children1() {
     const { state, dispatch } = useContext(Context);
     return <Fragment>
@@ -21,6 +23,30 @@ function Children2() {
         </div >
     </Fragment>;
 }
+function StartAndEndTime() {
+    const { state, dispatch } = useContext(Context);
+    function onStartEndDateChange(value, dateString) {
+        if (dateString[0].length === 0) {
+            dateString[0] = state.startTime;
+        }
+        if (dateString[1].length === 0) {
+            dateString[1] = state.endTime;
+        }
+        dispatch({ type: 'updateDate', start: moment(dateString[0], dateFormat), end: moment(dateString[1], dateFormat) });
+    }
+    const dateVal = [
+        moment(state.startTime, dateFormat),
+        moment(state.endTime, dateFormat)
+    ];
+    return <Fragment>
+        <Row className="ui_search_box queryRow" type="flex" justify="start" align="middle">
+            <Col className="item">
+                <label>起止时间:&nbsp;</label>
+                <RangePicker format={dateFormat} value={dateVal} onChange={onStartEndDateChange} allowClear={false} />
+            </Col>
+        </Row>
+    </Fragment>;
+}
 
 function Module4() {
     const [state, dispatch] = useReducer(reducer, store);
@@ -31,6 +57,7 @@ function Module4() {
             </Row>
             <Children1 />
             <Children2 />
+            <StartAndEndTime />
         </div>;
     </Context.Provider>;
 }
