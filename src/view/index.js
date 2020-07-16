@@ -14,6 +14,8 @@ import Module1 from '@/view/module1';
 import Module2 from '@/view/module2';
 //3
 import Module3 from '@/view/module3';
+//4
+import Module4 from '@/view/module4';
 
 
 export default function View() {
@@ -27,6 +29,7 @@ export default function View() {
                         <Route exact path="/home/module1" component={Module1}></Route>
                         <Route path="/home/module2" component={Module2}></Route>
                         <Route path="/home/module3" component={Module3}></Route>
+                        <Route path="/home/module4" component={Module4}></Route>
                     </HomeWapper>
                 </Route>
                 <Route path="/login" component={Login} />

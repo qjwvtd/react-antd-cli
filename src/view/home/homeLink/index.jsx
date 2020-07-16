@@ -65,6 +65,12 @@ export default class HomeLink extends PureComponent {
                         <Menu.Item key="module31">Option 1</Menu.Item>
                         <Menu.Item key="module32">Option 2</Menu.Item>
                     </SubMenu>
+                    <Menu.Item key="module4">
+                        <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
+                            <TeamOutlined />
+                            <span>模块4</span>
+                        </Link>
+                    </Menu.Item>
                 </Menu>
             </Fragment>
         );
