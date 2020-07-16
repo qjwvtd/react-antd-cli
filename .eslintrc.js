@@ -5,8 +5,8 @@ module.exports = {
         sourceType: "module",
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
-            jsx: true
-        }
+            jsx: true,
+        },
     },
     plugins: ["react", "html", "react-hooks"],
     env: {
@@ -28,7 +28,7 @@ module.exports = {
         // 检查 Hook 的规则
         "react-hooks/rules-of-hooks": "error",
         // 检查 effect 的依赖
-        "react-hooks/exhaustive-deps": "warn",
+        // "react-hooks/exhaustive-deps": "warn",
         //未定义前不能使用
         "no-use-before-define": "error",
         "no-sparse-arrays": "error",
@@ -36,7 +36,7 @@ module.exports = {
         //是否禁止console
         "no-console": "off",
         //禁止使用undefined
-        "no-undefined": 2,
+        // "no-undefined": 2,
         //强制正确的分号结尾
         semi: ["error", "always"],
         //禁止出现多余的分号,如:const a = 1;;
