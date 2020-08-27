@@ -3,15 +3,16 @@ export default function reducer(state, action) {
     switch (action.type) {
         case 'updateName':
             state.name = action.name;
-            return Object.assign({}, state);
+            break;
         case 'updateDate':
             state.startTime = action.start;
             state.endTime = action.end;
-            return Object.assign({}, state);
+            break;
         case 'updateList':
             state.list = action.list;
-            return Object.assign({}, state);
+            break;
         default:
             throw new Error();
     }
+    return Object.assign({}, state);
 }
