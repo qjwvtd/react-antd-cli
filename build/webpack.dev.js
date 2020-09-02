@@ -4,6 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config.js');
+const optimization = require('./optimization.js');
 const base = require('./base.config.js');
 
 //定义环境变量
@@ -18,6 +19,8 @@ const hotUpdate = new webpack.HotModuleReplacementPlugin();
 
 webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(hotUpdate);
+
+webpackConfig.optimization = optimization;
 module.exports = merge(webpackConfig, {
     mode: 'development',
     output: {
