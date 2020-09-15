@@ -3,14 +3,13 @@ import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '@/common/router';
 //全局顶层模块
-import PageNotFound from '@/view/404';
+import { PageNoFind, Error } from '@/view/exception';
 import Main from '@/view/main';
 import HomeWapper from '@/view/home';
 import Login from '@/view/login';
 import UpdatePassword from '@/view/updatePassword';
 
-//全局顶层模块
-import { PageNoFind, Error } from '@/view/exception';
+
 //1
 import Module1 from '@/view/module1';
 //2
@@ -38,7 +37,7 @@ export default function View() {
                 <Route path="/login" component={Login} />
                 <Route path="/updatePassword" component={UpdatePassword} />
                 <Route path="/error" component={Error} />
-                <Route component={PageNotFound} />
+                <Route component={PageNoFind} />
             </Switch>
         </Router>
     </Fragment >;
