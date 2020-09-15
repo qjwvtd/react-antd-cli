@@ -26,6 +26,21 @@ axios.defaults.timeout = 10000;
 
 //http request 拦截器
 const author = 'Authorization';
+//递归对象
+function recurrence(params, obj) {
+    if (typeof params === 'object') {
+        for (let i in params) {
+            const item = params[i];
+            if (typeof item === 'string' || typeof item === 'boolean' || typeof item === 'number') {
+                obj[i] = item;
+            }
+            if (typeof item === 'object') {
+                recurrence(item, obj);
+            }
+        }
+    }
+    return obj;
+}
 axios.interceptors.request.use(config => {
     const token = getToken();
     if (token) {
@@ -99,6 +114,21 @@ function checkStatus(response) {
         }
     } catch (error) {
         console.log(error);
+    }
+    //服务器异常
+    if (response.status >= 400) {
+        let res = null;
+        if (typeof response.data === 'object') {
+            res = recurrence(response.data, {});
+        }
+        if (typeof response.data === 'string') {
+            res = response;
+        }
+        const path = {
+            pathname: '/error',
+            state: res
+        };
+        rotes.push(path);
     }
     //处理null值
     function handleNull(data) {
