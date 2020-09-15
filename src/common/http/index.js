@@ -100,7 +100,21 @@ function checkStatus(response) {
     } catch (error) {
         console.log(error);
     }
-    return response.data;
+    //处理null值
+    function handleNull(data) {
+        console.log(typeof data);
+        if (!data) { return; }
+        for (let i in data) {
+            if (data[i] === null) {
+                data[i] = '--';
+            }
+            if (typeof data[i] === 'object') {
+                handleNull(data[i]);
+            }
+        }
+        return data;
+    }
+    return handleNull(response.data);
 }
 
 export default {
