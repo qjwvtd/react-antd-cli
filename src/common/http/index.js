@@ -5,7 +5,7 @@ import { getToken, removeToken } from '@/common/utils';
 //不拦截token的白名单
 import whiteList from './httpWhiteRoster.js';
 //请求地址
-let __BASEURL = require('./../../../package.json').baseURL;
+let __BASEURL = require('./../../../package.json').baseUrl;
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
@@ -128,7 +128,7 @@ function checkStatus(response) {
             pathname: '/error',
             state: res
         };
-        rotes.push(path);
+        history.push(path);
     }
     //处理null值
     function handleNull(data) {
