@@ -66,7 +66,7 @@ function Module4() {
     return <Context.Provider value={{ state: state, dispatch: dispatch }}>
         <div className="ui_content_container">
             <Row className="titleRow">
-                <Col span={24}><h4>使用useContext和useReducer实现组件内数据管理</h4></Col>
+                <Col span={24}><h4>使用useContext和useReducer实现组件局部数据管理</h4></Col>
             </Row>
             <Children1 />
             <Children2 />

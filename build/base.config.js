@@ -3,7 +3,7 @@
 const path = require('path');
 const env = require('./env');
 //请求地址
-let __BASEURL = require('./../package.json').baseUrl;
+let webRoot = require('./../config.js').webRoot;
 
 function joinName(pathString) {
     return path.resolve(__dirname, pathString);
@@ -24,7 +24,7 @@ const __proxy = {
     //接口根路径
     '/api': {
         //被代理的请求地址
-        target: __BASEURL,
+        target: webRoot,
         //跨域
         changeOrigin: true,
         //如果是https，会有安全校验，设置secure为false
