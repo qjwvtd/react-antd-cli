@@ -48,7 +48,7 @@ axios.interceptors.request.use(config => {
             config.headers.common[author] = 'Bearer ' + token;
         }
     }
-    // 设置请求的cancelToken,以断请求
+    // 设置请求的cancelToken,以中断未完成的请求
     config.headers.common['router'] = router.location.pathname;
     if (config.headers.common.router !== router.location.pathname) {
         const CancelToken = axios.CancelToken;
