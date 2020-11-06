@@ -1,48 +1,37 @@
-import React, { Component, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 //主界面Link,router
 import HomeLink from './homeLink';
 import HomeHead from './homeHead';
 
-export default class HomeWapper extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            collapsed: false, //左侧导航是否折叠
-            currentTitle: '成员管理' //当前正在操作的模块名,默认成员管理
-        };
-    }
+export default function HomeWapper({ children }) {
+    const [collapsed, setCollapsed] = useState(false);
+    const [currentTitle, setCurrentTitle] = useState('成员管理');
     //切换折叠
-    toggleCollapsed() {
-        this.setState({
-            collapsed: !this.state.collapsed
-        });
+    function toggleCollapsed() {
+        setCollapsed(!collapsed);
     }
     //路由点击事件
-    homeLinkClick(title) {
-        this.setState({
-            currentTitle: title
-        });
+    function homeLinkClick(title) {
+        setCurrentTitle(title);
     }
-    componentDidMount() { }
-    render() {
-        return (
-            <Fragment>
-                <div className="sass-ui-container">
-                    <HomeHead />
-                    <div className="sass-ui-content" style={{ overflow: 'hidden', width: '100%' }}>
-                        <div className={this.state.collapsed ? "sass-ui-left active" : "sass-ui-left"} style={{ float: 'left', width: '200px' }}>
-                            <HomeLink
-                                collapsed={this.state.collapsed}
-                                collapsedEvent={() => this.toggleCollapsed()}
-                                linkClickEvent={(t) => this.homeLinkClick(t)}
-                            />
-                        </div>
-                        <div className={this.state.collapsed ? "sass-ui-right" : "sass-ui-right active"} style={{ float: 'right', textAlign: 'center', width: 'calc(100% - 200px)' }}>
-                            {this.props.children}
-                        </div>
-                    </div>
+    useEffect(() => {
+        console.log(currentTitle);
+    }, [currentTitle]);
+    return <Fragment>
+        <div className="sass-ui-container">
+            <HomeHead />
+            <div className="sass-ui-content" style={{ overflow: 'hidden', width: '100%' }}>
+                <div className={collapsed ? "sass-ui-left active" : "sass-ui-left"} style={{ float: 'left', width: '200px' }}>
+                    <HomeLink
+                        collapsed={collapsed}
+                        collapsedEvent={() => toggleCollapsed()}
+                        linkClickEvent={(t) => homeLinkClick(t)}
+                    />
                 </div>
-            </Fragment>
-        );
-    }
+                <div className={collapsed ? "sass-ui-right" : "sass-ui-right active"} style={{ float: 'right', textAlign: 'center', width: 'calc(100% - 200px)' }}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    </Fragment>;
 }

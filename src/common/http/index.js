@@ -5,14 +5,14 @@ import whiteList from './httpWhiteRoster';
 //处理函数
 import { handleStatus } from './handleStatus';
 //请求地址
-let webRoot = require('./../../../config.js').webRoot;
+let baseUrl = require('./../../../config.js').baseUrl;
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
-    if (!webRoot) {
-        webRoot = window.location.origin;
+    if (!baseUrl) {
+        baseUrl = window.location.origin;
     }
-    axios.defaults.baseURL = webRoot;
+    axios.defaults.baseURL = baseUrl;
 }
 //开发环境
 if (process.env.NODE_ENV === 'development') {

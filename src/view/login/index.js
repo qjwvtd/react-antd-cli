@@ -26,6 +26,8 @@ const LoginForm = observer(() => {
             "stringNum": 4,
             "width": 100
         };
+        const code = getImgCode64(sendData);
+        console.log(code);
         getImgCode64(sendData).then((res) => {
             if (res && res.code === 200) {
                 setImgCode('data:image/jpeg;base64,' + res.data);
