@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Button } from 'antd';
-import roters from '@/common/router';
+import router from '@/common/router';
 import { getToken } from '@/common/utils';
 //服务器错误页面
 export function Error() {
-    const state = roters.location.state;
+    const state = router.location.state;
     console.log(state);
     if (!state) {
         window.history.go(-1);
@@ -47,10 +47,10 @@ export function Error() {
                     <Button type="link" onClick={() => { window.history.go(-1); }}>
                         返回上一页
                     </Button>&nbsp;&nbsp;
-                    <Button type="link" onClick={() => { roters.push('/'); }}>
+                    <Button type="link" onClick={() => { router.push('/'); }}>
                         返回首页
                     </Button>&nbsp;&nbsp;
-                    <Button type="link" onClick={() => { roters.push('/login'); }}>
+                    <Button type="link" onClick={() => { router.push('/login'); }}>
                         重新登录
                     </Button>
                 </li>

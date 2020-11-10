@@ -3,7 +3,8 @@ import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '@/common/router';
 //全局顶层模块
-import { PageNoFind, Error } from '@/view/exception';
+import { PageNoFind } from '@/view/exception/404';
+import { Error } from '@/view/exception/error';
 import Main from '@/view/main';
 import HomeWapper from '@/view/home';
 import Login from '@/view/login';
@@ -25,11 +26,14 @@ export default function View() {
                 <Route exact path="/" component={Main} />
                 <Route path="/home">
                     <HomeWapper>
-                        {/* 首页默认加载成员管理 */}
-                        <Route exact path="/home/module1" component={Module1}></Route>
-                        <Route path="/home/module2" component={Module2}></Route>
-                        <Route path="/home/module3" component={Module3}></Route>
-                        <Route path="/home/module4" component={Module4}></Route>
+                        <Switch>
+                            {/* 首页默认加载成员管理 */}
+                            <Route exact path="/home/module1" component={Module1}></Route>
+                            <Route path="/home/module2" component={Module2}></Route>
+                            <Route path="/home/module3" component={Module3}></Route>
+                            <Route path="/home/module4" component={Module4}></Route>
+                            <Route component={PageNoFind} />
+                        </Switch>
                     </HomeWapper>
                 </Route>
                 <Route path="/login" component={Login} />

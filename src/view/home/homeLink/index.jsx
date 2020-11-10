@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Menu } from 'antd';
-import { TeamOutlined, GroupOutlined, SettingOutlined } from '@ant-design/icons';
+import { TeamOutlined, GroupOutlined, SettingOutlined, ClusterOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
@@ -9,7 +9,7 @@ export default class HomeLink extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            menuKeys: ['module1', 'module2', 'module3'],
+            menuKeys: ['module1', 'module2', 'module3', 'module4'],
             openKeys: ['module1']
         };
     }
@@ -67,7 +67,7 @@ export default class HomeLink extends PureComponent {
                     </SubMenu>
                     <Menu.Item key="module4">
                         <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
-                            <TeamOutlined />
+                            <ClusterOutlined />
                             <span>模块4</span>
                         </Link>
                     </Menu.Item>
