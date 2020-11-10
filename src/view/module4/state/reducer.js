@@ -1,14 +1,14 @@
-/* eslint-disable indent */
+import actions from './action';
 export default function reducer(state, action) {
     switch (action.type) {
-        case 'updateName':
+        case actions.update_name:
             state.name = action.name;
             break;
-        case 'updateDate':
+        case actions.update_date:
             state.startTime = action.start;
             state.endTime = action.end;
             break;
-        case 'updateList':
+        case actions.update_list:
             state.list = action.list;
             break;
         default:

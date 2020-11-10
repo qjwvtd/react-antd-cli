@@ -3,7 +3,8 @@ import { Row, Col, DatePicker, Button } from 'antd';
 import moment from 'moment';
 import { store, Context, dateFormat } from './state/store';
 import reducer from './state/reducer';
-import { initData } from './state/action';
+import actions from './state/action';
+import { initData } from './initData';
 const { RangePicker } = DatePicker;
 // 工作区统计
 
@@ -13,7 +14,7 @@ function Children1() {
         <div>
             {state.name}
             <Button onClick={() => {
-                dispatch({ type: 'updateName', name: 'zhangxiaofan' });
+                dispatch({ type: actions.update_name, name: 'zhangxiaofan' });
             }}>click me</Button>
         </div>
     </Fragment>;
@@ -37,7 +38,7 @@ function StartAndEndTime() {
         if (dateString[1].length === 0) {
             dateString[1] = state.endTime;
         }
-        dispatch({ type: 'updateDate', start: moment(dateString[0], dateFormat), end: moment(dateString[1], dateFormat) });
+        dispatch({ type: actions.update_date, start: moment(dateString[0], dateFormat), end: moment(dateString[1], dateFormat) });
     }
     const dateVal = [
         moment(state.startTime, dateFormat),
@@ -45,7 +46,7 @@ function StartAndEndTime() {
     ];
     useEffect(() => {
         initData((arr) => {
-            dispatch({ type: 'updateList', list: arr });
+            dispatch({ type: actions.update_list, list: arr });
         });
     }, []);
     return <Fragment>
