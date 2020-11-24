@@ -1,78 +1,79 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Menu } from 'antd';
-import { TeamOutlined, GroupOutlined, SettingOutlined, ClusterOutlined } from '@ant-design/icons';
+import { AppstoreOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
-
-export default class HomeLink extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            menuKeys: ['module1', 'module2', 'module3', 'module4'],
-            openKeys: ['module1']
-        };
+const rootSubmenuKeys = ['sub1', 'sub2'];
+export default function HomeLink({ linkClickEvent }) {
+    const [current, updateCurrent] = useState('1');
+    const [openKey, updateOpenKey] = useState(['sub1']);
+    function handleClick(e) {
+        console.log(e);
+        updateCurrent(e.key);
     }
-    //点击菜单，收起其他展开的所有菜单，保持菜单聚焦简洁。
-    onChangeMunuEvent(openKeys) {
-        const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        if (this.state.menuKeys.indexOf(latestOpenKey) === -1) {
-            this.setState({ openKeys });
+    function handleChange(keys) {
+        console.log(keys);
+        const latestOpenKey = keys.find(key => openKey.indexOf(key) === -1);
+        if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            updateOpenKey(keys);
         } else {
-            this.setState({
-                openKeys: latestOpenKey ? [latestOpenKey] : []
-            });
+            updateOpenKey(latestOpenKey ? [latestOpenKey] : []);
         }
     }
-    render() {
-        const { linkClickEvent } = this.props;
-        return (
-            <Fragment>
-                <Menu
-                    mode="inline"
-                    openKeys={this.state.openKeys}
-                    onOpenChange={this.onChangeMunuEvent.bind(this)}
-                >
-                    <Menu.Item key="module1">
-                        <Link to="/home/module1" replace onClick={() => linkClickEvent('模块1')}>
-                            <TeamOutlined />
-                            <span>模块1</span>
-                        </Link>
-                    </Menu.Item>
-                    <SubMenu
-                        key="module2"
-                        title={
-                            <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
-                                <GroupOutlined />
-                                <span>模块2</span>
-                            </Link>
-                        }
-                    >
-                        <Menu.Item key="module21">Option 1</Menu.Item>
-                        <Menu.Item key="module22">Option 2</Menu.Item>
-                        <Menu.Item key="module23">Option 3</Menu.Item>
-                        <Menu.Item key="module24">Option 4</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="module13"
-                        title={
-                            <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
-                                <SettingOutlined />
-                                <span>模块3</span>
-                            </Link>
-                        }
-                    >
-                        <Menu.Item key="module31">Option 1</Menu.Item>
-                        <Menu.Item key="module32">Option 2</Menu.Item>
-                    </SubMenu>
-                    <Menu.Item key="module4">
-                        <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
-                            <ClusterOutlined />
-                            <span>模块4</span>
-                        </Link>
-                    </Menu.Item>
-                </Menu>
-            </Fragment>
-        );
-    }
+    return <Fragment>
+        <Menu
+            mode="inline"
+            theme={'light'}
+            onClick={handleClick}
+            onOpenChange={handleChange}
+            selectedKeys={[current]}
+            openKeys={openKey}
+        >
+            <Menu.Item key="1">
+                <Link to="/home/module1" replace onClick={() => linkClickEvent('模块1')}>
+                    <AppstoreOutlined />
+                    <span>模块1</span>
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+                <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
+                    <AppstoreOutlined />
+                    <span>模块2</span>
+                </Link>
+            </Menu.Item>
+            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="SubMenu3">
+                <Menu.Item key="3">
+                    <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
+                        <AppstoreOutlined />
+                        <span>Option3</span>
+                    </Link>
+                </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub2" icon={<AppstoreOutlined />} title="SubMenu4">
+                <Menu.Item key="4">
+                    <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
+                        <AppstoreOutlined />
+                        <span>Option4</span>
+                    </Link>
+                </Menu.Item>
+            </SubMenu>
+            {/* <SubMenu title="TWO" key="sub1" icon={<AppstoreOutlined />}>
+                <Menu.Item key="2">
+                    <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
+                        <AppstoreOutlined />
+                        <span>模块2</span>
+                    </Link>
+                </Menu.Item>
+            </SubMenu>
+            <SubMenu title="THREE" key="sub2" icon={<AppstoreOutlined />}>
+                <Menu.Item key="3">
+                    <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
+                        <AppstoreOutlined />
+                        <span>模块3</span>
+                    </Link>
+                </Menu.Item>
+            </SubMenu> */}
+        </Menu>
+    </Fragment >;
 }

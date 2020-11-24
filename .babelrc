@@ -16,6 +16,14 @@
             {
                 "polyfill": false
             }
+        ],
+        //antd按需加载,配合customize-cra插件使用
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": true // 这里改为true, 它将加载 并 处理我们的 less
+            }
         ]
     ]
 }

@@ -56,14 +56,16 @@ const cssLoader = {
 const lessLoader = {
     test: /\.less$/,
     use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
         use: [
             { loader: 'css-loader' },
-            { loader: 'less-loader', options: { javascriptEnabled: true } }
-        ],
-        fallback: 'style-loader'
-    }),
-    include: __include__dirname,
-    exclude: /node_modules/
+            {
+                loader: 'less-loader', // compiles Less to CSS
+                options: {
+                    lessOptions: { javascriptEnabled: true }
+                }
+            }]
+    })
 };
 const scssLoader = {
     test: /\.scss$/,

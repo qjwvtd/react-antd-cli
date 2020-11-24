@@ -9,8 +9,6 @@ const os = require('os');
 const HappyPack = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-const env = require('./env');
-
 const __base = require('./base.config.js');
 const __rules = require('./loaders');
 
@@ -32,12 +30,12 @@ const webpackConfig = {
     plugins: [
         //处理.css文件
         new MiniCssExtractPlugin({
-            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name]_[hash:8].css',
-            chunkFilename: env.dev ? 'static/css/[name]_chunk.css' : env.prod && 'static/css/[name]_chunk_[hash:8].css'
+            filename: 'static/css/[name]_[hash:8].css',
+            chunkFilename: 'static/css/[name]_chunk_[hash:8].css'
         }),
         //处理.less文件
         new ExtractTextPlugin({
-            filename: env.dev ? 'static/css/[name].css' : env.prod && 'static/css/[name]_[hash:8].css',
+            filename: 'static/css/[name]_[hash:8].css',
             allChunks: true
         }),
         //构建html

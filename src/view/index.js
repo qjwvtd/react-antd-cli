@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 // import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Router, Route, Switch } from 'react-router-dom';
-import history from '@/common/router';
+import router from '@/common/router';
 //全局顶层模块
 import { PageNoFind } from '@/view/exception/404';
 import { Error } from '@/view/exception/error';
@@ -21,7 +21,7 @@ import Module4 from '@/view/module4';
 
 export default function View() {
     return <Fragment>
-        <Router history={history}>
+        <Router history={router}>
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route path="/home">
