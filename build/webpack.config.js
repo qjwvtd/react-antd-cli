@@ -2,7 +2,6 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const os = require('os');
@@ -11,6 +10,23 @@ const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 const __base = require('./base.config.js');
 const __rules = require('./loaders');
+
+const env = require('./env');
+
+function chunkCssPath() {
+    let fileName = '', chunkFileName = '';
+    switch (env.current) {
+        case 'development':
+            fileName = 'static/css/[name].css';
+            chunkFileName = 'static/css/[name]_chunk.css';
+            break;
+        case 'production':
+            fileName = '/static/css/[name]_[hash:8].css';
+            chunkFileName = '/static/css/[name]_chunk_[hash:8].css';
+            break;
+    }
+    return { filename: fileName, chunkFilename: chunkFileName };
+}
 
 const webpackConfig = {
     entry: { 'index': path.resolve(__dirname, __base.entry) },
@@ -30,13 +46,8 @@ const webpackConfig = {
     plugins: [
         //处理.css文件
         new MiniCssExtractPlugin({
-            filename: 'static/css/[name]_[hash:8].css',
-            chunkFilename: 'static/css/[name]_chunk_[hash:8].css'
-        }),
-        //处理.less文件
-        new ExtractTextPlugin({
-            filename: 'static/css/[name]_[hash:8].css',
-            allChunks: true
+            filename: chunkCssPath().filename,
+            chunkFilename: chunkCssPath().chunkFilename
         }),
         //构建html
         new HtmlWebpackPlugin({
