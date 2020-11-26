@@ -75,7 +75,8 @@ const webpackConfig = {
         // console.log(parseFloat(percentage.toFixed(2)) * 100 + '%', message);
         // })
 
-    ]
+    ],
+    stats: { children: false }
 };
 
 module.exports = webpackConfig;

@@ -67,6 +67,6 @@ module.exports = {
         //生产环境代码输出目录
         path: _bundle,
         //输出文件'
-        filename: '/static/js/[name]_[hash:8].js'
+        filename: 'static/js/[name]_[hash:8].js'
     }
 };
