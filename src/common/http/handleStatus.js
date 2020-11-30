@@ -1,8 +1,7 @@
 import { message } from 'antd';
 import history from '@/common/router';
 import { removeToken } from '@/common/utils';
-import { recurrence, openErrorView } from './httpUtils';
-
+import { recurrence, openErrorView, handleNull } from './httpUtils';
 export function handleStatus(response) {
     let tips = null;//msg
     let data = response.data || { data: null, code: null, msg: null };//data
@@ -56,5 +55,5 @@ export function handleStatus(response) {
             openErrorView(res);
         }
     }
-    return data;
+    return handleNull(data);
 }

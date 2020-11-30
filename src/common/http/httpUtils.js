@@ -14,15 +14,15 @@ export function recurrence(params, obj) {
     }
     return obj;
 }
-//处理null值
+//处理null值,把null值变成{}
 export function handleNull(data) {
     if (!data) { return; }
     for (let i in data) {
-        if (data[i] === null) {
-            data[i] = '--';
-        }
         if (typeof data[i] === 'object') {
             handleNull(data[i]);
+        }
+        if (data[i] === null) {
+            data[i] = {};
         }
     }
     return data;
