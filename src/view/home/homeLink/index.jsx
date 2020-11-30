@@ -58,6 +58,12 @@ export default function HomeLink({ linkClickEvent }) {
                     </Link>
                 </Menu.Item>
             </SubMenu>
+            <Menu.Item key="5">
+                <Link to="/error" replace onClick={() => linkClickEvent('error page')}>
+                    <AppstoreOutlined />
+                    <span>Error Page</span>
+                </Link>
+            </Menu.Item>
             {/* <SubMenu title="TWO" key="sub1" icon={<AppstoreOutlined />}>
                 <Menu.Item key="2">
                     <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
