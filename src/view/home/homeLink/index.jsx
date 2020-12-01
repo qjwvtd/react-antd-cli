@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Menu } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import router from '@/common/router';
 
 const { SubMenu } = Menu;
 const rootSubmenuKeys = ['sub1', 'sub2'];
@@ -65,10 +66,10 @@ export default function HomeLink({ linkClickEvent }) {
                 </Link>
             </Menu.Item>
             <Menu.Item key="100">
-                <Link to="/error" replace onClick={() => linkClickEvent('error page')}>
+                <a onClick={() => { linkClickEvent('error page'); router.push('/error'); }}>
                     <AppstoreOutlined />
                     <span>Error Page</span>
-                </Link>
+                </a>
             </Menu.Item>
         </Menu>
     </Fragment >;
