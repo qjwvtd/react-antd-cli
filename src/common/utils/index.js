@@ -77,30 +77,6 @@ export function urlParse() {
     return obj;
 }
 /**
- * 防抖函数
- * 只需要在事件触发的第一行调用,如:
- * shakePrevent()
- * @param delay,延迟毫秒,可不传,默认3000
- */
-export function shakePrevent(delay) {
-    const e = event;
-    const _delay = delay ? delay : 3000;
-    function getTarget(target) {
-        //已到顶层,非button和input类型的按钮
-        if (['BODY', 'HTML', '#document'].indexOf(target.nodeName) >= 0) {
-            console.log('非button和input类型的按钮,无法设置防抖');
-            return e.target;
-        }
-        const flag = target.nodeName === 'BUTTON' || target.nodeName === 'INPUT';
-        return flag ? target : getTarget(target.parentNode);
-    }
-    const _target = getTarget(e.target);
-    _target.disabled = true;
-    setTimeout(() => {
-        _target.disabled = false;
-    }, _delay);
-}
-/**
  * 获取指定的URL参数值
  * URL:http://www.quwan.com/index?name=tyler
  * 参数：paramName URL参数
@@ -128,14 +104,48 @@ export function stopeEventPropagation(e) {
     e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
 }
-/**文本框chang事件防抖类
+/**
+ * hooks节流
+ * @param {*} func
+ * @param {*} ms,毫秒
+ */
+export function useEconomy(func, ms) {
+    let previous = 0;
+    return function () {
+        let now = Date.now();
+        let context = this;
+        let args = arguments;
+        if (now - previous > ms) {
+            func.apply(context, args);
+            previous = now;
+        }
+    };
+}
+/**
+ * hooks防抖
+ * @param {*} func
+ * @param {*} ms ,毫秒,默认3000
+ */
+export function useDebounce(func, ms) {
+    let timeout;
+    return function () {
+        let context = this;
+        let args = arguments;
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, ms || 3000);
+    };
+}
+/**
+ * 文本框输入框,chang事件防抖类
  * @param fn,写自己的处理逻辑
  * @param delay,延迟多少毫秒拿到结果,默认2000
  * @param value,文本框输入的值
- * debounce.init(fn, delay)(value);
- * 如:debounce.init(() => {console.log('在这里写请求')}, 1000)('文本框输入的值');
+ * inputDebounce.init(fn, delay)(value);
+ * 如:inputDebounce.init(() => {console.log('在这里写请求')}, 1000)('文本框输入的值');
  **/
-export const debounce = {
+export const inputDebounce = {
     timerId: null,
     init(fn, delay) {
         return (...parms) => {
@@ -147,6 +157,31 @@ export const debounce = {
         };
     }
 };
+/**
+ * 按钮类,防抖函数
+ * 只需要在事件触发的第一行调用,如:
+ * buttonDebounce()
+ * @param delay,延迟毫秒,可不传,默认3000
+ */
+export function buttonDebounce(delay) {
+    const e = event;
+    let timer = null;
+    function getTarget(target) {
+        //已到顶层,非button和input类型的按钮
+        if (['BODY', 'HTML', '#document'].includes(target.nodeName)) {
+            console.log('非button和input类型的按钮,无法设置防抖');
+            return e.target;
+        }
+        const flag = target.nodeName === 'BUTTON' || target.nodeName === 'INPUT';
+        return flag ? target : getTarget(target.parentNode);
+    }
+    const _target = getTarget(e.target);
+    _target.disabled = true;
+    timer = setTimeout(() => {
+        _target.disabled = false;
+        clearTimeout(timer);
+    }, delay || 3000);
+}
 /**
 *根据key,value,从树里面找到一个节点,return当前节点
 *@param treeList,标准的树型结构,必须要有children字段
@@ -234,3 +269,4 @@ export function dataURLtoFile(dataurl, fileName) {
 export function hashHistoryOpenView(path) {
     window.location.replace(window.location.origin + '#' + path);
 }
+

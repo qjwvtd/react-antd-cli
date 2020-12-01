@@ -42,44 +42,34 @@ export default function HomeLink({ linkClickEvent }) {
                     <span>模块2</span>
                 </Link>
             </Menu.Item>
-            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="SubMenu3">
+            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="模块3">
                 <Menu.Item key="3">
                     <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
                         <AppstoreOutlined />
-                        <span>Option3</span>
+                        <span>模块3-1</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<AppstoreOutlined />} title="SubMenu4">
+            <SubMenu key="sub2" icon={<AppstoreOutlined />} title="模块4">
                 <Menu.Item key="4">
                     <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
                         <AppstoreOutlined />
-                        <span>Option4</span>
+                        <span>模块4-1</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="5">
+                <Link to="/home/module5" replace onClick={() => linkClickEvent('模块5')}>
+                    <AppstoreOutlined />
+                    <span>模块5</span>
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="100">
                 <Link to="/error" replace onClick={() => linkClickEvent('error page')}>
                     <AppstoreOutlined />
                     <span>Error Page</span>
                 </Link>
             </Menu.Item>
-            {/* <SubMenu title="TWO" key="sub1" icon={<AppstoreOutlined />}>
-                <Menu.Item key="2">
-                    <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
-                        <AppstoreOutlined />
-                        <span>模块2</span>
-                    </Link>
-                </Menu.Item>
-            </SubMenu>
-            <SubMenu title="THREE" key="sub2" icon={<AppstoreOutlined />}>
-                <Menu.Item key="3">
-                    <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
-                        <AppstoreOutlined />
-                        <span>模块3</span>
-                    </Link>
-                </Menu.Item>
-            </SubMenu> */}
         </Menu>
     </Fragment >;
 }

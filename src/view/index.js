@@ -17,6 +17,8 @@ import Module2 from '@/view/module2';
 import Module3 from '@/view/module3';
 //4
 import Module4 from '@/view/module4';
+//5
+import Module5 from '@/view/module5';
 
 
 export default function View() {
@@ -32,6 +34,7 @@ export default function View() {
                             <Route path="/home/module2" component={Module2}></Route>
                             <Route path="/home/module3" component={Module3}></Route>
                             <Route path="/home/module4" component={Module4}></Route>
+                            <Route path="/home/module5" component={Module5}></Route>
                             <Route component={PageNoFind} />
                         </Switch>
                     </HomeWapper>

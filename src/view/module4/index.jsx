@@ -22,9 +22,11 @@ function Children1() {
 
 function Children2() {
     const { state } = useContext(Context);
+    console.log(state);
     return <Fragment>
         <div>
-            {state.name}
+            {/* {state.name} */}
+            {JSON.stringify(state)}
         </div >
     </Fragment>;
 }
