@@ -19,5 +19,7 @@ export const LOGINSECRET = {
  * @param "stringNum": 4,
  * @param "width": 100
  * */
-
+//获取base64字节的图片验证码
 export const getImgCode64 = data => http.POST(server.versatile + '/verifyCode/base64', data);
+//手机号和密码登录
+export const loginWithMobilePassword = data => http.POST(server.business + '/login/mobile', data);
