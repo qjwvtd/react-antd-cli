@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Input } from 'antd';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
+import store from '@/common/store';
 const InputGroup = Input.Group;
 /**
  * mobx跨组件通信
- * 涉及多个store的引用,inject('store1')(inject('store2')(observer(FC)))
  */
-const Module1 = inject('userStore')(inject('personStore')(observer(({ userStore, personStore }) => {
+const Module1 = observer(() => {
+    const { userStore, personStore } = store;
     useEffect(() => {
         personStore.init();
     }, []);
@@ -24,7 +25,7 @@ const Module1 = inject('userStore')(inject('personStore')(observer(({ userStore,
             </Col>
         </Row>
         <hr />
-        <h4>多个store使用示例</h4>
+        <h4>另一个store</h4>
         <Row>
             <Col offset={4} span={16}>
                 {
@@ -46,5 +47,5 @@ const Module1 = inject('userStore')(inject('personStore')(observer(({ userStore,
             </Col>
         </Row>
     </Fragment>;
-})));
+});
 export default Module1;
