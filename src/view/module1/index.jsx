@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Input } from 'antd';
-import { injectAll } from '@/common/store';
+import injectAll from '@/common/utils/inject';
 const InputGroup = Input.Group;
 /**
  * mobx跨组件通信
