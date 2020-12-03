@@ -1,19 +1,16 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Input } from 'antd';
-import { observer } from 'mobx-react';
-import store from '@/common/store';
+import { injectAll } from '@/common/store';
 const InputGroup = Input.Group;
 /**
  * mobx跨组件通信
  */
-const Module1 = observer(() => {
-    const { userStore, personStore } = store;
+const Module1 = injectAll(['userStore', 'personStore'], ({ userStore, personStore }) => {
     useEffect(() => {
         personStore.init();
     }, []);
     return <Fragment>
-        this is my Member page
-        <p>这是成员管理界面</p>
+        <h3>Mobx store全局注入,使用inject引入,同一组件使用多个store</h3>
         <hr />
         <h4>修改user</h4>
         <Row>

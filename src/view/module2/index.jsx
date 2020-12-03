@@ -1,18 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+const Module2 = () => {
+    return <Fragment>
+        <p>模块2</p>
+    </Fragment>;
+};
 
-export default class Module2 extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: 'this is my Equipment page'
-        };
-    }
-    render() {
-        return (
-            <Fragment>
-                {this.state.title}
-                <p>这是设备管理界面</p>
-            </Fragment>
-        );
-    }
-}
+export default Module2;
