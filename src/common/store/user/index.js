@@ -9,7 +9,7 @@ const userStore = observable({
                 name: "张小军",
                 phone: "18828055416",
                 sex: 1,
-                portrait: "https://oss.dhwork.cn/dev/images/portrait/6aa9058d6fca9bf895064af079902cf9.png",
+                portrait: "https://oss.dhwork.cn/dev/images/portrait/56ad9d1bfc63464923e5c021b5e1f6be.png",
                 hasPassword: true,
                 roleId: 208,
                 projectId: 103,
