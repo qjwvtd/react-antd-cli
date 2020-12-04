@@ -1,8 +1,8 @@
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
 
-class User {
-    @observable data = {};
-    @action initUser() {
+const userStore = observable({
+    data: {},
+    initUser() {
         setTimeout(() => {
             const mockData = {
                 id: 197,
@@ -18,11 +18,10 @@ class User {
             };
             this.data = mockData;
         }, 1000);
-    }
-    @action updateUserName(name) {
+    },
+    updateUserName(name) {
         this.data.name = name;
     }
-}
-const userStore = new User();
+});
 export default userStore;
 

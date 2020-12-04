@@ -1,16 +1,15 @@
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
 
-class Person {
-    @observable list = [];
-    @action init() {
+const personStore = observable({
+    list: [],
+    init() {
         setTimeout(() => {
             this.list = ['Tony', 'Andy', 'Tom', 'Cat', 'HanMeimei'];
         }, 1000);
-    }
-    @action updateItem(value, index) {
+    },
+    updateItem(value, index) {
         this.list[index] = value;
     }
-}
-const personStore = new Person();
+});
 export default personStore;
 

@@ -33,7 +33,7 @@ const HomeHead = inject('userStore')(observer(({ userStore }) => {
             </Col>
             <Col span={11} className="head-status text-right">
                 <div>
-                    <img src={avtar} title="头像" style={{ width: '32px' }} />
+                    <img src={userStore.data.portrait || avtar} title="头像" style={{ width: '32px' }} />
                     <Dropdown overlay={dropdownMenu} placement="bottomRight">
                         <span>{userStore.data.name || 'zhangxiaojun'}<DownOutlined /></span>
                     </Dropdown>
