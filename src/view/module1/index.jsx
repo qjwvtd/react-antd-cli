@@ -5,7 +5,7 @@ const InputGroup = Input.Group;
 /**
  * mobx跨组件通信
  */
-const Module1 = injectAll(['userStore', 'personStore'], ({ userStore, personStore }) => {
+const Module1 = injectAll(['userStore', 'personStore'])(({ userStore, personStore }) => {
     useEffect(() => {
         personStore.init();
     }, []);
