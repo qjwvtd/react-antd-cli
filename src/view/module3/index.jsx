@@ -12,6 +12,7 @@ export default class Module3 extends Component {
             <Fragment>
                 {this.state.title}
                 <p>这是项目设置界面</p>
+                <p>使用lazy()和Suspense实现根据路由进行代码分割,'view/index.js'文件查看</p>
             </Fragment>
         );
     }

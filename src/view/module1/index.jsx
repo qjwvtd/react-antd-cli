@@ -10,7 +10,7 @@ const Module1 = injectAll(['userStore', 'personStore'])(({ userStore, personStor
         personStore.init();
     }, []);
     return <Fragment>
-        <h3>Mobx store全局注入,使用inject引入,同一组件使用多个store</h3>
+        <h3>store已在顶层组件全局注入,使用inject引入,同一组件使用多个store</h3>
         <hr />
         <h4>修改user</h4>
         <Row>

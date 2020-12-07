@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import arrayToLinkList from '@/common/utils/linkList';
+import { arrayToLinkList } from '@/common/utils';
 const Module2 = () => {
     const [linkList, setLinkList] = useState({});
     useEffect(() => {

@@ -7,6 +7,7 @@ module.exports = {
     },
     splitChunks: {
         chunks: 'all',
+        minChunks: 2,
         cacheGroups: {
             common: {
                 // test: /[\\/]src[\\/]/,把src目录下的公共JS代码提出为common.js
