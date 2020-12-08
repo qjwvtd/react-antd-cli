@@ -10,7 +10,7 @@ const Module1 = injectAll(['userStore', 'personStore'])(({ userStore, personStor
         personStore.init();
     }, []);
     return <Fragment>
-        <h3>store已在顶层组件全局注入,使用inject引入,同一组件使用多个store</h3>
+        <h4>store已在顶层组件全局注入,使用inject引入,同一组件使用多个store</h4>
         <hr />
         <h4>修改user</h4>
         <Row>
@@ -21,24 +21,27 @@ const Module1 = injectAll(['userStore', 'personStore'])(({ userStore, personStor
                 />
             </Col>
         </Row>
-        <hr />
+        <br />
         <h4>另一个store</h4>
         <Row>
             <Col offset={4} span={16}>
                 {
                     personStore.list.map((item, index) =>
-                        <InputGroup compact key={index}>
-                            <Input
-                                style={{ width: '50%' }}
-                                value={item}
-                                onChange={(e) => personStore.updateItem(e.target.value, index)}
-                            />
-                            <Input
-                                style={{ width: '50%' }}
-                                disabled
-                                value={item}
-                            />
-                        </InputGroup>
+                        <Fragment key={index}>
+                            <InputGroup compact>
+                                <Input
+                                    style={{ width: '50%' }}
+                                    value={item}
+                                    onChange={(e) => personStore.updateItem(e.target.value, index)}
+                                />
+                                <Input
+                                    style={{ width: '50%' }}
+                                    disabled
+                                    value={item}
+                                />
+                            </InputGroup>
+                            <br />
+                        </Fragment>
                     )
                 }
             </Col>

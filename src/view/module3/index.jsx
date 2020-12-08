@@ -1,14 +1,20 @@
 import React, { Fragment, useEffect } from 'react';
-import { Row, Col, Input } from 'antd';
+import { Row, Col, Input, Skeleton } from 'antd';
 import globalUser from './store';
 
 //展示组件
 function ShowInfo() {
     const [userInfo] = globalUser();
     return <div style={{ width: '80%', margin: '0 auto', textAlign: 'left' }}>
-        <p>id: {userInfo.id}</p>
-        <p>name: {userInfo.name}</p>
-        <p>address: {userInfo.address}</p>
+        {
+            userInfo.id ?
+                <Fragment>
+                    <p>id: {userInfo.id}</p>
+                    <p>name: {userInfo.name}</p>
+                    <p>address: {userInfo.address}</p>
+                </Fragment> :
+                <Skeleton />
+        }
     </div>;
 }
 //修改名称组件
