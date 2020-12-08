@@ -5,30 +5,13 @@ const TokenKey = 'Admin-Token';
 //token,get
 export function getToken() {
     return Cookies.get(TokenKey);
-    //记住功能先留着
-    // const isremember = localStorage.getItem('REMEMBER');
-    // if (isremember === 'true') {
-    //     return Cookies.get(TokenKey);
-    // }
-    // if (isremember === 'false') {
-    //     return sessionStorage.getItem(TokenKey);
-    // }
 }
 //token,set
 export function setToken(token) {
     Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
-    //记住功能先留着
-    // const isremember = localStorage.getItem('REMEMBER');
-    // if (isremember === 'true') {
-    //     Cookies.set(TokenKey, token, { expires: 0.5 });//days 0.5,半天12小时
-    // }
-    // if (isremember === 'false') {
-    //     sessionStorage.setItem(TokenKey, token);
-    // }
 }
 //token,rm
 export function removeToken() {
-    sessionStorage.removeItem(TokenKey);
     return Cookies.remove(TokenKey);
 }
 

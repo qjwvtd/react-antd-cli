@@ -1,19 +1,55 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { Row, Col, Input } from 'antd';
+import globalUser from './store';
 
-export default class Module3 extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: 'this is my project setting page'
-        };
-    }
-    render() {
-        return (
-            <Fragment>
-                {this.state.title}
-                <p>这是项目设置界面</p>
-                <p>使用lazy()和Suspense实现根据路由进行代码分割,'view/index.js'文件查看</p>
-            </Fragment>
-        );
-    }
+//展示组件
+function ShowInfo() {
+    const [userInfo] = globalUser();
+    return <div style={{ width: '80%', margin: '0 auto', textAlign: 'left' }}>
+        <p>id: {userInfo.id}</p>
+        <p>name: {userInfo.name}</p>
+        <p>address: {userInfo.address}</p>
+    </div>;
 }
+//修改名称组件
+function UpdateName() {
+    const [userInfo, userAction] = globalUser();
+    return <Row style={{ width: '80%', margin: '0 auto' }}>
+        <Col span={8}>
+            <Input
+                value={userInfo.name}
+                onChange={(e) => userAction.updateUserName(e.target.value)}
+            />
+        </Col>
+    </Row>;
+}
+//修改地址组件
+function UpdateAddress() {
+    const [userInfo, userAction] = globalUser();
+    return <Row style={{ width: '80%', margin: '0 auto' }}>
+        <Col span={8}>
+            <Input
+                value={userInfo.address}
+                onChange={(e) => userAction.updateUserAddress(e.target.value)}
+            />
+        </Col>
+    </Row>;
+}
+//容器组件
+const Module3 = () => {
+    const [userInfo, userAction] = globalUser();
+    useEffect(() => {
+        if (!userInfo.id) {
+            userAction.initUser();
+        }
+    }, []);
+    return <Fragment>
+        <h4>使用use-global-hook包来管理react状态</h4>
+        <h4>可代替mobx/redux</h4>
+        <ShowInfo />
+        <UpdateName />
+        <br />
+        <UpdateAddress />
+    </Fragment>;
+};
+export default Module3;

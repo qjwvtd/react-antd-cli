@@ -42,7 +42,7 @@ const LoginForm = observer(() => {
                 size="large"
                 disabled={!btnDisabled}
                 onClick={() => {
-                    setToken('7e756df8-ba63-4da7-a7aa-d62fd1083135');
+                    setToken('1f4c00e7-2bde-43f5-b590-ddb1a1c5efd0');
                     history.push("/home/module1");
                 }}
             >

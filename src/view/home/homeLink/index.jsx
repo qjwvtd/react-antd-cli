@@ -34,20 +34,20 @@ export default function HomeLink({ linkClickEvent }) {
             <Menu.Item key="1">
                 <Link to="/home/module1" replace onClick={() => linkClickEvent('模块1')}>
                     <AppstoreOutlined />
-                    <span>模块1</span>
+                    <span>Mobx状态管理</span>
                 </Link>
             </Menu.Item>
             <Menu.Item key="2">
                 <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
                     <AppstoreOutlined />
-                    <span>模块2</span>
+                    <span>数组转链表</span>
                 </Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<AppstoreOutlined />} title="模块3">
                 <Menu.Item key="3">
                     <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
                         <AppstoreOutlined />
-                        <span>模块3-1</span>
+                        <span>use-global-hook</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
@@ -55,14 +55,14 @@ export default function HomeLink({ linkClickEvent }) {
                 <Menu.Item key="4">
                     <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
                         <AppstoreOutlined />
-                        <span>模块4-1</span>
+                        <span>useReducer和useContext</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="5">
                 <Link to="/home/module5" replace onClick={() => linkClickEvent('模块5')}>
                     <AppstoreOutlined />
-                    <span>模块5</span>
+                    <span>自定义Hook</span>
                 </Link>
             </Menu.Item>
             <Menu.Item key="100">
