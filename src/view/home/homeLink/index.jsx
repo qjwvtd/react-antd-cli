@@ -32,35 +32,39 @@ export default function HomeLink({ linkClickEvent }) {
             openKeys={openKey}
         >
             <Menu.Item key="1">
-                <Link to="/home/module1" replace onClick={() => linkClickEvent('模块1')}>
-                    <AppstoreOutlined />
-                    <span>Mobx状态管理</span>
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-                <Link to="/home/module2" replace onClick={() => linkClickEvent('模块2')}>
+                <Link to="/home/arrayToLinkList" replace onClick={() => linkClickEvent('模块1')}>
                     <AppstoreOutlined />
                     <span>数组转链表</span>
                 </Link>
             </Menu.Item>
-            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="模块3">
+            <SubMenu key="sub1" icon={<AppstoreOutlined />} title="React状态管理">
+                <Menu.Item key="2">
+                    <Link to="/home/mobxDemo" replace onClick={() => linkClickEvent('模块2')}>
+                        <AppstoreOutlined />
+                        <span>mobx,mobx-react</span>
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key="3">
-                    <Link to="/home/module3" replace onClick={() => linkClickEvent('模块3')}>
+                    <Link to="/home/useGlobalHookDemo" replace onClick={() => linkClickEvent('模块3')}>
                         <AppstoreOutlined />
                         <span>use-global-hook</span>
                     </Link>
                 </Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<AppstoreOutlined />} title="模块4">
                 <Menu.Item key="4">
-                    <Link to="/home/module4" replace onClick={() => linkClickEvent('模块4')}>
+                    <Link to="/home/contextAndReducerDemo" replace onClick={() => linkClickEvent('模块4')}>
                         <AppstoreOutlined />
-                        <span>useReducer和useContext</span>
+                        <span>useReducer,useContext</span>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="6">
+                    <Link to="/home/recoilDemo" replace onClick={() => linkClickEvent('模块6')}>
+                        <AppstoreOutlined />
+                        <span>recoil</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="5">
-                <Link to="/home/module5" replace onClick={() => linkClickEvent('模块5')}>
+                <Link to="/home/customHook" replace onClick={() => linkClickEvent('模块5')}>
                     <AppstoreOutlined />
                     <span>自定义Hook</span>
                 </Link>

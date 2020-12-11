@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-const userStore = observable({
+const store = {
     data: {},
     initUser() {
         setTimeout(() => {
@@ -22,6 +22,7 @@ const userStore = observable({
     updateUserName(name) {
         this.data.name = name;
     }
-});
+};
+const userStore = observable(store);
 export default userStore;
 

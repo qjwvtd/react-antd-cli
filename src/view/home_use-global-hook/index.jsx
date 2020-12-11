@@ -1,15 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
-import { Row, Col, Input, Skeleton } from 'antd';
+import { Row, Col, Input, Skeleton, Card } from 'antd';
 import globalUser from './store';
 
 //展示组件
 function ShowInfo() {
     const [userInfo] = globalUser();
-    return <div style={{ width: '80%', margin: '0 auto', textAlign: 'left' }}>
+    return <div>
         {
             userInfo.id ?
                 <Fragment>
-                    <p>id: {userInfo.id}</p>
                     <p>name: {userInfo.name}</p>
                     <p>address: {userInfo.address}</p>
                 </Fragment> :
@@ -20,7 +19,7 @@ function ShowInfo() {
 //修改名称组件
 function UpdateName() {
     const [userInfo, userAction] = globalUser();
-    return <Row style={{ width: '80%', margin: '0 auto' }}>
+    return <Row>
         <Col span={8}>
             <Input
                 value={userInfo.name}
@@ -32,7 +31,7 @@ function UpdateName() {
 //修改地址组件
 function UpdateAddress() {
     const [userInfo, userAction] = globalUser();
-    return <Row style={{ width: '80%', margin: '0 auto' }}>
+    return <Row>
         <Col span={8}>
             <Input
                 value={userInfo.address}
@@ -50,12 +49,14 @@ const Module3 = () => {
         }
     }, []);
     return <Fragment>
-        <h4>使用use-global-hook包来管理react状态</h4>
-        <h4>可代替mobx/redux</h4>
-        <ShowInfo />
-        <UpdateName />
-        <br />
-        <UpdateAddress />
+        <Card title="use-global-hook" bordered={false}>
+            <p>使用use-global-hook包管理react状态,仅用一个API实现状态管理,包大小(摘自npm,未压缩Unpacked Size):</p>
+            <p>use-global-hook: <b>25.1 kB</b></p>
+            <ShowInfo />
+            <UpdateName />
+            <br />
+            <UpdateAddress />
+        </Card>
     </Fragment>;
 };
 export default Module3;

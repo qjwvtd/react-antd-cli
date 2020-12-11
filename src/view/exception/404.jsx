@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Result, Button } from 'antd';
 import router from '@/common/router';
 
-export function PageNoFind() {
+export default function PageNoFind() {
     return <Fragment>
         <Result
             status="404"

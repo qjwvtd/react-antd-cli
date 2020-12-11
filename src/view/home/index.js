@@ -16,12 +16,12 @@ export default function HomeWapper({ children }) {
         <div className="sass-ui-container">
             <HomeHead />
             <div className="sass-ui-content" style={{ overflow: 'hidden', width: '100%' }}>
-                <div className="sass-ui-left" style={{ float: 'left', width: '200px' }}>
+                <div className="sass-ui-left" style={{ float: 'left', width: '300px' }}>
                     <HomeLink
                         linkClickEvent={(t) => homeLinkClick(t)}
                     />
                 </div>
-                <div className="sass-ui-right" style={{ float: 'right', textAlign: 'center', width: 'calc(100% - 200px)' }}>
+                <div className="sass-ui-right" style={{ float: 'right', width: 'calc(100% - 300px)' }}>
                     {children}
                 </div>
             </div>

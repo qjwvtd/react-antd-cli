@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import router from '@/common/router';
 import { getToken } from '@/common/utils';
 //服务器错误页面
-export function Error() {
+export default function Error() {
     const state = router.location.state || { show: 'success', message: '未知错误, 跳转未携带数据' };
     if (typeof router.location.state === 'string') {
         state.message = router.location.state;

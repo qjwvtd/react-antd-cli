@@ -1,5 +1,5 @@
 import React, { Fragment, useReducer, useContext, useEffect } from 'react';
-import { Row, Col, DatePicker, Button } from 'antd';
+import { Row, DatePicker, Button, Card } from 'antd';
 import moment from 'moment';
 import { store, Context, dateFormat } from './state/store';
 import reducer from './state/reducer';
@@ -67,14 +67,12 @@ function StartAndEndTime() {
 function Module4() {
     const [state, dispatch] = useReducer(reducer, store);
     return <Context.Provider value={{ state: state, dispatch: dispatch }}>
-        <div className="ui_content_container">
-            <Row className="titleRow">
-                <Col span={24}><h4>使用useContext和useReducer实现组件局部数据管理</h4></Col>
-            </Row>
+        <Card title="useContext,useReducer">
+            <p>使用React自带的useContext api和useReducer api实现局部数据管理</p>
             <Children1 />
             <Children2 />
             <StartAndEndTime />
-        </div>
+        </Card>
     </Context.Provider>;
 }
 export default Module4;
