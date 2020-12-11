@@ -9,10 +9,12 @@ export function handleStatus(response) {
         tips = '网络故障,请检查您的网络';
         message.error(tips);
         openErrorView({ message: tips });
+        return { code: null, data: {}, msg: tips };
     }
     //请求直接报错
     if (typeof response === 'string') {
         openErrorView({ message: response });
+        return { code: null, data: {}, msg: tips };
     }
     const requestStatus = response && response.status === 200;
     //请求成功
@@ -24,6 +26,7 @@ export function handleStatus(response) {
             localStorage.clear();
             sessionStorage.clear();
             removeToken();
+            return { code: null, data: {}, msg: '登录已过期,请重新登录' };
         }
     }
     //请求失败
@@ -41,6 +44,7 @@ export function handleStatus(response) {
             }
             openErrorView(res);
         }
+        return { code: response.status, data: {}, msg: tips };
     }
     return handleNull(data);
 }
