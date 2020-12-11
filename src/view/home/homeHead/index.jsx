@@ -19,6 +19,9 @@ const HomeHead = inject('userStore')(observer(({ userStore }) => {
                 <Link to="/updatePassword">更新密码</Link>
             </Menu.Item>
             <Menu.Item>
+                <Link to="/test">测试组件</Link>
+            </Menu.Item>
+            <Menu.Item>
                 <Link to="/" onClick={logout}>退出登录</Link>
             </Menu.Item>
         </Menu>;
