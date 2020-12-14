@@ -17,27 +17,44 @@ function UpdateUser() {
         <Row>
             <Col span={11}>
                 <p>userName:</p>
-                <Input value={state.user.name} onChange={(e) => {
-                    dispatch({ type: 'update_user_name', name: e.target.value });
-                }} />
+                <Input
+                    value={state.user.name}
+                    onChange={(e) => {
+                        dispatch({ type: 'update_user_name', name: e.target.value });
+                    }} />
             </Col>
             <Col span={11} offset={2}>
                 <p>userRole:</p>
-                <Input value={state.user.role} onChange={(e) => {
-                    dispatch({ type: 'update_user_role', role: e.target.value });
-                }} />
+                <Input
+                    value={state.user.role}
+                    onChange={(e) => {
+                        dispatch({ type: 'update_user_role', role: e.target.value });
+                    }} />
             </Col>
         </Row><br />
     </Fragment>;
 }
 function UpdateProject() {
+    const { state, dispatch } = useContext(Context);
     return <Fragment>
         <Row>
             <Col span={11}>
-                <Input />
+                <p>projectName:</p>
+                <Input
+                    value={state.project.name}
+                    onChange={(e) => {
+                        dispatch({ type: 'update_project_name', name: e.target.value });
+                    }}
+                />
             </Col>
             <Col span={11} offset={2}>
-                <Input />
+                <p>projectDesc:</p>
+                <Input
+                    value={state.project.desc}
+                    onChange={(e) => {
+                        dispatch({ type: 'update_project_desc', desc: e.target.value });
+                    }}
+                />
             </Col>
         </Row><br />
     </Fragment>;
@@ -50,11 +67,11 @@ function Child() {
         <UpdateProject />
     </Fragment>;
 }
-
-export default function Test() {
+//顶层组件使用Provider包裹
+export default function GlobalState() {
     useEffect(() => { }, []);
     return <Provider>
-        <Card title="使用react自带的useContext和useReducer实现全局状态管理">
+        <Card title="全局状态管理">
             <Child />
         </Card>
     </Provider>;
