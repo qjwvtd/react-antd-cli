@@ -5,12 +5,16 @@ export const user = {
 };
 //actions
 export const userActions = {
+    init: 'init_user',
     update_user_name: 'update_user_name',
     update_user_role: 'update_user_role'
 };
 //reducer
 export function userReducer(state, action) {
     switch (action.type) {
+        case userActions.init:
+            state.user = action.user;
+            break;
         case userActions.update_user_name:
             state.user.name = action.name;
             break;

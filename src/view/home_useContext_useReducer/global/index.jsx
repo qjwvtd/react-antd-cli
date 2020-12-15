@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Input, Card } from 'antd';
-import { UseRootProvider, useRootStore } from './store';
+import { CustomProvider, useCustomStore } from './store';
 
 function ShowComponent() {
-    const { state } = useRootStore();
+    const { state } = useCustomStore();
     return <Fragment>
         <p>userName: {state.user.name}</p>
         <p>userRole: {state.user.role}</p>
@@ -12,7 +12,14 @@ function ShowComponent() {
     </Fragment>;
 }
 function UpdateUser() {
-    const { state, dispatch } = useRootStore();
+    const { state, dispatch } = useCustomStore();
+    useEffect(() => {
+        //异步必须在组件内完成
+        const timer = setTimeout(() => {
+            dispatch({ type: 'init_user', user: { name: '小贼别走', role: '放开那个女孩' } });
+        }, 2000);
+        return () => { clearTimeout(timer); };
+    }, []);
     return <Fragment>
         <Row>
             <Col span={11}>
@@ -35,7 +42,7 @@ function UpdateUser() {
     </Fragment>;
 }
 function UpdateProject() {
-    const { state, dispatch } = useRootStore();
+    const { state, dispatch } = useCustomStore();
     return <Fragment>
         <Row>
             <Col span={11}>
@@ -70,9 +77,9 @@ function Child() {
 //顶层组件使用Provider包裹
 export default function GlobalState() {
     useEffect(() => { }, []);
-    return <UseRootProvider>
+    return <CustomProvider>
         <Card title="全局状态管理">
             <Child />
         </Card>
-    </UseRootProvider>;
+    </CustomProvider>;
 }

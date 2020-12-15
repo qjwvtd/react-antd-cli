@@ -1,13 +1,10 @@
 import React, { useReducer, useContext } from 'react';
-//store
-import stores from './stores';
-//reducer
-import reducers from './reduders';
+import { stores, reducer } from './stores';
 //context
 const Context = React.createContext(stores);
 //使用Provider
-export function UseRootProvider({ children }) {
-    const [state, dispatch] = useReducer(reducers, stores);
+export function CustomProvider({ children }) {
+    const [state, dispatch] = useReducer(reducer, stores);
     return <Context.Provider
         value={{ state: state, dispatch: dispatch }}
     >
@@ -15,6 +12,6 @@ export function UseRootProvider({ children }) {
     </Context.Provider>;
 }
 //使用store
-export function useRootStore() {
+export function useCustomStore() {
     return useContext(Context);
 }
