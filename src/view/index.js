@@ -2,7 +2,8 @@ import React, { Fragment, Suspense, lazy } from 'react';
 // import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 import router from '@/common/router';
-import { Spin } from 'antd';
+import { LoadingSpin } from '@/view/component';
+
 //全局顶层模块
 const PageNoFind = lazy(() => import('@/view/exception/404'));
 const Error = lazy(() => import('@/view/exception/error'));
@@ -20,11 +21,7 @@ const CustomHook = lazy(() => import('@/view/home_customHook'));
 const RecoilDemo = lazy(() => import('@/view/home_recoil'));
 
 export default function View() {
-    function LoadingSpin() {
-        return <div className="text-center" style={{ height: '480px', lineHeight: '480px' }}>
-            <Spin tip="Loading..."></Spin>
-        </div>;
-    }
+
     return <Fragment>
         <Router history={router}>
             <Suspense fallback={<LoadingSpin />}>

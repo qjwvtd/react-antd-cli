@@ -41,6 +41,7 @@ module.exports = merge(webpackConfig, {
         compress: true, //虚拟服务代码压缩,加快开发流程和优化
         hot: true, //true,webpack4会自动添加HMR插件
         historyApiFallback: true, //保证Router刷新不丢失
+        headers: { 'Access-Control-Allow-Origin': '*' },// 允许开发服务器访问本地服务器的包JSON文件，防止跨域
         proxy: base.dev.proxy
     }
 });
