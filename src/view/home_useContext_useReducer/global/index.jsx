@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Input, Card } from 'antd';
-import { Provider, Context } from './store';
+import { UseRootProvider, useRootStore } from './store';
 
 function ShowComponent() {
-    const { state } = useContext(Context);
+    const { state } = useRootStore();
     return <Fragment>
         <p>userName: {state.user.name}</p>
         <p>userRole: {state.user.role}</p>
@@ -12,7 +12,7 @@ function ShowComponent() {
     </Fragment>;
 }
 function UpdateUser() {
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useRootStore();
     return <Fragment>
         <Row>
             <Col span={11}>
@@ -35,7 +35,7 @@ function UpdateUser() {
     </Fragment>;
 }
 function UpdateProject() {
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useRootStore();
     return <Fragment>
         <Row>
             <Col span={11}>
@@ -70,9 +70,9 @@ function Child() {
 //顶层组件使用Provider包裹
 export default function GlobalState() {
     useEffect(() => { }, []);
-    return <Provider>
+    return <UseRootProvider>
         <Card title="全局状态管理">
             <Child />
         </Card>
-    </Provider>;
+    </UseRootProvider>;
 }

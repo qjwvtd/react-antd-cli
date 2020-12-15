@@ -13,11 +13,14 @@ const __include__dirname = path.resolve(__dirname, baseConfig.workPath);
 const babelLoader = {
     test: /\.(js|jsx)$/,
     use: {
-        loader: 'babel-loader', options: {
-            presets: ['env', 'react', 'stage-0'],
+        loader: 'babel-loader',
+        options: {
+            presets: [
+                ['@babel/preset-env', { targets: "defaults" }]
+            ],
             plugins: [
-                'transform-decorators-legacy',
-                'transform-decorators'
+                //支持装饰器语法
+                ["@babel/plugin-proposal-decorators", { "legacy": true }]
             ]
         }
     },

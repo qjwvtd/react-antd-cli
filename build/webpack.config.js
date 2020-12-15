@@ -47,7 +47,8 @@ const webpackConfig = {
         //处理.css文件
         new MiniCssExtractPlugin({
             filename: chunkCssPath().filename,
-            chunkFilename: chunkCssPath().chunkFilename
+            chunkFilename: chunkCssPath().chunkFilename,
+            ignoreOrder: true //移除样式文件引用顺序不对导致的警告
         }),
         //构建html
         new HtmlWebpackPlugin({
