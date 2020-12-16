@@ -50,6 +50,7 @@ const Module3 = () => {
     }, []);
     return <Fragment>
         <Card title="use-global-hook" bordered={false}>
+            <p className="text-red">注:数据从顶层组件注入,有rerender的性能问题</p>
             <p>使用use-global-hook包管理react状态,仅用一个API实现状态管理,包大小(摘自npm,未压缩Unpacked Size):</p>
             <p>use-global-hook: <b>25.1 kB</b></p>
             <ShowInfo />

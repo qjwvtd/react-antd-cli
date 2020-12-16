@@ -5,7 +5,8 @@ import { Spin } from 'antd';
 export const RedText = () => <a style={{ color: 'red' }}>*</a>;
 //loadingSpin
 export function LoadingSpin() {
-    return <div className="text-center" style={{ height: '480px', lineHeight: '480px' }}>
+    const hei = window.innerHeight + 'px';
+    return <div className="text-center" style={{ height: hei, lineHeight: hei }}>
         <Spin tip="Loading..."></Spin>
     </div>;
 }

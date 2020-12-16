@@ -79,6 +79,7 @@ export default function GlobalState() {
     useEffect(() => { }, []);
     return <CustomProvider>
         <Card title="全局状态管理">
+            <p className="text-red">注:数据从顶层组件注入,有rerender的性能问题</p>
             <Child />
         </Card>
     </CustomProvider>;

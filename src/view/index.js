@@ -19,6 +19,8 @@ const UseGlobalHookDemo = lazy(() => import('@/view/home_use-global-hook'));
 const ContextAndReducerDemo = lazy(() => import('@/view/home_useContext_useReducer'));
 const CustomHook = lazy(() => import('@/view/home_customHook'));
 const RecoilDemo = lazy(() => import('@/view/home_recoil'));
+const ReduxDemo = lazy(() => import('@/view/home_redux'));
+const ConstateDemo = lazy(() => import('@/view/home_constate'));
 
 export default function View() {
 
@@ -37,6 +39,8 @@ export default function View() {
                                 <Route path="/home/contextAndReducerDemo" component={ContextAndReducerDemo}></Route>
                                 <Route path="/home/customHook" component={CustomHook}></Route>
                                 <Route path="/home/recoilDemo" component={RecoilDemo}></Route>
+                                <Route path="/home/reduxDemo" component={ReduxDemo}></Route>
+                                <Route path="/home/constateDemo" component={ConstateDemo}></Route>
                                 <Route component={PageNoFind} />
                             </Switch>
                         </HomeWapper>
