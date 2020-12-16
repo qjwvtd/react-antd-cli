@@ -1,10 +1,11 @@
 import React, { useReducer, useContext } from 'react';
-import { stores, reducer } from './stores';
+import store from './store';
+import reducer from './reducer';
 //context
-const Context = React.createContext(stores);
+const Context = React.createContext(store);
 //使用Provider
 export function CustomProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, stores);
+    const [state, dispatch] = useReducer(reducer, store);
     return <Context.Provider
         value={{ state: state, dispatch: dispatch }}
     >

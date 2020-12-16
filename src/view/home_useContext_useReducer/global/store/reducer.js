@@ -1,19 +1,12 @@
-import { user, userReducer, userActions } from './user';
-import { project, projectReducer, projectActions } from './project';
-//注册reducer,action
+import { userReducer, userActions } from './user';
+import { projectReducer, projectActions } from './project';
+//注册reducer,绑定action
 const options = [
     { reducer: userReducer, action: userActions },
     { reducer: projectReducer, action: projectActions }
 ];
-//注册store
-export const stores = {
-    ...{
-        project,
-        user
-    }
-};
 //export reducer
-export function reducer(state, action) {
+export default function reducer(state, action) {
     try {
         const current = options.filter((item) => {
             const active = Object.keys(item.action).filter(
@@ -30,4 +23,3 @@ export function reducer(state, action) {
     }
     return Object.assign({}, state);
 }
-
