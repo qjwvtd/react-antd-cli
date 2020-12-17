@@ -5,7 +5,5 @@ export function initData(callback) {
         { date: '2016/06/12', name: '李四', dept: '经管部', takenum: 3, takeTimenum: '36分钟', woffnum: '5次' },
         { date: '2016/06/12', name: '陈五', dept: '经管部', takenum: 4, takeTimenum: '36分钟', woffnum: '5次' }
     ];
-    setTimeout(() => {
-        callback(arr);
-    }, 2000);
+    callback(arr);
 }

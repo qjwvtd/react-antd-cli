@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Row, Col, Input, Card, Button } from 'antd';
+import { Row, Col, Input, Card, Button, Rate } from 'antd';
 import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
 import userState, { showState, filterShowState } from './store';
 function ShowUserInfo() {
@@ -33,6 +33,8 @@ function UserInfo() {
         setUser(data);
     }
     return <Card title="Recoil" bordered={false}>
+        <Rate disabled value={4} className="text-success" />
+        <p></p>
         <p>
             Recoil基于Hooks的API以及它的直观性。与其他一些库相比，Recoil比大多数库更容易。
             两个重要且常用的API(atom,selector),atom用于申明变量即state,selector通常用于计算值 ,

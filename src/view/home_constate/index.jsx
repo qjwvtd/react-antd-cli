@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Card } from 'antd';
+import { Card, Rate } from 'antd';
 import constate from "constate";
 
 // 1️⃣ Create a custom hook as usual
@@ -28,6 +28,8 @@ export default function ConstateDemo() {
     // 5️⃣ Wrap your components with Provider
     return <Fragment>
         <Card title="constate" bordered={false}>
+            <Rate disabled value={3} className="text-success" />
+            <p></p>
             <p>
                 constate 本质上依然是将 Context 进行封装，
                 建立父与子组件之间的通信来简化基于 Context 的状态共享，

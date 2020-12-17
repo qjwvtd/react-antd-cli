@@ -39,9 +39,9 @@ export default function HomeLink({ linkClickEvent }) {
             </Menu.Item>
             <SubMenu key="sub1" icon={<AppstoreOutlined />} title="React状态管理">
                 <Menu.Item key="2">
-                    <Link to="/home/mobxDemo" replace onClick={() => linkClickEvent('模块2')}>
+                    <Link to="/home/reduxDemo" replace onClick={() => linkClickEvent('模块2')}>
                         <AppstoreOutlined />
-                        <span>mobx,mobx-react</span>
+                        <span>redux</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
@@ -63,20 +63,20 @@ export default function HomeLink({ linkClickEvent }) {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="6">
-                    <Link to="/home/reduxDemo" replace onClick={() => linkClickEvent('模块7')}>
+                    <Link to="/home/mobxDemo" replace onClick={() => linkClickEvent('模块6')}>
                         <AppstoreOutlined />
-                        <span>redux</span>
+                        <span>mobx,mobx-react</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="7">
-                    <Link to="/home/constateDemo" replace onClick={() => linkClickEvent('模块8')}>
+                    <Link to="/home/constateDemo" replace onClick={() => linkClickEvent('模块7')}>
                         <AppstoreOutlined />
                         <span>constate</span>
                     </Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="99">
-                <Link to="/home/customHook" replace onClick={() => linkClickEvent('模块5')}>
+                <Link to="/home/customHook" replace onClick={() => linkClickEvent('模块99')}>
                     <AppstoreOutlined />
                     <span>自定义Hook</span>
                 </Link>

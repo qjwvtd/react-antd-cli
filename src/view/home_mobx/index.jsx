@@ -1,7 +1,7 @@
 
 
 import React, { Fragment, useEffect } from 'react';
-import { Row, Col, Input, Card } from 'antd';
+import { Row, Col, Input, Card, Rate } from 'antd';
 import injectAll from '@/common/utils/inject';
 const InputGroup = Input.Group;
 /**
@@ -13,6 +13,8 @@ const Module2 = injectAll(['userStore', 'personStore'])(({ userStore, personStor
     }, []);
     return <Fragment>
         <Card title="mobx,mobx-react" bordered={false}>
+            <Rate disabled allowHalf value={4.5} className="text-success" />
+            <p></p>
             <p>
                 store在顶层组件全局注入,使用inject引入,
                 封装inject函数,可以使用injectAll引用多个store,

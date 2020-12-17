@@ -47,9 +47,12 @@ function StartAndEndTime() {
         moment(state.endTime, dateFormat)
     ];
     useEffect(() => {
-        initData((arr) => {
-            dispatch({ type: actions.update_list, list: arr });
-        });
+        const timer = setTimeout(() => {
+            initData((arr) => {
+                dispatch({ type: actions.update_list, list: arr });
+            });
+        }, 2000);
+        return () => { clearTimeout(timer); };
     }, []);
     return <Fragment>
         <br />

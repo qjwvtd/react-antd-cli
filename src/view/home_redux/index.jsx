@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
-import { Input, Card, Row, Col, InputNumber } from 'antd';
-import useStore from './state';
+import React, { Fragment } from 'react';
+import { Input, Card, Row, Col, InputNumber, Rate } from 'antd';
+import useStore from './store';
 
 function ProjectNode() {
     const { state, dispatch } = useStore();
@@ -28,7 +28,7 @@ function GoodsNode() {
                 </Row>
             </li>
             {
-                state.goods.map((item) => {
+                state.good.list.map((item) => {
                     return <li style={{ height: '32px', lineHeight: '32px' }} key={item.id}>
                         <Row>
                             <Col span={6}>{item.name}</Col>
@@ -52,10 +52,6 @@ function GoodsNode() {
 }
 //component
 function App() {
-    const { state } = useStore();
-    useEffect(() => {
-        console.log(state);
-    }, []);
     return <Fragment>
         <ProjectNode />
         <GoodsNode />
@@ -64,9 +60,12 @@ function App() {
 
 export default function ReduxDemo() {
     return <Card title="redux" bordered={false}>
-        <p>Redux 是 JavaScript 状态容器，提供可预测化的状态管理。Redux 除了和 React 一起用外，还支持其它界面库。 它体小精悍（只有2kB，包括依赖）。</p>
-        <p className="text-red">本示例使用原生redux加react hooks功能, 通过在自定义的hook中订阅并发布state和dispatch, 并且store不需要在顶层组件注入, 实现全局管理store的目的</p>
-        <p>包大小(摘自npm,未压缩Unpacked Size):</p>
+        <Rate disabled value={5} className="text-success" />
+        <p></p>
+        <p>
+            本示例使用原生redux加react hooks功能, 通过在自定义的hook中订阅并发布state和dispatch, 并且store不需要在顶层组件注入, 实现全局管理store的目的
+        </p>
+        <p>Redux 除了和 React 一起用外，还支持其它界面库。 它体小精悍（只有2kB，包括依赖）。包大小(摘自npm,未压缩Unpacked Size):</p>
         <p>redux: <b>163.0 KB</b></p>
         <App />
     </Card>;
