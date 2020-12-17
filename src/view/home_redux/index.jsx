@@ -1,17 +1,36 @@
 import React, { Fragment } from 'react';
-import { Input, Card, Row, Col, InputNumber, Rate } from 'antd';
-import useStore from './store';
-
+import { Input, Card, Row, Col, InputNumber, Rate, Button } from 'antd';
+import { RedoOutlined } from '@ant-design/icons';
+import { useStore, applyStore } from './store';
+//异步演示
+function asyncUpdateDemo() {
+    const { dispatch } = applyStore();
+    setTimeout(() => {
+        const action = {
+            type: 'update_project_info',
+            name: '大渡河双江口水电站项目',
+            address: '阿坝藏族自治区马尔康市'
+        };
+        dispatch(action);
+    }, 500);
+}
 function ProjectNode() {
     const { state, dispatch } = useStore();
     return <div>
-        <p><b>项目信息</b>: {state.project.name},{state.project.address}</p>
+        <p>
+            <b>项目信息</b>:
+            {state.project.name},{state.project.address}
+            <Button type="link" onClick={asyncUpdateDemo}>
+                <RedoOutlined />更新项目信息
+            </Button>
+        </p>
         <Input
             value={state.project.address}
             onChange={(e) => {
                 dispatch({ type: 'update_project_address', value: e.target.value });
             }}
         />
+
     </div>;
 }
 function GoodsNode() {
@@ -50,6 +69,7 @@ function GoodsNode() {
         </ul>
     </Fragment >;
 }
+
 //component
 function App() {
     return <Fragment>
