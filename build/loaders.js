@@ -23,15 +23,11 @@ const babelLoader = {
                 ["@babel/plugin-proposal-decorators", { "legacy": true }]
             ]
         }
-    },
-    include: __include__dirname,
-    exclude: /node_modules/
+    }
 };
 const happypackLoader = {
     test: /\.(js|jsx)$/,
-    loader: 'happypack/loader?id=happyBabel',
-    include: __include__dirname,
-    exclude: /node_modules/
+    loader: 'happypack/loader?id=happyBabel'
 };
 const esLintLoader = {
     test: /\.(js|jsx)$/,
