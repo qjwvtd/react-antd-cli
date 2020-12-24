@@ -1,55 +1,69 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { GloblaProvider, useGloblaStore, globlaApplyStore } from './store';
+import Girl from './girl';
 
-const user = {
-    name: 'zhangxiaojun',
-    list: ['a', 'b', 'c'],
-    option: { address: 'chengdu', sex: 1 }
-};
-
-const initState = { text: "react.js", color: "red" };
-function reducerDemo(state = initState, action) {
-    console.log(state);
-    switch (action.type) {
-        case 'UPDATE_TITLE_TEXT':
-            state.text = action.text;
-            break;
-        case 'UPDATE_TITLE_COLOR':
-            state.color = action.color;
-            break;
-    }
-    return Object.assign({}, state);
+function asyncRequestData() {
+    const [, dispatch] = globlaApplyStore();
+    setTimeout(() => {
+        dispatch({ type: 'update_user_nickName', nickName: '龙门砍哥' });
+    }, 3000);
 }
 
-function createStore(reducer) {
-    let state = null;
-    const listeners = [];
-    const subscribe = (listener) => listeners.push(listener);
-    const getState = () => state;
-    const dispatch = (action) => {
-        state = reducer(state, action); //重新赋值
-        listeners.forEach((listener) => listener());
-    };
-    dispatch({}); //初始化state
-    return { getState, dispatch, subscribe };
+function Child1() {
+    const [state1, dispatch1] = useGloblaStore();
+    useEffect(() => {
+        let timer = null;
+        timer = setTimeout(() => {
+            dispatch1({ type: 'update_user_name', name: 'zhangxiaojun' });
+        }, 1000);
+        timer = setTimeout(() => {
+            dispatch1({ type: 'update_user_nickName', nickName: '龙门砍哥' });
+        }, 2000);
+        timer = setTimeout(() => {
+            dispatch1({ type: 'update_user_role', role: '超级管理员' });
+        }, 3000);
+        asyncRequestData();
+        return () => { clearTimeout(timer); };
+    }, []);
+    return <div>
+        <p>{state1.user.name}</p>
+        <p>{state1.user.nickName}</p>
+        <p>{state1.user.role}</p>
+    </div>;
+}
+function Child2() {
+    //别名
+    const [state] = useGloblaStore();
+    return <div>
+        <p>{state.project.name}</p>
+    </div>;
 }
 
-function useStore() {
-    const store = createStore(reducerDemo);
-    store.subscribe(() => {
-        store.getState();
-    });
-    return [store.getState(), store.dispatch];
-}
 
 export default function Test() {
-    const [state, dispatch] = useStore();
+    let [count, setCount] = useState(0);
     useEffect(() => {
-        dispatch({ type: "UPDATE_TITLE_TEXT", text: "这是修改后的数据" });
-        dispatch({ type: "UPDATE_TITLE_COLOR", color: "orange" });
+        const timer = setInterval(() => {
+            if (count < 3) {
+                count = count + 1;
+                setCount(count);
+            }
+            if (count === 3) {
+                clearInterval(timer);
+            }
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+            setCount(0);
+        };
     }, []);
     return <Fragment>
-        <p>{user.name}</p>
-        <div style={{ color: state.color }}>{state.text}</div>
+        <GloblaProvider>
+            <p>loading...,{count}</p>
+            <Child2 />
+            <Child1 />
+            <Girl />
+        </GloblaProvider>
     </Fragment>;
 }
 

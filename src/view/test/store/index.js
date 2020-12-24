@@ -1,22 +1,15 @@
-import React, { useReducer } from 'react';
+import createStore from './lib';
 import { user, userReducer } from './user';
 import { project, projectReducer } from './project';
-//注册store
-const stores = { project, user };
-//注册reducer
-function reducer(state, action) {
-    userReducer(state, action);
-    projectReducer(state, action);
-    return Object.assign({}, state);
-}
-//使用context
-export const Context = React.createContext({ ...stores });
-//使用Provider
-export const Provider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, { ...stores });
-    return <Context.Provider
-        value={{ state: state, dispatch: dispatch }}
-    >
-        {children}
-    </Context.Provider>;
-};
+//合并成一个reducer
+const connectReducer = [
+    { user, userReducer },
+    { project, projectReducer }
+];
+//使用
+const globlaStore = createStore(connectReducer);
+console.log(globlaStore);
+//别名
+export const useGloblaStore = globlaStore.useStore;
+export const GloblaProvider = globlaStore.Provider;
+export const globlaApplyStore = globlaStore.applyStore;

@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 function Module4() {
     return <React.Suspense fallback={<LoadingSpin />}>
         <Card title="使用React自带的API,useContext和useReducer实现状态管理">
-            <Rate disabled allowHalf value={3.5} className="text-success" />
+            <Rate disabled allowHalf value={4.5} className="text-success" />
             <p></p>
             <Tabs defaultActiveKey="1">
                 <TabPane tab="局部" key="1">
