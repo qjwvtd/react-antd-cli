@@ -1,29 +1,25 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { GloblaProvider, useGloblaStore, globlaApplyStore } from './store';
+import React, { Fragment, useEffect } from 'react';
+import { GloblaProvider, useGloblaStore, globlaAsyncStore } from './store';
 import Girl from './girl';
 
 function asyncRequestData() {
-    const [, dispatch] = globlaApplyStore();
-    setTimeout(() => {
-        dispatch({ type: 'update_user_nickName', nickName: '龙门砍哥' });
-    }, 3000);
+    globlaAsyncStore().then((store) => {
+        const [, dispatch] = store;
+        setTimeout(() => {
+            dispatch({ type: 'update_user_name', name: 'ZhangXiaoJun' });
+            dispatch({ type: 'update_user_nickName', nickName: 'LongMenKanGe' });
+            dispatch({ type: 'update_user_role', role: 'Super Admin' });
+        }, 2000);
+    });
 }
 
 function Child1() {
+    //可以别名
     const [state1, dispatch1] = useGloblaStore();
     useEffect(() => {
-        let timer = null;
-        timer = setTimeout(() => {
-            dispatch1({ type: 'update_user_name', name: 'zhangxiaojun' });
-        }, 1000);
-        timer = setTimeout(() => {
-            dispatch1({ type: 'update_user_nickName', nickName: '龙门砍哥' });
-        }, 2000);
-        timer = setTimeout(() => {
-            dispatch1({ type: 'update_user_role', role: '超级管理员' });
-        }, 3000);
-        asyncRequestData();
-        return () => { clearTimeout(timer); };
+        dispatch1({ type: 'update_user_name', name: '张小军' });
+        dispatch1({ type: 'update_user_nickName', nickName: '龙门砍哥' });
+        dispatch1({ type: 'update_user_role', role: '超级管理员' });
     }, []);
     return <div>
         <p>{state1.user.name}</p>
@@ -39,29 +35,16 @@ function Child2() {
     </div>;
 }
 
-
 export default function Test() {
-    let [count, setCount] = useState(0);
     useEffect(() => {
-        const timer = setInterval(() => {
-            if (count < 3) {
-                count = count + 1;
-                setCount(count);
-            }
-            if (count === 3) {
-                clearInterval(timer);
-            }
-        }, 1000);
-        return () => {
-            clearInterval(timer);
-            setCount(0);
-        };
+        asyncRequestData();
     }, []);
     return <Fragment>
+        <p>3秒后异步刷新</p>
         <GloblaProvider>
-            <p>loading...,{count}</p>
             <Child2 />
             <Child1 />
+            <p>异步请求</p>
             <Girl />
         </GloblaProvider>
     </Fragment>;
