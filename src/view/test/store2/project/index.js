@@ -1,16 +1,13 @@
-//state
-export const project = {
+const initState = {
     name: '金融城项目',
-    desc: '关于双江口项目的一些描述'
+    desc: '关于金融城项目的描述'
 };
-//reducer
-export function projectReducer(state = project, action) {
+export default function (state = initState, action) {
     switch (action.type) {
-        case 'update_project_name':
-            state.name = action.name;
-            break;
-        case 'update_project_desc':
-            state.desc = action.desc;
+        case 'init_project':
+            state.name = action.data.name;
+            state.desc = action.data.desc;
             break;
     }
+    return Object.assign({}, state);
 }

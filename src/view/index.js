@@ -16,7 +16,7 @@ const Test = lazy(() => import('@/view/test'));
 const ArrayToLinkList = lazy(() => import('@/view/home_arrayToLinkList'));
 const MobxDemo = lazy(() => import('@/view/home_mobx'));
 const UseGlobalHookDemo = lazy(() => import('@/view/home_use-global-hook'));
-const ContextAndReducerDemo = lazy(() => import('@/view/home_useContext_useReducer'));
+const HookStateDemo = lazy(() => import('@/view/home_hook_state'));
 const CustomHook = lazy(() => import('@/view/home_customHook'));
 const RecoilDemo = lazy(() => import('@/view/home_recoil'));
 const ReduxDemo = lazy(() => import('@/view/home_redux'));
@@ -36,7 +36,7 @@ export default function View() {
                                 <Route exact path="/home/arrayToLinkList" component={ArrayToLinkList}></Route>
                                 <Route path="/home/mobxDemo" component={MobxDemo}></Route>
                                 <Route path="/home/useGlobalHookDemo" component={UseGlobalHookDemo}></Route>
-                                <Route path="/home/contextAndReducerDemo" component={ContextAndReducerDemo}></Route>
+                                <Route path="/home/hookStateDemo" component={HookStateDemo}></Route>
                                 <Route path="/home/customHook" component={CustomHook}></Route>
                                 <Route path="/home/recoilDemo" component={RecoilDemo}></Route>
                                 <Route path="/home/reduxDemo" component={ReduxDemo}></Route>

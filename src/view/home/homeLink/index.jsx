@@ -51,9 +51,9 @@ export default function HomeLink({ linkClickEvent }) {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="4">
-                    <Link to="/home/contextAndReducerDemo" replace onClick={() => linkClickEvent('模块4')}>
+                    <Link to="/home/hookStateDemo" replace onClick={() => linkClickEvent('模块4')}>
                         <AppstoreOutlined />
-                        <span>useReducer,useContext</span>
+                        <span>react hook state</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="5">

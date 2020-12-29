@@ -59,12 +59,12 @@ export default function createHookStore(connect) {
     //创建context
     const Context = React.createContext(stores);
     //apply store
-    let applyStore = new Promise((resove) => resove);
+    let asyncStore = new Promise((resove) => resove);
     //Provider
     function Provider({ children }) {
         const [state, dispatch] = useReducer(combineReducer, stores);
         useEffect(() => {
-            applyStore = new Promise((resove) => {
+            asyncStore = new Promise((resove) => {
                 resove([state, dispatch]);
             });
         }, []);
@@ -80,7 +80,7 @@ export default function createHookStore(connect) {
         HookStore,
         Provider,
         AsyncStore: async function () {
-            return await applyStore;
+            return await asyncStore;
         }
     };
 }

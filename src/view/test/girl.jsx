@@ -12,6 +12,12 @@ function initGirlInfo() {
                     data: res.data[0]
                 };
                 dispatch(action);
+            } else {
+                const action = {
+                    type: 'init_girl',
+                    data: { ...res.data }
+                };
+                dispatch(action);
             }
         });
     });
@@ -29,8 +35,8 @@ export default function Girl() {
         initGirlInfo();
     }, []);
     return <Fragment>
+        <p>异步请求</p>
         <GirlProvider>
-            <p>test girl img</p>
             <GirlBody />
         </GirlProvider>
     </Fragment>;
