@@ -22,7 +22,7 @@ function checkParamsHasErr(params) {
     return params[0];
 }
 
-export default function createThinkStore(reducerMap) {
+export default function createThink(reducerMap) {
     reducerMap = checkParamsHasErr(arguments);
     //reducer is dispatching
     let isDispatching = false;
@@ -61,46 +61,34 @@ export default function createThinkStore(reducerMap) {
     //create context
     const Context = React.createContext(stores);
     //async store
-    const asyncStore = {
-        state: stores,
-        dispatch: null
-    };
-    //get async state
-    function getAsyncState() {
-        if (!isDispatching) {
-            throw 'You cannot get a state before the dispatch execution is completed.';
-        }
-        return asyncStore.state;
-    }
-    //get async dispatch
-    function getAsyncDispatch() {
-        if (!isDispatching) {
-            throw 'You cannot get a dispatch before the dispatch execution is completed.';
-        }
-        return asyncStore.dispatch;
+    const applyStore = { state: {}, dispatch: null };
+    //Provider
+    function Provider({ children }) {
+        const [state, dispatch] = useReducer(reducer, stores);
+        useEffect(() => {
+            applyStore.state = isDispatching && state || {};
+            applyStore.dispatch = isDispatching && dispatch || null;
+        }, [isDispatching]);
+        return <Context.Provider
+            value={[state, dispatch]}
+        >
+            {children}
+        </Context.Provider>;
     }
     //get async store
-    function asyncThinkStore() {
-        return isDispatching && [getAsyncState(), getAsyncDispatch()];
-    }
-    //使用context
-    const useThinkStore = () => useContext(Context);
-    //使用provider
-    const useThinkProvider = () => {
-        //Provider
-        function Provider({ children }) {
-            const [state, dispatch] = useReducer(reducer, stores);
-            useEffect(() => {
-                asyncStore.state = isDispatching && state || null;
-                asyncStore.dispatch = isDispatching && dispatch || null;
-            }, [isDispatching]);
-            return <Context.Provider
-                value={[state, dispatch]}
-            >
-                {children}
-            </Context.Provider>;
+    function getAsyncStore() {
+        if (!isDispatching) {
+            throw 'You cannot get state or dispatch before the dispatch execution is completed.' +
+            'Please try to execute the async request in useEffect';
         }
-        return Provider;
+        const state = applyStore.state;
+        const dispatch = applyStore.dispatch;
+        return [state, dispatch];
+    }
+    const Think = {
+        useStore: () => useContext(Context),
+        useProvider: () => Provider,
+        getAsyncStore: () => getAsyncStore()
     };
-    return { useThinkStore, useThinkProvider, asyncThinkStore };
+    return Think;
 }
