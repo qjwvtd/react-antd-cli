@@ -1,5 +1,6 @@
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
     minimize: true,
     runtimeChunk: {
@@ -56,6 +57,8 @@ module.exports = {
                 }
             },
             canPrint: true
-        })
+        }),
+        //压缩
+        new TerserPlugin(),
     ]
 };

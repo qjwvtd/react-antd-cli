@@ -1,7 +1,7 @@
-import createShareStore from '@qjwvtd/share-store';
+import createLiveStore from 'use-live-store';
 import girl from './reducer/girl';
 const girlRducer = { girl };
-const { useStore, useProvider, getAsyncStore } = createShareStore(girlRducer);
+const { useStore, useProvider, getAsyncStore } = createLiveStore(girlRducer);
 
 export const useGirlStroe = useStore;
 export const useGirlProvider = useProvider;
