@@ -31,12 +31,10 @@ function GirlAppComponent() {
         <GirlAppComponentJson />
     </Fragment>;
 }
-
-export default function GirlApp() {
-    return useGirlProvider(() => {
-        return <Fragment>
-            <p><b>异步获取数据</b></p>
-            <GirlAppComponent />
-        </Fragment>;
-    });
-}
+const GirlApp = () => useGirlProvider(() => {
+    return <Fragment>
+        <p><b>异步获取数据</b></p>
+        <GirlAppComponent />
+    </Fragment>;
+});
+export default GirlApp;

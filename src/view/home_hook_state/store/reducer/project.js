@@ -9,6 +9,9 @@ export default function (state = initState, action) {
             state.name = action.data.name;
             state.desc = action.data.desc;
             break;
+        case 'update_project_desc':
+            state.desc = action.value;
+            break;
     }
     return Object.assign({}, state);
 }

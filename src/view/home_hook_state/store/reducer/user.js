@@ -1,6 +1,8 @@
 const initState = {
     name: 'dsfadsfadsa',
-    role: 'dsfadsa'
+    role: 'dsfadsa',
+    len: 100,
+    index: 5
 };
 export default function (state = initState, action) {
     switch (action.type) {
@@ -8,6 +10,8 @@ export default function (state = initState, action) {
             state.name = action.data.name;
             state.role = action.data.role;
             break;
+        case 'update_xh':
+            state.index = action.value;
     }
     return Object.assign({}, state);
 }

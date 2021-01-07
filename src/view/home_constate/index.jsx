@@ -1,21 +1,24 @@
 import React, { Fragment, useState } from "react";
-import { Card, Rate } from 'antd';
+import { Card, Rate, Input } from 'antd';
 import constate from "constate";
 
 // 1️⃣ Create a custom hook as usual
 function useCounter() {
-    const [count, setCount] = useState(0);
-    const increment = () => setCount(prevCount => prevCount + 1);
+    const [count, setCount] = useState('');
+    const increment = (e) => setCount(e.target.value);
     return { count, increment };
 }
 
 // 2️⃣ Wrap your hook with the constate factory
 const [CounterProvider, useCounterContext] = constate(useCounter);
 
-function Button() {
+function InputChange() {
     // 3️⃣ Use context instead of custom hook
-    const { increment } = useCounterContext();
-    return <button onClick={increment} style={{ padding: '8px 24px' }}>+</button>;
+    const { count, increment } = useCounterContext();
+    return <Input
+        valur={count}
+        onChange={increment}
+    />;
 }
 
 function Count() {
@@ -39,7 +42,7 @@ export default function ConstateDemo() {
             <p>constate: <b>24 kB</b></p>
             <CounterProvider>
                 <Count />
-                <Button />
+                <InputChange />
             </CounterProvider>
         </Card>
     </Fragment>;

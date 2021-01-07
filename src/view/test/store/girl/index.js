@@ -1,15 +1,15 @@
-import createHookStore from './../lib';
-const girl = {};
-function girlReducer(state = girl, action) {
+//initState
+const initState = {};
+//reducer
+export default function (state = initState, action) {
     switch (action.type) {
         case 'init_girl':
-            state.author = action.data.author;
             state.desc = action.data.desc;
             state.url = action.data.url;
             break;
+        case 'update_girl_desc':
+            state.desc = action.value;
+            break;
     }
+    return JSON.parse(JSON.stringify(state));
 }
-const { HookStore, Provider, AsyncStore } = createHookStore({ girl, girlReducer });
-export const useGirlStore = HookStore;
-export const GirlProvider = Provider;
-export const girlAsyncStore = AsyncStore;
