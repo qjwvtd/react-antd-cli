@@ -14,5 +14,5 @@ export default function (state = initState, action) {
             state.desc = action.value;
             break;
     }
-    return JSON.parse(JSON.stringify(state));
+    return Object.assign({}, state);
 }

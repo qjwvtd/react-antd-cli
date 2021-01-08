@@ -1,15 +1,13 @@
 //initState
-const initState = {};
+const initState = {
+    list: []
+};
 //reducer
 export default function (state = initState, action) {
     switch (action.type) {
         case 'init_girl':
-            state.desc = action.data.desc;
-            state.url = action.data.url;
-            break;
-        case 'update_girl_desc':
-            state.desc = action.value;
+            state.list = action.data;
             break;
     }
-    return JSON.parse(JSON.stringify(state));
+    return Object.assign({}, state);
 }

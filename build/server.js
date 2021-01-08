@@ -8,9 +8,9 @@ app.use(cors({
     orgin: 'localhost:3000'
 }));
 
-// 获取用户接口
+// 获取接口
 app.get('/api/project', function (req, res) {
-    // 定义用户列表
+    // 定义列表
     var project = { id: 1, name: '双江口项目', desc: '关于双江口项目的一些描述' };
     res.json(project);
 })

@@ -1,14 +1,16 @@
-import createLiveStore from './lib';
+import { createLiveStore, createActionMap } from './../lib';
 import girl from './girl';
 import project from './project';
+import girlAction from './girl/action';
+import projectAction from './project/action';
 
-const stores = { girl, project };
+const reducers = { girl, project };
+const actionMap = { girlAction, projectAction };
 
-const { useStore, Provider, getAsyncStore } = createLiveStore(stores);
+const { Wapper, useStore, observer } = createLiveStore(reducers);
 
-export const useGloblaStore = useStore;
-export const GloblaProvider = Provider;
-export const getGloblaAsyncStore = getAsyncStore;
+export const actions = createActionMap(actionMap);
+export { Wapper, useStore, observer };
 
 
 

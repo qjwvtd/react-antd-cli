@@ -1,41 +1,49 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Card, Input } from 'antd';
 import { getGirlDataApi } from '@/common/api/public';
-import { useGloblaStore, GloblaProvider } from './store';
+import { getProject } from '@/common/api/project';
+import { useStore, Wapper, observer, actions } from './store';
+
+//test observer
+const TestObserver = observer(({ state }) => {
+    return <p>{state.project.desc}</p>;
+});
 
 function StoreView() {
-    const [state, dispatch] = useGloblaStore();
+    const [state, dispatch] = useStore();
+    const { initGirl, initProject, updateProjectDesc } = actions;
     useEffect(() => {
         getGirlDataApi().then((res) => {
             if (res.status === 100) {
-                const action = {
-                    type: 'init_girl',
-                    data: res.data[0]
-                };
-                dispatch(action);
+                dispatch(initGirl(res.data));
             }
         });
+        getProject().then((res) => {
+            dispatch(initProject(res));
+        });
     }, []);
-
     function Girl() {
         return <Card title={'girl'}>
-            <p>{state.girl.desc}</p>
-            <img src={state.girl.url} style={{ width: '120px' }} />
+            {
+                state.girl.list.map((item) => {
+                    return <Row key={item._id}>
+                        <Col span={6}><img src={item.url} style={{ width: '98%' }} /></Col>
+                        <Col span={18}><p>{item.author}</p><p>{item.desc}</p></Col>
+                        <Col span={24}><p></p></Col>
+                    </Row>;
+                })
+            }
         </Card>;
     }
     function Project() {
         function handleChange(value) {
-            const action = {
-                type: 'update_project_desc',
-                value: value
-            };
-            dispatch(action);
+            dispatch(updateProjectDesc(value));
         }
         return <Card title={'project'}>
             <p>{state.project.name}</p>
             <p>{state.project.desc}</p>
             <Input
-                // value={inputValue}
+                // value={state.project.desc}
                 // onChange={(e) => handleChange(e.target.value)}
                 defaultValue={state.project.desc}
                 onBlur={(e) => handleChange(e.target.value)}
@@ -49,14 +57,16 @@ function StoreView() {
             </Col>
             <Col span={11} offset={2}>
                 <Project />
+                <TestObserver />
             </Col>
         </Row>
     </Fragment>;
 }
+
 export default function Test() {
-    return <GloblaProvider>
+    return <Wapper>
         <StoreView />
-    </GloblaProvider>;
+    </Wapper>;
 }
 
 
