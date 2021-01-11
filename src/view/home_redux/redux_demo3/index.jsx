@@ -3,17 +3,26 @@ import { Row, Col, Card, Input, Rate } from 'antd';
 import { useStore, Wapper, observer, actions } from './store';
 
 //test observer
-const TestObserver = observer(({ state }) => {
-    return <p>{state.project.desc}</p>;
-});
-
-function StoreView() {
-    const [state, dispatch] = useStore();
-    const { initGirl, initProject, updateProjectDesc } = actions;
+const TestObserver = observer(({ state, dispatch }) => {
+    const { initGirl, initProject } = actions;
     useEffect(() => {
         dispatch(initGirl());
         dispatch(initProject());
     }, []);
+    return <p>{state.project.desc}</p>;
+});
+//Test Observer custom props
+function TestObserverCustomProps({ state, name }) {
+    return <Fragment>
+        <p>{state.project.desc}</p>
+        <p>{name}</p>
+    </Fragment>;
+}
+const TestObserver2 = observer(<TestObserverCustomProps name={'custom props'} />);
+
+function StoreView() {
+    const [state, dispatch] = useStore();
+    const { updateProjectDesc } = actions;
     function Girl() {
         return <Card title={'girl'}>
             {
@@ -51,6 +60,7 @@ function StoreView() {
             <Col span={11} offset={2}>
                 <Project />
                 <TestObserver />
+                <TestObserver2 />
             </Col>
         </Row>
     </Fragment>;

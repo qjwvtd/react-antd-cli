@@ -30,19 +30,44 @@ export function createLiveStore(reducersMap) {
     //use store
     function useStore() {
         const [state, setState] = React.useState(store.getState());
-        //listener
-        store.subscribe(() => {
+        //订阅
+        const unsubscribe = store.subscribe(() => {
             setState(store.getState());
         });
+        //卸载时取消订阅
+        React.useEffect(() => {
+            return () => unsubscribe();
+        }, []);
         return [state, store.dispatch];
     }
     //Observer
     function observer(FC) {
+        const ErrorMsg = 'Parameters must be functional components or ordinary components, ' +
+            'such as: (props) => {} or <MyComponent name={"custom name"} />';
         return function () {
-            const Element = /*#__PURE__*/React.createElement(FC, {
-                state: store.getState(),
-                dispatch: store.dispatch
-            }, FC);
+            const struct = FC.constructor;
+            let Element = null;
+            switch (struct) {
+                case Function: {
+                    Element = /*#__PURE__*/React.createElement(FC, {
+                        state: store.getState(),
+                        dispatch: store.dispatch
+                    }, FC);
+                }
+                    break;
+                case Object: {
+                    if (FC.type.constructor !== Function) {
+                        throw ErrorMsg;
+                    }
+                    const nextProps = {
+                        ...FC.props,
+                        state: store.getState(),
+                        dispatch: store.dispatch
+                    };
+                    Element = Object.assign({}, FC, { props: { ...nextProps } });
+                }
+                    break;
+            }
             return Element;
         };
     }

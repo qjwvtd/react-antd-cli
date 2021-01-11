@@ -6,7 +6,6 @@ export default {
                 const action = { type: 'init_project', data: result };
                 dispatch(action);
             });
-
         };
     },
     updateProjectDesc: (text) => {
