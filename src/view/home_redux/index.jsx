@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import { LoadingSpin } from '@/view/component';
 const ReduxDemo1 = React.lazy(() => import('./redux_demo1'));
 const ReduxDemo2 = React.lazy(() => import('./redux_demo2'));
+const ReduxDemo3 = React.lazy(() => import('./redux_demo3'));
 const { TabPane } = Tabs;
 
 //component
@@ -14,6 +15,9 @@ export default function ReduxDemo() {
             </TabPane>
             <TabPane tab="redux,react-redux" key="2">
                 <ReduxDemo2 />
+            </TabPane>
+            <TabPane tab="redux,react-redux,redux-thunk" key="3">
+                <ReduxDemo3 />
             </TabPane>
         </Tabs>
     </React.Suspense>;

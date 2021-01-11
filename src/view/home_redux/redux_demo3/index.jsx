@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Row, Col, Card, Input } from 'antd';
+import { Row, Col, Card, Input, Rate } from 'antd';
 import { useStore, Wapper, observer, actions } from './store';
 
 //test observer
@@ -55,9 +55,18 @@ function StoreView() {
     </Fragment>;
 }
 
-export default function Test() {
+export default function ReduxDemo3() {
     return <Wapper>
-        <StoreView />
+        <Card title="redux,react-redux,redux-thunk" bordered={false}>
+            <Rate disabled value={5} className="text-success" />
+            <p></p>
+            <p>redux,react-redux,redux-thunk</p>
+            <p>包大小(摘自npm,未压缩Unpacked Size):</p>
+            <p>redux: <b>163.0 KB</b></p>
+            <p>react-redux: <b>271.0 KB</b></p>
+            <p>redux-thunk: <b>17.7 KB</b></p>
+            <StoreView />
+        </Card>
     </Wapper>;
 }
 
