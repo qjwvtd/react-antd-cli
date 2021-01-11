@@ -32,6 +32,7 @@ function StoreView() {
             dispatch(updateProjectDesc(value));
         }
         return <Card title={'project'}>
+            <p className="text-gray">项目demo有本地接口,请先运行npm run server</p>
             <p>{state.project.name}</p>
             <p>{state.project.desc}</p>
             <Input
