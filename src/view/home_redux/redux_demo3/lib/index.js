@@ -42,7 +42,7 @@ export function createLiveStore(reducersMap) {
     }
     //Observer
     function observer(FC) {
-        const ErrorMsg = 'Parameters must be functional components or ordinary components, ' +
+        const ErrorMsg = 'Parameters must be functional components or ordinary components ' +
             'such as: (props) => {} or <MyComponent name={"custom name"} />';
         return function () {
             const struct = FC.constructor;

@@ -1,14 +1,10 @@
 const initState = {
-    author: 'girl name',
-    desc: 'the girl`s some description',
-    url: null
+    list: []
 };
 export default function (state = initState, action) {
     switch (action.type) {
         case 'init_girl':
-            state.author = action.data.author;
-            state.desc = action.data.desc;
-            state.url = action.data.url;
+            state.list = action.data;
             break;
     }
     return Object.assign({}, state);

@@ -1,40 +1,29 @@
 import React, { Fragment, useEffect } from 'react';
-import { useGirlStroe, useGirlProvider, getGirlAsyncStore } from './store/girl';
-import { getGirlDataApi } from '@/common/api/public';
-
-function asyncRequest() {
-    const [, dispatch] = getGirlAsyncStore();
-    getGirlDataApi().then((res) => {
-        if (res.status === 100) {
-            const action = { type: 'init_girl', data: res.data[0] };
-            dispatch(action);
-        }
-    });
-}
-function GirlAppComponentJson() {
-    const [state] = useGirlStroe();
-    return <Fragment>
-        <div>{JSON.stringify(state)}</div>
-    </Fragment>;
-}
+import { Row, Col } from 'antd';
+import { useStore } from './store';
+import { initGirl } from './store/action';
 
 function GirlAppComponent() {
-    const [state] = useGirlStroe();
+    const { state, dispatch } = useStore();
     useEffect(() => {
-        asyncRequest();
+        dispatch.async(initGirl());
     }, []);
     return <Fragment>
-        <p>{state.girl.author}</p>
-        <p>{state.girl.desc}</p>
-        <img src={state.girl.url} style={{ width: '320px' }} />
-        <hr />
-        <GirlAppComponentJson />
+        {
+            state.girl.list.map((item) => {
+                return <Row key={item._id}>
+                    <Col span={4}><img src={item.url} style={{ width: '100%' }} /></Col>
+                    <Col span={19} offset={1}><p>{item.author}</p><p>{item.desc}</p></Col>
+                    <Col span={24}><p></p></Col>
+                </Row>;
+            })
+        }
     </Fragment>;
 }
-const GirlApp = () => useGirlProvider(() => {
+function GirlApp() {
     return <Fragment>
         <p><b>异步获取数据</b></p>
         <GirlAppComponent />
     </Fragment>;
-});
+}
 export default GirlApp;

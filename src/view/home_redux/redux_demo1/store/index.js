@@ -1,4 +1,4 @@
-import createLiveStore from 'live-store';
+import createLiveStore from './lib';
 //import reducer
 import project from './project';
 import good from './good';
