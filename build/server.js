@@ -11,7 +11,7 @@ app.use(cors({
 // 获取接口
 app.get('/api/project', function (req, res) {
     // 定义列表
-    var project = { id: 1, name: '双江口项目', desc: '关于双江口项目的一些描述' };
+    var project = { id: 1, name: '双江口项目', address: '马尔康大渡河上源足木足河与绰斯甲河汇口处以下2 km河段' };
     res.json(project);
 })
 //服务

@@ -1,8 +1,8 @@
-import createLiveStore from './lib';
+import createLiveStore from './../lib';
 //import reducer
-import project from './project';
-import good from './good';
+import project from './../reducer/project';
+import good from './../reducer/good';
 //merge reducer
 const reducer = { project, good };
-const [useStore, applyStore] = createLiveStore(reducer);
-export { useStore, applyStore };
+const [useStore] = createLiveStore(reducer);
+export { useStore };

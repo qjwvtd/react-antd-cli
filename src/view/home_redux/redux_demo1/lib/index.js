@@ -1,6 +1,16 @@
 'use strict';
 import React from 'react';
 import { createStore, combineReducers } from 'redux';
+//uuid
+// function getUUid() {
+//     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+//         let r = Math.random() * 16 | 0,
+//             v = c === 'x' ? r : (r & 0x3 | 0x8);
+//         return v.toString(16);
+//     });
+// }
+// const storeKey = getUUid();
+// window[storeKey] = {};
 /**
  * main function
  * @param {*} reducersMap
@@ -23,7 +33,7 @@ export default function createLiveStore(reducersMap) {
         * use hook,在组件内调用
         * const [state, dispatch] = useStore();
         */
-        const [state, updateState] = React.useState(store.getState());
+        const [state, setState] = React.useState(store.getState());
         //async of dispatch
         store.dispatch.async = function () {
             if (arguments[0].constructor !== Function) {
@@ -37,21 +47,12 @@ export default function createLiveStore(reducersMap) {
         let unsubscribe = null;
         React.useEffect(() => {
             unsubscribe = store.subscribe(() => {
-                updateState(store.getState());
+                setState(store.getState());
             });
             //cancel subscribe
             return () => unsubscribe();
         }, []);
         return [state, dispatch];
     }
-    function applyStore() {
-        /**
-         * 外部函数调用,如封装的异步请求等
-         * 外部函数不能使用useStore(),因其内部使用了effect和subscribe订阅
-         * const [state, dispatch] = applyStore();
-         * 用于异步更新数据: dispatch({type: 'xxx',...});
-         */
-        return [store.getState(), store.dispatch];
-    }
-    return [useStore, applyStore];
+    return [useStore];
 }
