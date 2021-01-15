@@ -3,10 +3,10 @@ import { Input, Card, Row, Col, InputNumber, Rate, Button } from 'antd';
 import { RedoOutlined } from '@ant-design/icons';
 import { initProject } from './action';
 import GilrInfo from './girl';
-import { useStore } from './store';
+import { useGloblaStore } from './store';
 
 function ProjectInfo() {
-    const [state, dispatch] = useStore();
+    const [state, dispatch] = useGloblaStore();
     //更新地址
     function updateAddress(value) {
         dispatch({ type: 'update_project_address', value: value });
@@ -34,7 +34,7 @@ function ProjectInfo() {
     </div>;
 }
 function GoodsInfo() {
-    const [state, dispatch] = useStore();
+    const [state, dispatch] = useGloblaStore();
     return <Fragment>
         <p style={{ paddingTop: '24px' }}><b>✦,商品信息</b>: </p>
         <Row>
@@ -56,9 +56,12 @@ function GoodsInfo() {
 
 //component
 function App() {
+    const [state] = useGloblaStore();
     return <Fragment>
         <ProjectInfo />
         <GoodsInfo />
+        <p></p>
+        <p>{JSON.stringify(state)}</p>
     </Fragment>;
 }
 

@@ -1,7 +1,7 @@
-import createLiveStore from './../lib';
+import createHookStore from 'live-store';
 //import reducer
 import girl from './../reducer/girl';
 //merge reducer
 const reducer = { girl };
-const [useGirlStore] = createLiveStore(reducer);
-export { useGirlStore };
+const useStore = createHookStore(reducer);
+export const useGirlStore = useStore;
