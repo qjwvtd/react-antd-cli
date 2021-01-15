@@ -52,8 +52,6 @@ function createLiveStore(reducerMap) {
     const reducer = combineReducers();
     //create context
     const Context = React.createContext(stores);
-    //is mounted
-    let isMounted = false;
     //Wapper
     function Wapper({ children }) {
         const [state, dispatch] = React.useReducer(reducer, stores);
@@ -65,10 +63,6 @@ function createLiveStore(reducerMap) {
             arguments[0].apply(arguments[0], [dispatch]);
             return arguments[0];
         };
-        isMounted = true;
-        React.useEffect(() => {
-            return () => { isMounted = false; };
-        }, []);
         return /*#__PURE__*/React.createElement(Context.Provider, {
             value: { state, dispatch }
         }, children);
@@ -79,9 +73,6 @@ function createLiveStore(reducerMap) {
             store = React.useContext(Context);
         } catch (e) {
             throw e.name + ', ' + e.message;
-        }
-        if (!isMounted) {
-            throw 'useStore() cannot be used before a container component is mounted';
         }
         return store;
     }

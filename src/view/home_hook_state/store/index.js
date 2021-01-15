@@ -1,4 +1,5 @@
-import createLiveStore from 'use-live-store';
+// import createLiveStore from 'use-live-store';
+import createLiveStore from './../lib';
 import user from './reducer/user';
 import project from './reducer/project';
 import girl from './reducer/girl';

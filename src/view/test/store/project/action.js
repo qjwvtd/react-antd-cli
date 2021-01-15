@@ -9,9 +9,9 @@ export default {
 
         };
     },
-    updateProjectDesc: (text) => {
+    updateProjectAddress: (text) => {
         return dispatch => {
-            const action = { type: 'update_project_desc', value: text };
+            const action = { type: 'update_project_address', value: text };
             dispatch(action);
         };
     }

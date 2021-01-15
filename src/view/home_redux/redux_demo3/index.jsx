@@ -18,51 +18,47 @@ function Test2() {
         <p>{state.project.address}</p>
     </Fragment>;
 }
-
-function StoreView() {
-    const [state, dispatch] = useStore();
-    function Girl() {
-        return <Card title={'girl'}>
-            {
-                state.girl.list.map((item) => {
-                    return <Row key={item._id}>
-                        <Col span={6}><img src={item.url} style={{ width: '98%' }} /></Col>
-                        <Col span={18}><p>{item.author}</p><p>{item.desc}</p></Col>
-                        <Col span={24}><p></p></Col>
-                    </Row>;
-                })
-            }
-        </Card>;
-    }
-    function Project() {
-        function handleChange(value) {
-            dispatch({ type: 'update_project_address', value: value });
+//Girl
+function Girl() {
+    const [state] = useStore();
+    return <Card title={'girl'}>
+        {
+            state.girl.list.map((item) => {
+                return <Row key={item._id}>
+                    <Col span={6}><img src={item.url} style={{ width: '98%' }} /></Col>
+                    <Col span={18}><p>{item.author}</p><p>{item.desc}</p></Col>
+                    <Col span={24}><p></p></Col>
+                </Row>;
+            })
         }
-        return <Card title={'project'}>
-            <p className="text-gray">项目demo有本地接口,请先运行npm run server</p>
-            <p>{state.project.name}</p>
-            <p>{state.project.address}</p>
-            <Input
-                // placeholder={state.project.address}
-                // value={state.project.address}
-                // onChange={(e) => handleChange(e.target.value)}
-                defaultValue={state.project.address}
-                onBlur={(e) => handleChange(e.target.value)}
-            />
-        </Card>;
+    </Card>;
+}
+//Project
+function Project() {
+    const [state, dispatch] = useStore();
+    function handleChange(value) {
+        dispatch({ type: 'update_project_address', value: value });
     }
+    return <Card title={'project'}>
+        <p className="text-gray">项目demo有本地接口,请先运行npm run server</p>
+        <p>{state.project.name}</p>
+        <p>{state.project.address}</p>
+        <Input
+            // placeholder={state.project.address}
+            value={state.project.address}
+            onChange={(e) => handleChange(e.target.value)}
+        // defaultValue={state.project.address}
+        // onBlur={(e) => handleChange(e.target.value)}
+        />
+    </Card>;
+}
+//App
+function App() {
     return <Fragment>
         <Row>
-            <Col span={24}>
-                <Girl />
-            </Col>
-            <Col span={24}>
-                <Project />
-            </Col>
-            <Col span={24}>
-                <Test1 />
-                <Test2 />
-            </Col>
+            <Col span={24}><Girl /></Col>
+            <Col span={24}><Project /></Col>
+            <Col span={24}><Test1 /><Test2 /></Col>
         </Row>
     </Fragment>;
 }
@@ -77,7 +73,7 @@ export default function ReduxDemo3() {
             <p>redux: <b>163.0 KB</b></p>
             <p>react-redux: <b>271.0 KB</b></p>
             <p>redux-thunk: <b>17.7 KB</b></p>
-            <StoreView />
+            <App />
         </Card>
     </Wapper>;
 }

@@ -1,77 +1,113 @@
 'use strict';
 import React from 'react';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-/**
- * main function
- * @param {*} reducersMap
- * 如: {reducer1,reducer2,...}
- * 关于return []和return {}的区别,返回数组在命名时可以别名,map对象则不能
- */
-export function createLiveStore(reducersMap) {
-    if (!reducersMap) {
-        throw 'Reducer and Action is required';
+
+export default function createLiveStore(reducerMap, actionsMap) {
+    if (arguments.length === 0) {
+        throw 'Reducer is required';
     }
-    if (reducersMap.constructor !== Object) {
+    if (arguments[0].constructor !== Object) {
         throw 'Parameter exception,The reducer collection must be an object type, ' +
         'For example:: {reducer1,reducer2,...} or {reducer}';
     }
-    //combine reducer
-    const reducer = combineReducers(reducersMap);
-    //create store
-    const store = createStore(reducer, {}, applyMiddleware(thunk));
-    //Wapper
-    function Wapper({ children }) {
-        return <Provider store={store}>
-            {children}
-        </Provider>;
+    //绑定到第一个参数上
+    reducerMap = arguments[0];
+    //克隆reducer
+    const clonedReducers = {};
+    for (let a in reducerMap) {
+        if (reducerMap[a].constructor !== Function) {
+            throw 'The type of reducer must be a function';
+        }
+        clonedReducers[a] = reducerMap[a];
     }
-    //use store
-    function useStore() {
-        const [state, setState] = React.useState(store.getState());
-        //listener
-        store.subscribe(() => {
-            setState(store.getState());
-        });
-        return [state, store.dispatch];
+    //combineStores
+    function combineStores() {
+        const stores = {};
+        for (let b in clonedReducers) {
+            const state = clonedReducers[b](undefined, { type: null });
+            if (state === undefined || state === null) {
+                throw 'The return value of reducer cannot be null or undefined';
+            }
+            stores[b] = state;
+        }
+        return stores;
     }
-    //Observer
-    function observer(FC) {
-        return function () {
-            const Element = /*#__PURE__*/React.createElement(FC, {
-                state: store.getState(),
-                dispatch: store.dispatch
-            }, FC);
-            return Element;
+    //combineReducers
+    function combineReducers() {
+        return function (state, action) {
+            const nextState = {};
+            for (let c in clonedReducers) {
+                const prevState = state[c];
+                const currentReducer = clonedReducers[c];
+                const currentState = currentReducer(prevState, action);
+                if (currentState === undefined) {
+                    throw 'Reducer must return state,current reducer: ' + currentReducer;
+                }
+                nextState[c] = currentState;
+            }
+            return nextState;
         };
     }
-    return { Wapper, useStore, observer };
-}
-export function createActionMap(actionsMap) {
-    if (!actionsMap) {
-        throw 'Missing required parameter actionsMap';
-    }
-    const errorText = 'There is already an action with the same name. ' +
-        'Please make sure that the name of each action is unique';
-    const actions = {};
-    for (let key in actionsMap) {
-        if (actionsMap[key].constructor === Function) {
-            if (actions[key]) {
-                throw errorText;
-            }
-            actions[key] = actionsMap[key];
+    //combineActions
+    function combineActions() {
+        if (!actionsMap) {
+            throw 'Missing required parameter actionsMap';
         }
-        if (actionsMap[key].constructor === Object) {
-            for (let i in actionsMap[key]) {
-                if (actionsMap[key][i].constructor === Function) {
-                    if (actions[i]) {
-                        throw errorText;
+        const errorText = 'There is already an action with the same name. ' +
+            'Please make sure that the name of each action is unique';
+        const actions = {};
+        for (let key in actionsMap) {
+            if (actionsMap[key].constructor === Function) {
+                if (actions[key]) {
+                    throw errorText;
+                }
+                actions[key] = actionsMap[key];
+            }
+            if (actionsMap[key].constructor === Object) {
+                for (let i in actionsMap[key]) {
+                    if (actionsMap[key][i].constructor === Function) {
+                        if (actions[i]) {
+                            throw errorText;
+                        }
+                        actions[i] = actionsMap[key][i];
                     }
-                    actions[i] = actionsMap[key][i];
                 }
             }
         }
+        return actions;
     }
-    return actions;
+    //merge stores
+    const stores = combineStores();
+    //merge reducer
+    const reducer = combineReducers();
+    //actions
+    const actions = combineActions();
+    //create context
+    const Context = React.createContext(stores);
+    //Wapper
+    function Wapper({ children }) {
+        const [state, dispatch] = React.useReducer(reducer, stores);
+        //async of dispatch
+        dispatch.async = function () {
+            if (arguments[0].constructor !== Function) {
+                throw 'param of asyncDispatch must is function.';
+            }
+            arguments[0].apply(arguments[0], [dispatch]);
+            return arguments[0];
+        };
+        return /*#__PURE__*/React.createElement(Context.Provider, {
+            value: { state, dispatch, actions }
+        }, children);
+    }
+    function useStore() {
+        let store = null;
+        try {
+            store = React.useContext(Context);
+        } catch (e) {
+            throw e.name + ', ' + e.message;
+        }
+        return store;
+    }
+    return { useStore, Wapper };
 }
+
+
