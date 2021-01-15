@@ -7,11 +7,5 @@ export default {
                 dispatch(action);
             });
         };
-    },
-    updateProjectDesc: (text) => {
-        return dispatch => {
-            const action = { type: 'update_project_desc', value: text };
-            dispatch(action);
-        };
     }
 };

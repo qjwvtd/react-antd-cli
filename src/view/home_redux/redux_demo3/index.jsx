@@ -1,28 +1,26 @@
 import React, { Fragment, useEffect } from 'react';
 import { Row, Col, Card, Input, Rate } from 'antd';
-import { useStore, Wapper, observer, actions } from './store';
-
-//test observer
-const TestObserver = observer(({ state, dispatch }) => {
-    const { initGirl, initProject } = actions;
+import { useStore, Wapper, actions } from './store';
+const { initGirl, initProject } = actions;
+//Test1
+function Test1() {
+    const [state, dispatch] = useStore();
     useEffect(() => {
         dispatch(initGirl());
         dispatch(initProject());
     }, []);
-    return <p>{state.project.desc}</p>;
-});
-//Test Observer custom props
-function TestObserverCustomProps({ state, name }) {
+    return <p>{state.project.address}</p>;
+}
+//Test2
+function Test2() {
+    const [state] = useStore();
     return <Fragment>
-        <p>{state.project.desc}</p>
-        <p>{name}</p>
+        <p>{state.project.address}</p>
     </Fragment>;
 }
-const TestObserver2 = observer(<TestObserverCustomProps name={'custom props'} />);
 
 function StoreView() {
     const [state, dispatch] = useStore();
-    const { updateProjectDesc } = actions;
     function Girl() {
         return <Card title={'girl'}>
             {
@@ -38,29 +36,32 @@ function StoreView() {
     }
     function Project() {
         function handleChange(value) {
-            dispatch(updateProjectDesc(value));
+            dispatch({ type: 'update_project_address', value: value });
         }
         return <Card title={'project'}>
             <p className="text-gray">项目demo有本地接口,请先运行npm run server</p>
             <p>{state.project.name}</p>
-            <p>{state.project.desc}</p>
+            <p>{state.project.address}</p>
             <Input
-                // value={state.project.desc}
+                // placeholder={state.project.address}
+                // value={state.project.address}
                 // onChange={(e) => handleChange(e.target.value)}
-                defaultValue={state.project.desc}
+                defaultValue={state.project.address}
                 onBlur={(e) => handleChange(e.target.value)}
             />
         </Card>;
     }
     return <Fragment>
         <Row>
-            <Col span={11}>
+            <Col span={24}>
                 <Girl />
             </Col>
-            <Col span={11} offset={2}>
+            <Col span={24}>
                 <Project />
-                <TestObserver />
-                <TestObserver2 />
+            </Col>
+            <Col span={24}>
+                <Test1 />
+                <Test2 />
             </Col>
         </Row>
     </Fragment>;
@@ -80,6 +81,3 @@ export default function ReduxDemo3() {
         </Card>
     </Wapper>;
 }
-
-
-
