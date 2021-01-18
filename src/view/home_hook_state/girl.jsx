@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 import { useStore } from './store';
 import { initGirl } from './store/action';
 
 function GirlAppComponent() {
     const { state, dispatch } = useStore();
     useEffect(() => {
-        dispatch.async(initGirl());
+        dispatch(initGirl());
     }, []);
     return <Fragment>
         {
@@ -21,8 +21,17 @@ function GirlAppComponent() {
     </Fragment>;
 }
 function GirlApp() {
+    const { dispatch } = useStore();
     return <Fragment>
-        <p><b>异步获取数据</b></p>
+        <p>
+            <b>异步获取数据</b>
+            <Button
+                type='link'
+                onClick={() => { dispatch(initGirl()); }}
+            >
+                刷新
+            </Button>
+        </p>
         <GirlAppComponent />
     </Fragment>;
 }

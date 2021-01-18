@@ -1,13 +1,13 @@
 import createLiveStore from './../lib';
 import girl from './girl';
 import project from './project';
-import girlAction from './girl/action';
-import projectAction from './project/action';
+// import girlAction from './girl/action';
+// import projectAction from './project/action';
 
 const reducerMap = { girl, project };
-const actionMap = { girlAction, projectAction };
+// const actionMap = { girlAction, projectAction };
 
-const { Wapper, useStore } = createLiveStore(reducerMap, actionMap);
+const { Wapper, useStore } = createLiveStore(reducerMap);
 export { Wapper, useStore };
 
 
