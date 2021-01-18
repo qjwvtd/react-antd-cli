@@ -2,7 +2,6 @@
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
 /**
  * main function
  * @param {*} reducersMap
@@ -21,24 +20,28 @@ export function createLiveStore(reducersMap) {
     const reducer = combineReducers(reducersMap);
     //create store
     const store = createStore(reducer, {}, applyMiddleware(thunk));
+    //Context
+    const Context = React.createContext(store);
     //Wapper
     function Wapper({ children }) {
-        return <Provider store={store}>
+        return <Context.Provider value={store}>
             {children}
-        </Provider>;
+        </Context.Provider>;
     }
-    //use store
+    //useStore
     function useStore() {
-        const [state, setState] = React.useState(store.getState());
+        const anonymous = React.useContext(Context);
+        const [state, setState] = React.useState(anonymous.getState());
+        const dispatch = anonymous.dispatch;
         //订阅
-        const unsubscribe = store.subscribe(() => {
-            setState(store.getState());
+        const unsubscribe = anonymous.subscribe(() => {
+            setState(anonymous.getState());
         });
         //卸载时取消订阅
         React.useEffect(() => {
             return () => unsubscribe();
         }, []);
-        return [state, store.dispatch];
+        return [state, dispatch];
     }
     //Observer
     function observer(FC) {

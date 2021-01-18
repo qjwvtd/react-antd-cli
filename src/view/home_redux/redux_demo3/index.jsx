@@ -62,10 +62,10 @@ function App() {
 
 export default function ReduxDemo3() {
     return <Wapper>
-        <Card title="redux,react-redux,redux-thunk" bordered={false}>
+        <Card title="redux,redux-thunk" bordered={false}>
             <Rate disabled value={5} className="text-success" />
             <p></p>
-            <p>redux,react-redux,redux-thunk</p>
+            <p>redux,redux-thunk</p>
             <p>包大小(摘自npm,未压缩Unpacked Size):</p>
             <p>redux: <b>163.0 KB</b></p>
             <p>react-redux: <b>271.0 KB</b></p>

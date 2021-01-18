@@ -16,7 +16,7 @@ export default function ReduxDemo() {
             <TabPane tab="redux,react-redux" key="2">
                 <ReduxDemo2 />
             </TabPane>
-            <TabPane tab="redux,react-redux,redux-thunk" key="3">
+            <TabPane tab="redux,redux-thunk" key="3">
                 <ReduxDemo3 />
             </TabPane>
         </Tabs>
