@@ -44,11 +44,8 @@ function Project() {
         <p>{state.project.name}</p>
         <p>{state.project.address}</p>
         <Input
-            // placeholder={state.project.address}
             value={state.project.address}
             onChange={(e) => handleChange(e.target.value)}
-        // defaultValue={state.project.address}
-        // onBlur={(e) => handleChange(e.target.value)}
         />
     </Card>;
 }
