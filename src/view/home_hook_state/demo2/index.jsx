@@ -26,9 +26,9 @@ function View() {
         <GirlApp />
     </Fragment>;
 }
-function Test() {
+function Demo2() {
     return <Fragment>
-        <Card title="react hook state manage" bordered={false}>
+        <Card title="直接使用xxxAction()方法来更新数据,dispatch已传递到action里面" bordered={false}>
             <Rate disabled value={4.5} className="text-success" />
             <p></p>
             <p>用useContext和useReducer封装的状态管理机,全局状态管理器,代替redux,mobx,...,等第三方库</p>
@@ -38,4 +38,4 @@ function Test() {
         </Card>
     </Fragment>;
 }
-export default Test;
+export default Demo2;

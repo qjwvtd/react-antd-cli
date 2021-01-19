@@ -43,6 +43,21 @@ function combineReducers(reducers) {
         return nextState;
     };
 }
+//combinehookAction
+function combineHookAction(dispatchAction, state, actions) {
+    const dispatch = dispatchAction;
+    const action = {};
+    for (let key in actions) {
+        if (typeof actions[key] !== 'function') {
+            throw 'action must be an function type,The error occurred in ' + key;
+        }
+        const newAction = function (params) {
+            return actions[key](params)({ dispatch, state });
+        };
+        action[key] = newAction;
+    }
+    return action;
+}
 export default function createLiveStore(reducerMap, actionMap) {
     if (arguments.length === 0) {
         throw 'Reducer and action is required';
@@ -76,17 +91,8 @@ export default function createLiveStore(reducerMap, actionMap) {
     const Context = React.createContext(stores);
     //Wapper
     function Wapper({ children }) {
-        const [state, dispatch] = React.useReducer(reducer, stores);
-        const action = {};
-        for (let key in actions) {
-            if (typeof actions[key] !== 'function') {
-                throw 'action must be an function type,The error occurred in ' + key;
-            }
-            const newAction = function (params) {
-                return actions[key]({ dispatch, state, params });
-            };
-            action[key] = newAction;
-        }
+        const [state, dispatchAction] = React.useReducer(reducer, stores);
+        const action = combineHookAction(dispatchAction, state, actions);
         return <Context.Provider value={{ state, action }}>
             {children}
         </Context.Provider>;

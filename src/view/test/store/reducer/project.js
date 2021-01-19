@@ -1,9 +1,8 @@
-//initState
 const initState = {
     name: '金融城项目',
-    address: '关于金融城项目的描述'
+    address: '关于金融城项目的描述',
+    obj: { title: 'dsfdsafds' }
 };
-//reducer
 export default function (state = initState, action) {
     switch (action.type) {
         case 'init_project':
@@ -11,7 +10,7 @@ export default function (state = initState, action) {
             state.address = action.data.address;
             break;
         case 'update_project_address':
-            state.address = action.value;
+            state.address = action.address;
             break;
     }
     return Object.assign({}, state);

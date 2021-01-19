@@ -4,38 +4,39 @@ import { useStore, Wapper } from './store';
 import GirlApp from './girl';
 
 function View() {
-    const { state, action } = useStore();
-    const { initProject, initUser, updateProjectAddress } = action;
+    const { state, dispatch } = useStore();
     useEffect(() => {
-        initProject();
-        initUser();
+        dispatch({ type: 'init_project', data: { name: '双江口项目', desc: '关于双江口项目的一些描述' } });
+        dispatch({ type: 'init_user', data: { name: '龙门砍哥', role: '超级管理员' } });
     }, []);
     function handleChange(e) {
-        updateProjectAddress(e.target.value);
+        dispatch({ type: 'update_project_desc', value: e.target.value });
     }
     return <Fragment>
         <p>{state.project.name}</p>
-        <p>{state.project.address}</p>
+        <p>{state.project.desc}</p>
         <p>{state.user.name}</p>
         <p>{state.user.role}</p>
         <Input
-            value={state.project.address}
+            value={state.project.desc}
             onChange={handleChange}
         />
         <p></p>
         <GirlApp />
     </Fragment>;
 }
-function Test() {
+function App() {
+    return <Wapper><View /></Wapper>;
+}
+
+function Demo1() {
     return <Fragment>
-        <Card title="react hook state manage" bordered={false}>
+        <Card title="使用dispatch({type:'xxx'})和dispatch(xxxAction())来更新数据" bordered={false}>
             <Rate disabled value={4.5} className="text-success" />
             <p></p>
             <p>用useContext和useReducer封装的状态管理机,全局状态管理器,代替redux,mobx,...,等第三方库</p>
-            <Wapper>
-                <View />
-            </Wapper>
+            <App />
         </Card>
     </Fragment>;
 }
-export default Test;
+export default Demo1;

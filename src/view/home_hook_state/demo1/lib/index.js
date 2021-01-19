@@ -1,20 +1,5 @@
 'use strict';
 import React from 'react';
-
-//combineActions
-function combineActions(actionMap) {
-    const actions = {};
-    for (let key in actionMap) {
-        if (typeof actionMap[key] !== 'function') {
-            throw 'action must be an Function type,The error occurred in ' + key;
-        }
-        if (actions[key]) {
-            throw 'There is already a same action,The error occurred in ' + key;
-        }
-        actions[key] = actionMap[key];
-    }
-    return actions;
-}
 //combineStores
 function combineStores(reducers) {
     const stores = {};
@@ -43,21 +28,16 @@ function combineReducers(reducers) {
         return nextState;
     };
 }
-export default function createLiveStore(reducerMap, actionMap) {
+export default function createLiveStore(reducerMap) {
     if (arguments.length === 0) {
-        throw 'Reducer and action is required';
+        throw 'Reducer is required';
     }
     if (arguments[0].constructor !== Object) {
         throw 'Parameter exception,The reducer collection must be an object type, ' +
         'For example:: {reducer1,reducer2,...} or {reducer}';
     }
-    if (arguments[1].constructor !== Object) {
-        throw 'Parameter exception,The action collection must be an object type, ' +
-        'For example:: {action1,action2,...} or {action}';
-    }
-    //绑定到参数上
+    //绑定到参数
     reducerMap = arguments[0];
-    actionMap = arguments[1];
     //克隆reducer
     const clonedReducers = {};
     for (let a in reducerMap) {
@@ -70,24 +50,21 @@ export default function createLiveStore(reducerMap, actionMap) {
     const stores = combineStores(clonedReducers);
     //merge reducer
     const reducer = combineReducers(clonedReducers);
-    //actions
-    const actions = combineActions(actionMap);
     //create context
     const Context = React.createContext(stores);
     //Wapper
     function Wapper({ children }) {
-        const [state, dispatch] = React.useReducer(reducer, stores);
-        const action = {};
-        for (let key in actions) {
-            if (typeof actions[key] !== 'function') {
-                throw 'action must be an function type,The error occurred in ' + key;
+        const [state, dispatchAction] = React.useReducer(reducer, stores);
+        const dispatch = function () {
+            if (arguments[0].constructor === Object) {
+                dispatchAction.apply(dispatchAction, [arguments[0]]);
             }
-            const newAction = function (params) {
-                return actions[key]({ dispatch, state, params });
-            };
-            action[key] = newAction;
-        }
-        return <Context.Provider value={{ state, action }}>
+            if (arguments[0].constructor === Function) {
+                arguments[0].apply(arguments[0], [dispatchAction, state]);
+            }
+            return dispatchAction;
+        };
+        return <Context.Provider value={{ state, dispatch }}>
             {children}
         </Context.Provider>;
     }
