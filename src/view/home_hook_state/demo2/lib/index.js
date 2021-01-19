@@ -52,7 +52,7 @@ function combineHookAction(dispatchAction, state, actions) {
             throw 'action must be an function type,The error occurred in ' + key;
         }
         const newAction = function (params) {
-            return actions[key](params)({ dispatch, state });
+            return actions[key](params)(dispatch, state);
         };
         action[key] = newAction;
     }
