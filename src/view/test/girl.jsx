@@ -10,7 +10,7 @@ function GirlAppComponent() {
     return <Fragment>
         {
             state.girl.list.map((item) => {
-                return <Row key={item._id}>
+                return <Row key={item._id + Date.now()}>
                     <Col span={4}><img src={item.url} style={{ width: '100%' }} /></Col>
                     <Col span={19} offset={1}><p>{item.author}</p><p>{item.desc}</p></Col>
                     <Col span={24}><p></p></Col>
