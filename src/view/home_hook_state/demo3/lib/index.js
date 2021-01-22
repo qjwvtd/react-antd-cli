@@ -56,8 +56,8 @@ export default function createLiveStore(actionMap) {
             const combineAction = {};
             for (let key in actions) {
                 combineAction[key] = function (params) {
-                    const nextParams = { setState, state, params };
-                    return actions[key].call(actions[key], nextParams);
+                    const nextParams = [setState, state, params];
+                    return actions[key].apply(actions[key], nextParams);
                 };
             }
             return combineAction;
@@ -68,7 +68,8 @@ export default function createLiveStore(actionMap) {
         </Context.Provider>;
     }
     function useStore() {
-        return React.useContext(Context);
+        const { state, action } = React.useContext(Context);
+        return [state, action];
     }
     return { Wapper, useStore };
 }
