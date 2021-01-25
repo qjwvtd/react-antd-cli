@@ -33,8 +33,11 @@ function Project() {
 export default function Demo3() {
     return <GloblaProvider>
         <Card title="直接使用xxxAction()" bordered={false}>
-            <Rate disabled value={4.5} className="text-success" />
-            <p>顶层组件使用useState,将set方法传到action里面,将action暴露到各组件分别调用,没有dipatch</p>
+            <Rate disabled value={5} className="text-success" />
+            <p>
+                顶层组件使用useState管理所有state,将set方法传到action,在各个子组件直接调用这些方法,
+                摒弃了绕人的reducer和dispatch,比纯用useReducer和useContext封装的更优雅
+            </p>
             <p>使用到的React api,[createContext,useContext,useState]</p>
             <User />
             <Project />

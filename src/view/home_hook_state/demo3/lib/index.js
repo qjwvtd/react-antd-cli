@@ -44,7 +44,7 @@ export default function createLiveStore(actionMap) {
     //Context
     const Context = React.createContext(stores);
     //Wapper
-    function Wapper({ children }) {
+    function Provider({ children }) {
         const [state, dispatchAction] = React.useState(stores);
         //new setState
         const setState = function (newState) {
@@ -71,5 +71,5 @@ export default function createLiveStore(actionMap) {
         const { state, action } = React.useContext(Context);
         return [state, action];
     }
-    return { Wapper, useStore };
+    return { Provider, useStore };
 }

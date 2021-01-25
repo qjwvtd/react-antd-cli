@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Button } from 'antd';
-import { GirlWapper, useGirlStore } from './store/girl';
+import { GirlProvider, useGirlStore } from './store/girl';
 
 function View() {
     const [state, action] = useGirlStore();
@@ -26,5 +26,5 @@ function View() {
     </>;
 }
 export default function GirlApp() {
-    return <GirlWapper><View /></GirlWapper>;
+    return <GirlProvider><View /></GirlProvider>;
 }

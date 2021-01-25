@@ -3,5 +3,5 @@ import girl from './../action/girl';
 
 
 const live = createLiveStore({ girl });
-export const GirlWapper = live.Wapper;
+export const GirlProvider = live.Provider;
 export const useGirlStore = live.useStore;

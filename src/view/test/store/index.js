@@ -1,9 +1,9 @@
-import createLiveStore from './../lib';
-import user from './../action/user';
-import project from './../action/project';
+// import createLiveStore from './../lib';
+import useUser from './../action/user';
+import useProject from './../action/project';
 
-const actionMap = { user, project };
+export const hookStateMap = { useUser, useProject };
 
-const live = createLiveStore(actionMap);
-export const GloblaProvider = live.Wapper;
-export const useGloblaStore = live.useStore;
+export function createHookStore(hooksMap) {
+    console.log(hooksMap);
+}

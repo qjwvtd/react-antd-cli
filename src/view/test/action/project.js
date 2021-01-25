@@ -1,17 +1,19 @@
+import React from 'react';
 import { getProject } from '@/common/api/project';
-export default {
-    info: {
-        name: 'dsfadsfadsa',
-        address: 'dsfadsafdsa'
-    },
-    initProject: function (setState, state) {
-        getProject().then((result) => {
-            state.project.info = result;
-            setState(state);
-        });
-    },
-    updateProjectAddres: function (setState, state, params) {
-        state.project.info.address = params;
-        setState(state);
-    }
+const initState = {
+    name: 'dsfadsfadsa',
+    address: 'dsfadsafdsa'
 };
+export default function useProject() {
+    const [project, setProject] = React.useState(initState);
+    const initProject = function () {
+        getProject().then((result) => {
+            setProject(result);
+        });
+    };
+    const updateProjectAddres = function (text) {
+        project.address = text;
+        setProject(project);
+    };
+    return { project, initProject, updateProjectAddres };
+}

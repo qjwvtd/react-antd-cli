@@ -5,5 +5,5 @@ import project from './../action/project';
 const actionMap = { user, project };
 
 const live = createLiveStore(actionMap);
-export const GloblaProvider = live.Wapper;
+export const GloblaProvider = live.Provider;
 export const useGloblaStore = live.useStore;
