@@ -30,7 +30,7 @@ function Project() {
         </Row>
     </div>;
 }
-export default function Test() {
+export default function Demo3() {
     return <GloblaProvider>
         <Card title="直接使用xxxAction()" bordered={false}>
             <Rate disabled value={4.5} className="text-success" />

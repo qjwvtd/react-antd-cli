@@ -4,13 +4,13 @@ export default {
         name: 'dsfadsfadsa',
         address: 'dsfadsafdsa'
     },
-    initProject: function ({ setState, state }) {
+    initProject: function (setState, state) {
         getProject().then((result) => {
             state.project.info = result;
             setState(state);
         });
     },
-    updateProjectAddres: function ({ setState, state, params }) {
+    updateProjectAddres: function (setState, state, params) {
         state.project.info.address = params;
         setState(state);
     }
