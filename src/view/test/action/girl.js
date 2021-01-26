@@ -1,15 +1,15 @@
-import React from 'react';
 import { getGirlDataApi } from '@/common/api/public';
 
-export default function useGirl() {
-    const [list, setList] = React.useState([]);
-    const initGirl = function () {
+export default {
+    list: [],
+    initGirl: function (setState, state) {
         getGirlDataApi().then((res) => {
             if (res.status === 100) {
-                console.log(res.data);
-                setList(res.data);
+                for (let key in res.data[0]) {
+                    state.girl[key] = res.data[0][key];
+                }
+                setState(state);
             }
         });
-    };
-    return { list, initGirl };
-}
+    }
+};

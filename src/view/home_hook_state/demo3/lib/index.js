@@ -5,26 +5,26 @@ import React from 'react';
 function combineActionMap(actionMap) {
     const stores = {}, actions = {};
     for (let key in actionMap) {
-        if (typeof actionMap[key] !== 'object') {
+        if (actionMap[key].constructor !== Object) {
             throw 'The action must be an object type';
         }
         if (stores.hasOwnProperty(key)) {
-            throw 'The same store already exists.';
+            throw 'a same store name already exists.';
         }
         stores[key] = {};
         const actionAnys = actionMap[key];
-        const keys = Object.keys(actionAnys);
-        keys.forEach((item) => {
-            if (actions.hasOwnProperty(key)) {
+        for (let i in actionAnys) {
+            const item = actionAnys[i];
+            if (actions.hasOwnProperty(i)) {
                 throw 'The same action already exists.';
             }
-            if (typeof actionAnys[item] === 'function') {
-                actions[item] = actionAnys[item];
+            if (typeof item === 'function') {
+                actions[i] = item;
             }
-            if (typeof actionAnys[item] !== 'function') {
-                stores[key][item] = actionAnys[item];
+            if (typeof item !== 'function') {
+                stores[key][i] = item;
             }
-        });
+        }
     }
     return { stores, actions };
 }
