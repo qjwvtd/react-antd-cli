@@ -17,15 +17,15 @@ function Project() {
     const [state, action] = useGloblaStore();
     const { initProject, updateProjectAddres } = action;
     useEffect(() => {
-        initProject('自定义参数');
+        initProject();
     }, []);
-    const info = state.project.info;
+    const project = state.project;
     return <div>
         <b>★project</b>
-        <p>{info.name + ', ' + info.address},<Button type="link" onClick={() => action.initProject()}>刷新</Button></p>
+        <p>{project.name + ', ' + project.address},<Button type="link" onClick={() => action.initProject()}>刷新</Button></p>
         <Row>
             <Col span={20}>
-                <Input value={info.address} onChange={(e) => updateProjectAddres(e.target.value)} />
+                <Input value={project.address} onChange={(e) => updateProjectAddres(e.target.value)} />
             </Col>
         </Row>
     </div>;
