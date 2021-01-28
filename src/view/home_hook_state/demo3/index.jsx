@@ -19,13 +19,16 @@ function Project() {
     useEffect(() => {
         initProject();
     }, []);
+    function handleChange(value) {
+        updateProjectAddres(value);
+    }
     const project = state.project;
     return <div>
         <b>★project</b>
         <p>{project.name + ', ' + project.address},<Button type="link" onClick={() => action.initProject()}>刷新</Button></p>
         <Row>
             <Col span={20}>
-                <Input value={project.address} onChange={(e) => updateProjectAddres(e.target.value)} />
+                <Input value={project.address} onChange={(e) => handleChange(e.target.value)} />
             </Col>
         </Row>
     </div>;
