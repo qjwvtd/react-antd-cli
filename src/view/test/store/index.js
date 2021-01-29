@@ -1,10 +1,9 @@
-import createHookState from './../lib';
-import girl from './../action/girl';
+import createLiveStore from './../lib';
 import user from './../action/user';
 import project from './../action/project';
 
-const actionMap = { girl, user, project };
+const actionMap = { user, project };
 
-const [useHookStore, Wapper] = createHookState(actionMap);
-export const useStore = useHookStore;
-export const Provider = Wapper;
+const live = createLiveStore(actionMap);
+export const GloblaProvider = live.Provider;
+export const useGloblaStore = live.useStore;

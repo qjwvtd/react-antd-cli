@@ -1,9 +1,8 @@
 export default {
-    name: null,
-    role: null,
+    data: { name: null, role: null },
     initUser: function (setState, state) {
-        state.user.name = 'zhangxiaojun';
-        state.user.role = 'admin';
+        state.user.data.name = 'zhangxiaojun';
+        state.user.data.role = 'admin';
         setState(state);
     }
 };

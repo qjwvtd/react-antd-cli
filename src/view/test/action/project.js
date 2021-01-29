@@ -9,8 +9,8 @@ export default {
             setState(state);
         });
     },
-    updateProjectAddres: function (setState, state, text) {
-        state.project.address = text;
+    updateProjectAddres: function (setState, state, params) {
+        state.project.address = params;
         setState(state);
     }
 };

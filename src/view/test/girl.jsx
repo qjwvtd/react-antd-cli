@@ -1,19 +1,28 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Button } from 'antd';
-import { useStore } from './store';
-export default function Girl() {
-    const { state, action } = useStore();
+import { GirlProvider, useGirlStore } from './store/girl';
+
+function View() {
+    const [state, action] = useGirlStore();
+    useEffect(() => {
+        action.initGirl({ name: '自定义参数' });
+    }, []);
     const girl = state.girl;
     return <>
-        <b>★girl</b>
-        <Button type="link" onClick={() => action.initGirl()}>刷新</Button>
+        <p>
+            <b>★girl</b>
+            <Button type="link" onClick={() => action.initGirl()}>刷新</Button>
+        </p>
         <Row key={girl._id + Date.now()}>
-            <Col span={3}><img src={girl.url} style={{ width: '98%' }} /></Col>
-            <Col span={21}>
+            <Col span={4}><img src={girl.url} style={{ width: '98%' }} /></Col>
+            <Col span={20}>
                 <b>{girl.author}</b>
                 <p>{girl.desc}</p>
             </Col>
             <Col span={24}><p></p></Col>
         </Row>
     </>;
+}
+export default function GirlApp() {
+    return <GirlProvider><View /></GirlProvider>;
 }

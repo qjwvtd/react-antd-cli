@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+
 //combineActionMap
 function combineActionMap(actionMap) {
     const stores = {}, actions = {};
@@ -28,9 +29,9 @@ function combineActionMap(actionMap) {
     return { stores, actions };
 }
 
-export default function createHookState(actionMap) {
+export default function createLiveStore(actionMap) {
     if (arguments.length === 0) {
-        throw 'actionMap is required';
+        throw 'Reducer and action is required';
     }
     if (arguments[0].constructor !== Object) {
         throw 'Parameter exception,The action collection must be an object type, ' +
@@ -42,39 +43,71 @@ export default function createHookState(actionMap) {
     const { stores, actions } = combineActionMap(actionMap);
     //Context
     const Context = React.createContext(stores);
-    //useWapper
-    function useWapper() {
-        return function Provider({ children }) {
-            const [state, dispatchAction] = React.useState(stores);
-            //new setState
-            const setState = function (newState) {
-                const calculatedState = Object.assign({}, newState);
-                return dispatchAction(calculatedState);
-            };
-            //combinehookAction
-            function combineHookAction() {
-                const combineAction = {};
-                for (let key in actions) {
-                    combineAction[key] = function (params) {
-                        const nextParams = [setState, state, params];
-                        return actions[key].apply(actions[key], nextParams);
-                    };
-                }
-                return combineAction;
+    //Wapper
+    function Provider({ children }) {
+        const [state, dispatchAction] = React.useState(stores);
+        //new setState
+        const setState = function (newState) {
+            const calculatedState = Object.assign({}, newState);
+            return dispatchAction(calculatedState);
+        };
+        //combinehookAction
+        function combineHookAction() {
+            const combineAction = {};
+            for (let key in actions) {
+                combineAction[key] = function (params) {
+                    const nextParams = [setState, state, params];
+                    return actions[key].apply(actions[key], nextParams);
+                };
             }
-            const action = combineHookAction();
-            return <Context.Provider value={{ state, action }}>
-                {children}
-            </Context.Provider>;
-        };
+            return combineAction;
+        }
+        const action = combineHookAction();
+        return <Context.Provider value={{ state, action }}>
+            {children}
+        </Context.Provider>;
     }
-    //useStore
     function useStore() {
-        return function useHookStore() {
-            console.log(React.useContext(Context));
-            return React.useContext(Context);
-        };
+        const { state, action } = React.useContext(Context);
+        return [state, action];
     }
-    return [useStore, useWapper];
+    return { Provider, useStore };
 }
+export function useLive(actionMap) {
+    if (arguments.length === 0) {
+        throw 'Reducer and action is required';
+    }
+    if (arguments[0].constructor !== Object) {
+        throw 'Parameter exception,The action collection must be an object type, ' +
+        'For example: {action1,action2,...} or {action}';
+    }
+    //绑定到参数上
+    actionMap = arguments[0];
+    //stores,actions
+    const { stores, actions } = combineActionMap(actionMap);
+    //Context
+    // const Context = React.createContext(stores);
+    //state
+    const [state, dispatchAction] = React.useState(stores);
+    //new setState
+    function setState(newState) {
+        const calculatedState = Object.assign({}, newState);
+        return dispatchAction(calculatedState);
+    }
+    //combinehookAction
+    function combineHookAction() {
+        const combineAction = {};
+        for (let key in actions) {
+            combineAction[key] = function (params) {
+                const nextParams = [setState, state, params];
+                return actions[key].apply(actions[key], nextParams);
+            };
+        }
+        return combineAction;
+    }
+    const action = combineHookAction();
+    React.useEffect(() => {
 
+    }, []);
+    return { state, action };
+}
