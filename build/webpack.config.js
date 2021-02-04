@@ -9,7 +9,7 @@ const os = require('os');
 const HappyPack = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-const __base = require('./base.config.js');
+const base = require('./base.config.js');
 const __rules = require('./loaders');
 
 const env = require('./env');
@@ -30,7 +30,7 @@ function chunkCssPath() {
 }
 
 const webpackConfig = {
-    entry: { 'index': path.resolve(__dirname, __base.entry) },
+    entry: { 'index': path.resolve(__dirname, base.entry) },
     module: {
         rules: __rules
     },
@@ -55,7 +55,7 @@ const webpackConfig = {
         }),
         //构建html
         new HtmlWebpackPlugin({
-            title: __base.projectName + __base.version,
+            title: base.name + base.version,
             minify: {
                 // 移除HTML中的注释
                 removeComments: true,
@@ -63,8 +63,8 @@ const webpackConfig = {
                 minifyCSS: true
             },
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
-            favicon: __base.dev.sevices + '/favicon.ico',
-            template: __base.dev.sevices + '/index.html'
+            favicon: base.dev.path + '/favicon.ico',
+            template: base.dev.path + '/index.html'
         }),
         //加快构建速度
         new HappyPack({

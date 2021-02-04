@@ -21,6 +21,10 @@ webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(hotUpdate);
 
 webpackConfig.optimization = optimization;
+
+if (!base.dev || Object.keys(base.dev).length === 0) {
+    throw '致命错误,开发环境没有配置'
+}
 module.exports = merge(webpackConfig, {
     mode: 'development',
     output: {
@@ -34,7 +38,7 @@ module.exports = merge(webpackConfig, {
     cache: true,
     devtool: 'cheap-module-eval-source-map',
     devServer: {
-        contentBase: path.join(__dirname, base.dev.sevices), //定位静态服务到index.html
+        contentBase: path.join(__dirname, base.dev.path), //定位静态服务到index.html
         open: false, //是否自动打开浏览器
         host: base.dev.host || 'localhost', //默认localhost
         port: base.dev.port || '3000', //默认3000
@@ -42,6 +46,6 @@ module.exports = merge(webpackConfig, {
         hot: true, //true,webpack4会自动添加HMR插件
         historyApiFallback: true, //保证Router刷新不丢失
         headers: { 'Access-Control-Allow-Origin': '*' },// 允许开发服务器访问本地服务器的包JSON文件，防止跨域
-        proxy: base.dev.proxy
+        proxy: base.dev.proxy || {}
     }
 });
