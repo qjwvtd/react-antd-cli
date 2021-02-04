@@ -32,7 +32,7 @@ module.exports = merge(webpackConfig, {
         publicPath: base.dev.publicPath
     },
     cache: true,
-    devtool: 'cheap-module-eval-source-map', //'inline-source-map'
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         contentBase: path.join(__dirname, base.dev.sevices), //定位静态服务到index.html
         open: false, //是否自动打开浏览器

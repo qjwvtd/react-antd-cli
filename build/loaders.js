@@ -29,18 +29,6 @@ const happypackLoader = {
     test: /\.(js|jsx)$/,
     loader: 'happypack/loader?id=happyBabel'
 };
-const esLintLoader = {
-    test: /\.(js|jsx)$/,
-    use: [{
-        loader: 'eslint-loader',
-        options: { // 这里的配置项参数将会被传递到 eslint的CLIEngine
-            formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
-        }
-    }],
-    enforce: "pre", // 编译前检查
-    include: __include__dirname,
-    exclude: /node_modules/
-};
 const cssLoader = {
     test: /\.css$/,
     use: [
@@ -95,5 +83,5 @@ const fileLoader = {
     exclude: /node_modules/
 };
 module.exports = [
-    happypackLoader, babelLoader, esLintLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
+    happypackLoader, babelLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
 ];

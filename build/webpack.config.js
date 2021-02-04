@@ -3,6 +3,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const os = require('os');
 const HappyPack = require('happypack');
@@ -44,6 +45,8 @@ const webpackConfig = {
         }
     },
     plugins: [
+        //eslint
+        new ESLintPlugin(),
         //处理.css文件
         new MiniCssExtractPlugin({
             filename: chunkCssPath().filename,

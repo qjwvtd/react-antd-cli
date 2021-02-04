@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const logoWhite = require('@/assets/images/logo-white.svg');
-const logoBlack = require('@/assets/images/logo-black.svg');
-const logoYellow = require('@/assets/images/logo_yellow.svg');
+import logoWhite from '@/assets/images/logo-white.svg';
+import logoBlack from '@/assets/images/logo-black.svg';
+import logoYellow from '@/assets/images/logo_yellow.svg';
 /**
 *Logo加,智安汇
 *@param link,路由路径,如:'/','/login',也可以不传

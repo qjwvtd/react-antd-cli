@@ -29,17 +29,17 @@ module.exports = {
         // 自定义js优化配置，覆盖默认配置
         new UglifyJsPlugin({
             cache: true,
-            parallel: true, // 开启并行压缩，充分利用cpu
+            parallel: 4, // 开启并行压缩，充分利用cpu
             sourceMap: false,
             extractComments: true, // 移除注释
             uglifyOptions: {
                 compress: {
                     unused: true,
-                    warnings: false,
                     drop_debugger: true,
                     drop_console: true,//console
                     pure_funcs: ['console.log']//移除console
                 },
+                warnings: false,
                 output: {
                     comments: false
                 }
