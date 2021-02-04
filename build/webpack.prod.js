@@ -6,7 +6,7 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpackConfig = require('./webpack.config.js');
 const optimization = require('./optimization.js');
-const base = require('./base.config.js');
+const base = require('./../config.js');
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({
@@ -23,5 +23,8 @@ webpackConfig.plugins.push(clearFiles);
 webpackConfig.optimization = optimization;
 module.exports = merge(webpackConfig, {
     mode: 'production',
-    output: base.prod
+    output: {
+        path: base.dist,
+        filename: 'static/js/[name]_[hash:8].js'
+    }
 });

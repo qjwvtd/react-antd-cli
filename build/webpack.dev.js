@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config.js');
 const optimization = require('./optimization.js');
-const base = require('./base.config.js');
+const base = require('./../config.js');
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({
@@ -29,7 +29,7 @@ module.exports = merge(webpackConfig, {
     mode: 'development',
     output: {
         //输出文件
-        filename: base.dev.filename,
+        filename: 'static/js/[name].js',
         //开发环境代码构建编译目录
         path: base.dev.path,
         //开发环境热更新目录必须是输出路径的绝对路径

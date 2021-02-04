@@ -5,11 +5,11 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const base = require('./base.config');
+const config = require('./../config.js');
 //env
 const env = require('./env');
 //工作空间
-const __include__dirname = path.resolve(__dirname, base.src);
+const __include__dirname = path.resolve(__dirname, config.src);
 const babelLoader = {
     test: /\.(js|jsx)$/,
     use: {

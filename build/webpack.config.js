@@ -9,7 +9,7 @@ const os = require('os');
 const HappyPack = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-const base = require('./base.config.js');
+const base = require('./../config.js');
 const __rules = require('./loaders');
 
 const env = require('./env');
