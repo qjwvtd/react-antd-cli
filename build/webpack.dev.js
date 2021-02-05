@@ -1,11 +1,24 @@
 'use strict';
 
+const fs = require("fs");
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config.js');
 const optimization = require('./optimization.js');
 const base = require('./../config.js');
+
+//创建webRoot.js文件,把baseUrl写到webRoot中
+function writeRootFile() {
+    const context = "const webRoot = '" + base.baseUrl + "';\n" +
+        "export default webRoot;";
+    fs.writeFile('src/common/http/webRoot.js', context, function (err) {
+        if (err) {
+            return console.error(err);
+        }
+    });
+}
+writeRootFile();
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({

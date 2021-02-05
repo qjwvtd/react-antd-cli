@@ -1,15 +1,18 @@
 const path = require('path');
 const packJson = require('./package.json');
+function resolve(pathString) {
+    return path.resolve(__dirname, pathString);
+}
 //http/https接口请求地址
 const baseUrl = "https://saas-dev.dhwork.cn";
 //热更新目录<开发环境目录>
-const hot_update_dirname = path.resolve(__dirname, 'public');
+const hot_update_dirname = resolve('public');
 //输出目录<生产环境构建目录>
-const dist_dirname = path.resolve(__dirname, 'dist');
+const dist_dirname = resolve('dist');
 //工作目录<源代码>
-const workPath = path.resolve(__dirname, 'src');
+const workPath = resolve('src');
 //入口文件
-const entry = path.resolve(__dirname, 'src/app.js');
+const entry = resolve('src/app.js');
 module.exports = {
     baseUrl: baseUrl,
     name: '智安汇运营后台',

@@ -5,7 +5,9 @@ import whiteList from './httpWhiteRoster';
 //处理函数
 import { handleStatus } from './handleStatus';
 //请求地址
-let baseUrl = require('./../../../config.js').baseUrl;
+import webRoot from './webRoot';
+
+let baseUrl = webRoot;
 
 //生产环境
 if (process.env.NODE_ENV === 'production') {
