@@ -10,7 +10,8 @@ const base = require('./../config.js');
 
 //创建webRoot.js文件,把baseUrl写到webRoot中
 function writeRootFile() {
-    const context = "const webRoot = '" + base.baseUrl + "';\n" +
+    const context = "//此文件脚本自动注入,禁止手动修改\n" +
+        "const webRoot = '" + base.baseUrl + "';\n" +
         "export default webRoot;";
     fs.writeFile('src/common/http/webRoot.js', context, function (err) {
         if (err) {
