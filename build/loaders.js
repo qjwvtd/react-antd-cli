@@ -69,9 +69,20 @@ const sassLoader = {
     include: __include__dirname,
     exclude: /node_modules/
 };
-const urlLoader = {
+const imgLoader = {
     test: /\.(png|jpg|jpeg|gif)$/,
-    use: [{ loader: 'url-loader', options: { limit: 128, name: env.dev ? 'static/img/[name]_[hash:8].[ext]' : env.prod && '/static/img/[name]_[hash:8].[ext]' } }],
+    use: [
+        {
+            loader: 'url-loader',
+            options: {
+                // limit: 128,
+                limit: 8 * 1024,
+                // 关闭es6
+                esModule: false,
+                name: env.dev ? 'static/img/[name]_[hash:8].[ext]' : env.prod && '/static/img/[name]_[hash:8].[ext]'
+            }
+        }
+    ],
     include: __include__dirname,
     exclude: /node_modules/
 };
@@ -82,5 +93,5 @@ const fileLoader = {
     exclude: /node_modules/
 };
 module.exports = [
-    babelLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
+    babelLoader, cssLoader, lessLoader, scssLoader, sassLoader, imgLoader, fileLoader
 ];
