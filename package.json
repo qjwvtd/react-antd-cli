@@ -10,7 +10,7 @@
     "hooks"
   ],
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode=development --config ./build/webpack.dev.js --progress --watch --colors --devtool source-map",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode=development --config ./build/webpack.dev.js --progress --watch --colors",
     "build": "cross-env NODE_ENV=production webpack -p --mode=production --config ./build/webpack.prod.js --progress",
     "dev:test": "npm start",
     "build:test": "node build/server.js",
