@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 import { ConfigProvider } from 'antd';
 import store from '@/common/store';
 import zhCN from 'antd/lib/locale/zh_CN';
-import View from './view';
+import View from './view/app';
 /**
  * import less
  * **/

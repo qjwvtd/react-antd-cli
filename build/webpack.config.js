@@ -5,10 +5,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const os = require('os');
-const HappyPack = require('happypack');
-const happThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
 const base = require('./../config.js');
 const __rules = require('./loaders');
 
@@ -30,7 +26,8 @@ function chunkCssPath() {
 }
 
 const webpackConfig = {
-    entry: { 'index': path.resolve(__dirname, base.entry) },
+    target: 'web',//default
+    // entry: { 'index': path.resolve(__dirname, './../src/index.js') },//default,不需要配置
     module: {
         rules: __rules
     },
@@ -40,9 +37,9 @@ const webpackConfig = {
     // },
     resolve: {
         extensions: ['.js', '.jsx', '.css', '.scss', '.less'],
-        alias: {
-            '@': path.join(__dirname, './../src')
-        }
+        alias: base.alias ?
+            base.alias :
+            { '@': path.join(__dirname, './../src') }
     },
     plugins: [
         //eslint
@@ -65,14 +62,6 @@ const webpackConfig = {
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
             favicon: base.dev.path + '/favicon.ico',
             template: base.dev.path + '/index.html'
-        }),
-        //加快构建速度
-        new HappyPack({
-            id: 'happyBabel',
-            loaders: ['babel-loader?cacheDirectory=true'],
-            threadPool: happThreadPool,
-            //允许 HappyPack 输出日志
-            verbose: true
         })
         //监控进度
         // new webpack.ProgressPlugin((percentage, message, ...args) => {

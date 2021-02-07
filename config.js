@@ -5,25 +5,15 @@ function resolve(pathString) {
 }
 //http/https接口请求地址
 const baseUrl = "https://saas-dev.dhwork.cn";
-//热更新目录<开发环境目录>
-const hot_update_dirname = resolve('public');
-//输出目录<生产环境构建目录>
-const dist_dirname = resolve('dist');
-//工作目录<源代码>
-const workPath = resolve('src');
-//入口文件
-const entry = resolve('src/app.js');
 module.exports = {
     baseUrl: baseUrl,
     name: '智安汇运营后台',
     version: packJson.version,
-    entry: entry,
-    src: workPath,
-    hot: hot_update_dirname,
-    dist: dist_dirname,
+    src: resolve('src'),
+    hot: resolve('public'),
     //开发环境配置,同webpack配置一样
     dev: {
-        path: hot_update_dirname,
+        path: resolve('public'),
         publicPath: '/',
         host: "localhost",
         port: 2333,
@@ -36,5 +26,9 @@ module.exports = {
                 pathRewrite: { '^/api': '/api' }//重写根路径
             }
         }
+    },
+    //同webpack
+    alias: {
+        '@': path.join(__dirname, 'src')
     }
 };

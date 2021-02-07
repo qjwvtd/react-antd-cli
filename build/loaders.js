@@ -10,6 +10,9 @@ const config = require('./../config.js');
 const env = require('./env');
 //工作空间
 const __include__dirname = path.resolve(__dirname, config.src);
+if (!__include__dirname) {
+    throw '请在config.js中指定src目录';
+}
 const babelLoader = {
     test: /\.(js|jsx)$/,
     use: {
@@ -24,10 +27,6 @@ const babelLoader = {
             ]
         }
     }
-};
-const happypackLoader = {
-    test: /\.(js|jsx)$/,
-    loader: 'happypack/loader?id=happyBabel'
 };
 const cssLoader = {
     test: /\.css$/,
@@ -83,5 +82,5 @@ const fileLoader = {
     exclude: /node_modules/
 };
 module.exports = [
-    happypackLoader, babelLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
+    babelLoader, cssLoader, lessLoader, scssLoader, sassLoader, urlLoader, fileLoader
 ];
