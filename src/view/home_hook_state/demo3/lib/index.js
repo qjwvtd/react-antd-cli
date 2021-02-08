@@ -12,6 +12,7 @@ function combineActionMap(actionMap) {
             throw 'a same store name already exists.';
         }
         stores[key] = {};
+        actions[key] = {};
         const actionAnys = actionMap[key];
         for (let i in actionAnys) {
             const item = actionAnys[i];
@@ -19,7 +20,7 @@ function combineActionMap(actionMap) {
                 throw 'The same action already exists.';
             }
             if (typeof item === 'function') {
-                actions[i] = item;
+                actions[key][i] = item;
             }
             if (typeof item !== 'function') {
                 stores[key][i] = item;
@@ -55,10 +56,13 @@ export default function createLiveStore(actionMap) {
         function combineHookAction() {
             const combineAction = {};
             for (let key in actions) {
-                combineAction[key] = function (params) {
-                    const nextParams = [setState, state, params];
-                    return actions[key].apply(actions[key], nextParams);
-                };
+                combineAction[key] = {};
+                for (let i in actions[key]) {
+                    combineAction[key][i] = function (params) {
+                        const nextParams = [setState, state, params];
+                        return actions[key][i].apply(actions[key][i], nextParams);
+                    };
+                }
             }
             return combineAction;
         }

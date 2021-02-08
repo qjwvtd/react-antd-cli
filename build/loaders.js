@@ -75,7 +75,6 @@ const imgLoader = {
         {
             loader: 'url-loader',
             options: {
-                // limit: 128,
                 limit: 8 * 1024,
                 // 关闭es6
                 esModule: false,

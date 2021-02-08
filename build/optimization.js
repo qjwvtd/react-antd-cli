@@ -2,6 +2,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
+    usedExports: true, // true: 使用到的导出才使用
     minimize: true,
     runtimeChunk: {
         name: "manifest"
@@ -59,6 +60,6 @@ module.exports = {
             canPrint: true
         }),
         //压缩
-        new TerserPlugin(),
+        new TerserPlugin()
     ]
 };

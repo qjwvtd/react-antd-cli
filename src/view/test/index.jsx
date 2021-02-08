@@ -34,6 +34,16 @@ function Project() {
     </div>;
 }
 export default function Test() {
+    useEffect(() => {
+        const num = -123456;
+        const str = num.toString();
+        let temp = '';
+        if (str.length === 0) { temp = str; }
+        for (let i = str.length - 1; i > -1; i--) {
+            temp += str[i];
+        }
+        console.log(Number(temp));
+    }, []);
     return <GloblaProvider>
         <Card title="直接使用xxxAction()" bordered={false}>
             <Rate disabled value={5} className="text-success" />

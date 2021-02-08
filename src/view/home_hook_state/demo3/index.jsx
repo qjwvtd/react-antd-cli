@@ -6,7 +6,7 @@ import GirlApp from './girl';
 function User() {
     const [state, action] = useGloblaStore();
     useEffect(() => {
-        action.initUser();
+        action.user.initUser();
     }, []);
     return <>
         <b>★user</b>
@@ -15,20 +15,19 @@ function User() {
 }
 function Project() {
     const [state, action] = useGloblaStore();
-    const { initProject, updateProjectAddres } = action;
     useEffect(() => {
-        initProject();
+        action.project.initProject();
     }, []);
     function handleChange(value) {
-        updateProjectAddres(value);
+        action.project.updateProjectAddres(value);
     }
-    const project = state.project;
+    const projectInfo = state.project;
     return <div>
         <b>★project</b>
-        <p>{project.name + ', ' + project.address},<Button type="link" onClick={() => action.initProject()}>刷新</Button></p>
+        <p>{projectInfo.name + ', ' + projectInfo.address},<Button type="link" onClick={() => action.project.initProject()}>刷新</Button></p>
         <Row>
             <Col span={20}>
-                <Input value={project.address} onChange={(e) => handleChange(e.target.value)} />
+                <Input value={projectInfo.address} onChange={(e) => handleChange(e.target.value)} />
             </Col>
         </Row>
     </div>;
