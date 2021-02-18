@@ -1,5 +1,5 @@
 
-var path = require('path');
+var http = require("http");
 var express = require('express');
 var cors = require('cors');
 var app = express();
@@ -7,7 +7,6 @@ var app = express();
 app.use(cors({
     orgin: 'localhost:3000'
 }));
-
 // 接口
 app.get('/api/project', function (req, res) {
     // 定义列表

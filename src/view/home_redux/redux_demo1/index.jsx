@@ -69,7 +69,7 @@ export default function ReduxDemo() {
     return <Card title="redux" bordered={false}>
         <Rate disabled value={5} className="text-success" />
         <p></p>
-        <p>
+        <p className="text-success">
             本示例使用原生redux加react hooks功能, 通过在自定义的hook中订阅并发布state和dispatch, 并且store不需要在顶层组件注入, 实现全局管理store的目的
         </p>
         <p>Redux 除了和 React 一起用外，还支持其它界面库。 它体小精悍（只有2kB，包括依赖）。包大小(摘自npm,未压缩Unpacked Size):</p>

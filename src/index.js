@@ -6,9 +6,9 @@ import store from '@/common/store';
 import zhCN from 'antd/lib/locale/zh_CN';
 import View from './view/app';
 /**
- * import less
+ * require less
  * **/
-import '@/assets/style/index.less';
+require('@/assets/style/index.less');
 
 function App() {
     //antd国际化,默认中文

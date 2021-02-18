@@ -46,7 +46,9 @@ const lessLoader = {
         {
             loader: 'less-loader', // compiles Less to CSS
             options: {
-                lessOptions: { javascriptEnabled: true }
+                lessOptions: {
+                    javascriptEnabled: true
+                }
             }
         }
     ]
