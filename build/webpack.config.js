@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require("fs");
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -24,11 +25,23 @@ function chunkCssPath() {
     }
     return { filename: fileName, chunkFilename: chunkFileName };
 }
-
+//创建webRoot.js文件,把baseUrl写到webRoot中
+function writeRootFile() {
+    const context = "//此文件脚本自动注入,禁止手动修改\n" +
+        "const webRoot = '" + (base.baseUrl || 'window.location.origin') + "';\n" +
+        "export default webRoot;";
+    fs.writeFile('src/common/http/webRoot.js', context, function (err) {
+        if (err) {
+            return console.error(err);
+        }
+    });
+}
+writeRootFile();
 const webpackConfig = {
     target: 'web',//default
     // entry: { 'index': path.resolve(__dirname, './../src/index.js') },//default,不需要配置
     module: {
+        //noParse: /jquery|loadsh/,es5代码不需要打包
         rules: __rules
     },
     // externals: {
@@ -36,7 +49,7 @@ const webpackConfig = {
     //     "react-dom": "react-dom"
     // },
     resolve: {
-        extensions: ['.js', '.jsx', '.css', '.scss', '.less'],
+        extensions: ['.js', '.json', '.jsx', '.css', '.scss', '.less'],
         alias: base.alias ?
             base.alias :
             { '@': path.join(__dirname, './../src') }
@@ -52,7 +65,7 @@ const webpackConfig = {
         }),
         //构建html
         new HtmlWebpackPlugin({
-            title: base.name + base.version,
+            title: base.name || 'SPA,' + base.version || '0.0.1',
             minify: {
                 // 移除HTML中的注释
                 removeComments: true,
@@ -61,7 +74,9 @@ const webpackConfig = {
             },
             //HtmlWebpackPlugin插件的路径要从项目根目录开始
             favicon: base.dev.path + '/favicon.ico',
-            template: base.dev.path + '/index.html'
+            template: base.dev.path + '/index.html',
+            //自定义打包路径必须false
+            hash: false
         })
         //监控进度
         // new webpack.ProgressPlugin((percentage, message, ...args) => {
