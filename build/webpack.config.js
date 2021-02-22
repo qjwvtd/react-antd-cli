@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 const base = require('./../config.js');
-const __rules = require('./loaders');
+const __rules = require('./webpack.config.loaders');
 
 const env = require('./env');
 

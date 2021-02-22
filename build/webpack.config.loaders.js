@@ -5,7 +5,7 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const config = require('./../config.js');
+const config = require('../config.js');
 //env
 const env = require('./env');
 //工作空间
@@ -18,6 +18,7 @@ const babelLoader = {
     use: {
         loader: 'babel-loader',
         options: {
+            cacheDirectory: true,
             presets: [
                 ['@babel/preset-env', { targets: "defaults" }]
             ],

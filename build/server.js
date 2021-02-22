@@ -3,9 +3,10 @@ var http = require("http");
 var express = require('express');
 var cors = require('cors');
 var app = express();
+var port = 3000;
 // 处理跨域
 app.use(cors({
-    orgin: 'localhost:3000'
+    orgin: 'localhost:' + port
 }));
 // 接口
 app.get('/api/project', function (req, res) {
@@ -14,6 +15,6 @@ app.get('/api/project', function (req, res) {
     res.json(project);
 })
 //服务
-app.listen(3000, function () {
-    console.log('server is started success,listening on port:' + 3000);
+app.listen(port, function () {
+    console.log('server is started success,listening on port:' + port);
 });

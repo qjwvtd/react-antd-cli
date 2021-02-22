@@ -14,7 +14,7 @@ export default function Test() {
         background: '#333',
         color: '#999',
         fontSize: '18px',
-        lineHeight: 2,
+        lineHeight: 2.2,
         letterSpacing: '2px',
         padding: '12px 24px'
     };

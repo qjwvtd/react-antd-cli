@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config.js');
-const optimization = require('./optimization.js');
 const base = require('./../config.js');
 
 //定义环境变量
@@ -19,10 +18,8 @@ const hotUpdate = new webpack.HotModuleReplacementPlugin();
 webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(hotUpdate);
 
-webpackConfig.optimization = optimization;
-
 if (!base.dev || Object.keys(base.dev).length === 0) {
-    throw '致命错误,开发环境没有配置'
+    throw '致命错误,开发环境没有配置';
 }
 module.exports = merge(webpackConfig, {
     mode: 'development',
