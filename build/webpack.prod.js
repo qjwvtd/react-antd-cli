@@ -3,8 +3,8 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpackConfig = require('./webpack.config.js');
-const optimization = require('./webpack.prod.optimization.js');
+const webpackConfig = require('./webpack.common.js');
+const optimization = require('./webpack.optimization.js');
 
 //定义环境变量
 const defineMyEnv = new webpack.DefinePlugin({
