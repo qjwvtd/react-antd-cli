@@ -81,7 +81,7 @@ const webpackConfig = {
         //监控进度
         // new webpack.ProgressPlugin((percentage, message, ...args) => {
         // console.log(parseFloat(percentage.toFixed(2)) * 100 + '%', message);
-        // })
+        // }).
 
     ],
     stats: { children: false }
