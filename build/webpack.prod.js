@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -35,7 +36,7 @@ module.exports = merge(webpackConfig, {
     mode: 'production',
     target: ['web', 'es5'],
     output: {
-        // path: path.resolve(__dirname,'./../dist),//default,不需要配置
+        // path: path.resolve(__dirname, "/dist/"),//default,不需要配置
         filename: 'static/js/[name]_[hash:8].js'
     }
 });

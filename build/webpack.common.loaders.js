@@ -73,24 +73,23 @@ const sassLoader = {
     exclude: /node_modules/
 };
 const imgLoader = {
-    test: /\.(png|jpg|jpeg|gif)$/,
+    test: /\.(png|jpg|jpeg|gif|svg)$/i,
     use: [
         {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
                 limit: 8 * 1024,
-                // 关闭es6
-                esModule: false,
-                name: env.dev ? 'static/img/[name]_[hash:8].[ext]' : env.prod && '/static/img/[name]_[hash:8].[ext]'
+                name: process.env.NODE_ENV === 'development' ? 'static/img/[name]_[hash:8].[ext]' : '/static/img/[name]_[hash:8].[ext]'
             }
-        }
+        },
+        { loader: 'image-webpack-loader' }
     ],
     include: __include__dirname,
     exclude: /node_modules/
 };
 const fileLoader = {
-    test: /\.(eot|svg|ttf|otf|woff|woff2|mp3|mp4)/,
-    use: [{ loader: 'file-loader', options: { limit: 128, name: env.dev ? 'static/fonts/[name]_[hash:8].[ext]' : env.prod && '/static/fonts/[name]_[hash:8].[ext]' } }],
+    test: /\.(eot|ttf|otf|woff|woff2|mp3|mp4)/,
+    use: [{ loader: 'file-loader', options: { limit: 8 * 1024, name: env.dev ? 'static/fonts/[name]_[hash:8].[ext]' : env.prod && '/static/fonts/[name]_[hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };

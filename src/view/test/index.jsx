@@ -18,6 +18,25 @@ export default function Test() {
         letterSpacing: '2px',
         padding: '12px 24px'
     };
+    React.useEffect(() => {
+        function add() {
+            return new Promise((resolve) => {
+                let count = Math.floor(Math.random() * 100);
+                setTimeout(() => {
+                    if (count % 2 === 0) {
+                        resolve('偶数');
+                    } else {
+                        resolve('奇数');
+                    }
+                }, 2000);
+            });
+        }
+        async function runFn() {
+            const text = await add();
+            console.log(text);//输出奇数/偶数
+        }
+        runFn();
+    }, []);
     //https://www.gdwxcn.com/article/103654.html
     return <Fragment>
         <div style={cstyle}>
