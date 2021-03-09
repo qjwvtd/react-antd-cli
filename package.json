@@ -15,7 +15,8 @@
     "dev:test": "npm start",
     "build:test": "node build/server.js",
     "lint": "eslint --fix --ext .js,.jsx src",
-    "server": "node build/server.js"
+    "server": "node build/server.js",
+    "setBaseUrl": "node build/setBaseUrl.js"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",

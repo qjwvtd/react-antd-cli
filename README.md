@@ -28,6 +28,11 @@
 *npm install
 ```
 
+###设置接口请求地址
+```
+*npm run setBaseUrl 接口地址[如:http://www.dhwork.cn]
+```
+
 ###开发环境开启本地服务
 ```
 *npm start
