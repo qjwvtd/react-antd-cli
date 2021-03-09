@@ -5,8 +5,7 @@ import { Row, Col, Dropdown, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { removeToken } from '@/common/utils';
 import Logo from '@/view/component/logo';
-
-const avtar = require('@/assets/images/avtar.png');
+import avtar from '@/assets/images/avtar.png';
 const HomeHead = inject('userStore')(observer(({ userStore }) => {
     function logout() {
         removeToken();

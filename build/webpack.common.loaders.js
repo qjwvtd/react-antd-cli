@@ -73,23 +73,20 @@ const sassLoader = {
     exclude: /node_modules/
 };
 const imgLoader = {
-    test: /\.(png|jpg|jpeg|gif|svg)$/i,
-    use: [
-        {
-            loader: 'file-loader',
-            options: {
-                limit: 8 * 1024,
-                name: process.env.NODE_ENV === 'development' ? 'static/img/[name]_[hash:8].[ext]' : '/static/img/[name]_[hash:8].[ext]'
-            }
-        },
-        { loader: 'image-webpack-loader' }
-    ],
+    test: /\.(png|jpg|gif|svg)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: 'static/img/[name]_[hash:8][ext]',// [ext]前面自带"."
+    },
     include: __include__dirname,
     exclude: /node_modules/
 };
 const fileLoader = {
-    test: /\.(eot|ttf|otf|woff|woff2|mp3|mp4)/,
-    use: [{ loader: 'file-loader', options: { limit: 8 * 1024, name: env.dev ? 'static/fonts/[name]_[hash:8].[ext]' : env.prod && '/static/fonts/[name]_[hash:8].[ext]' } }],
+    test: /\.(eot|ttf|otf|woff|woff2|mp3|mp4)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: env.dev ? 'static/fonts/[name]_[hash:8][ext]' : env.prod && '/static/fonts/[name]_[hash:8][ext]',// [ext]前面自带"."
+    },
     include: __include__dirname,
     exclude: /node_modules/
 };

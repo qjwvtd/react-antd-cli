@@ -1,6 +1,6 @@
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = {
     usedExports: true, // true: 使用到的导出才使用
     minimize: true,
@@ -47,18 +47,7 @@ module.exports = {
             }
         }),
         // 优化css
-        new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.css$/g,
-            cssProcessorOptions: {
-                safe: true,
-                autoprefixer: { disable: true }, //这里注意下!!!!!
-                mergeLonghand: false,
-                discardComments: {
-                    removeAll: true // 移除注释
-                }
-            },
-            canPrint: true
-        }),
+        new CssMinimizerPlugin(),
         //压缩
         new TerserPlugin()
     ]
