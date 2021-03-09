@@ -19,8 +19,8 @@ function chunkCssPath() {
             chunkFileName = 'static/css/[name]_chunk.css';
             break;
         case 'production':
-            fileName = '/static/css/[name]_[hash:8].css';
-            chunkFileName = '/static/css/[name]_chunk_[hash:8].css';
+            fileName = 'static/css/[name]_[hash:8].css';
+            chunkFileName = 'static/css/[name]_chunk_[hash:8].css';
             break;
     }
     return { filename: fileName, chunkFilename: chunkFileName };

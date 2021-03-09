@@ -6,8 +6,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const config = require('../config.js');
-//env
-const env = require('./env');
 //工作空间
 const __include__dirname = path.resolve(__dirname, config.src);
 if (!__include__dirname) {
@@ -85,7 +83,7 @@ const fileLoader = {
     test: /\.(eot|ttf|otf|woff|woff2|mp3|mp4)$/i,
     type: 'asset/resource',
     generator: {
-        filename: env.dev ? 'static/fonts/[name]_[hash:8][ext]' : env.prod && '/static/fonts/[name]_[hash:8][ext]',// [ext]前面自带"."
+        filename: 'static/fonts/[name]_[hash:8][ext]',// [ext]前面自带"."
     },
     include: __include__dirname,
     exclude: /node_modules/
