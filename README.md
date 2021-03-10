@@ -53,15 +53,15 @@
 *http://localhost:2333
 ```
 
-###部署,测试
+###部署或发布相关
 ```
 
-#1,修改package.json文件中的baseUrl的接口请求地址
+#1,npm install
 
-#2,npm install
+#2,npm run setBaseUrl 接口地址[如:http://www.baidu.com]
 
 #3,npm run build
 
-#4,将构建产生的bundle目录发布
+#4,将构建产生的dist目录发布
 
 ```
