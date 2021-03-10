@@ -23,45 +23,41 @@
 
 ##脚手架演示：
 
-###安装
+###[开发环境||部署前||发布前]安装依赖
 ```
 *npm install
 ```
 
-###设置接口请求地址
+###[开发环境||部署前||发布前]手动设置接口请求地址
 ```
-*npm run setBaseUrl 接口地址[如:http://www.dhwork.cn]
+*npm run setBaseUrl 接口地址[如: npm run setBaseUrl https://www.baidu.com]
 ```
 
-###开发环境开启本地服务
+###[开发环境]开启本地服务
 ```
 *npm start
+*访问http://localhost:2333
 ```
 
-###开发过程中手动一键修复错误
+###[开发环境||部署前||发布前]手动一键修复错误
 ```
 *npm run lint
 ```
 
-###生产环境打包构建
+###[生产环境||部署前||发布前]打包构建,生成dist目录
 ```
 *npm run build
 ```
 
-###访问
-```
-*http://localhost:2333
-```
-
-###部署或发布相关
+###[生产环境||部署前||发布前]相关步骤
 ```
 
 #1,npm install
 
-#2,npm run setBaseUrl 接口地址[如:http://www.baidu.com]
+#2,npm run setBaseUrl 接口地址[如: npm run setBaseUrl https://www.baidu.com]
 
 #3,npm run build
 
-#4,将构建产生的dist目录发布
+#4,将构建产生的dist目录发布至线上
 
 ```

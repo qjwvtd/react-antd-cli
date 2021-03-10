@@ -25,18 +25,6 @@ function chunkCssPath() {
     }
     return { filename: fileName, chunkFilename: chunkFileName };
 }
-//创建webRoot.js文件,把baseUrl写到webRoot中
-function writeRootFile() {
-    const context = "//此文件脚本自动注入,禁止手动修改\n" +
-        "const webRoot = '" + (base.baseUrl || 'window.location.origin') + "';\n" +
-        "export default webRoot;";
-    fs.writeFile('src/common/http/webRoot.js', context, function (err) {
-        if (err) {
-            return console.error(err);
-        }
-    });
-}
-writeRootFile();
 const webpackConfig = {
     target: 'web',//default
     // entry: { 'index': path.resolve(__dirname, './../src/index.js') },//default,不需要配置

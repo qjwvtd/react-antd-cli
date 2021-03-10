@@ -1,19 +1,15 @@
 const path = require('path');
 const packJson = require('./package.json');
-function resolve(pathString) {
-    return path.resolve(__dirname, pathString);
-}
-//http/https接口请求地址
+//接口请求地址
 const baseUrl = "https://saas-dev.dhwork.cn";
 module.exports = {
-    baseUrl: baseUrl,
     name: '智安汇运营后台',
     version: packJson.version,
-    src: resolve('src'),
-    hot: resolve('public'),
+    baseUrl: baseUrl,
+    src: path.resolve(__dirname, 'src'),
     //开发环境配置,同webpack配置一样
     dev: {
-        path: resolve('public'),
+        path: path.resolve(__dirname, 'public'),
         publicPath: '/',
         host: "localhost",
         port: 2333,

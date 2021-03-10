@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require("fs");
 var value = process.argv.splice(2)[0];
 if (!value) {
@@ -5,14 +6,11 @@ if (!value) {
     return;
 }
 //创建webRoot.js文件,把baseUrl写到webRoot中
-function writeRootFile() {
-    const context = "//此文件脚本自动注入,禁止手动修改\n" +
-        "const webRoot = '" + (value || 'window.location.origin') + "';\n" +
-        "export default webRoot;";
-    fs.writeFile('src/common/http/webRoot.js', context, function (err) {
-        if (err) {
-            return console.error(err);
-        }
-    });
-}
-writeRootFile();
+const context = "//此文件脚本自动注入,禁止手动修改\n" +
+    "const webRoot = '" + (value || 'window.location.origin') + "';\n" +
+    "export default webRoot;";
+fs.writeFile('src/common/http/webRoot.js', context, function (err) {
+    if (err) {
+        return console.error(err);
+    }
+});
