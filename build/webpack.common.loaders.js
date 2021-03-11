@@ -9,7 +9,7 @@ const config = require('../config.js');
 //工作空间
 const __include__dirname = path.resolve(__dirname, config.src);
 if (!__include__dirname) {
-    throw '请在config.js中指定src目录';
+    throw '请在config.js中指定源代码目录';
 }
 const babelLoader = {
     test: /\.(js|jsx)$/,
