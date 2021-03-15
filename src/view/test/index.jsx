@@ -18,6 +18,13 @@ export default function Test() {
         letterSpacing: '2px',
         padding: '12px 24px'
     };
+    function removeWithoutCopy(arr, item) {
+        arr = arr.filter(function (num) {
+            return num !== item;
+        });
+        return arr;
+    }
+    console.log(removeWithoutCopy([1, 2, 2, 3, 4, 2, 2], 2));
     React.useEffect(() => {
         function add() {
             return new Promise((resolve) => {

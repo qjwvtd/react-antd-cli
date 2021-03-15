@@ -11,13 +11,7 @@ module.exports = {
         chunks: 'all',
         minChunks: 2,
         cacheGroups: {
-            common: {
-                // test: /[\\/]src[\\/]/,把src目录下的公共JS代码提出为common.js
-                name: "common",
-                minChunks: 2,
-                maxInitialRequests: 5,
-                minSize: 0
-            },
+            //把node_modules目录下的代码提出为vendor.js
             vendor: {
                 test: /[\\/]node_modules[\\/]/,
                 name: "vendor",
@@ -31,7 +25,7 @@ module.exports = {
         new UglifyJsPlugin({
             cache: true,
             parallel: 4, // 开启并行压缩，充分利用cpu
-            sourceMap: false,
+            sourceMap: true,
             extractComments: true, // 移除注释
             uglifyOptions: {
                 compress: {
@@ -46,9 +40,12 @@ module.exports = {
                 }
             }
         }),
-        // 优化css
+        //优化css
         new CssMinimizerPlugin(),
         //压缩
-        new TerserPlugin()
+        new TerserPlugin({
+            parallel: true, //并行压缩
+            sourceMap: true,
+        })
     ]
 };
