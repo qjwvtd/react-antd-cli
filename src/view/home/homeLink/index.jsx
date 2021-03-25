@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,16 @@ const rootSubmenuKeys = ['sub1', 'sub2'];
 export default function HomeLink({ linkClickEvent }) {
     const [current, updateCurrent] = useState('1');
     const [openKey, updateOpenKey] = useState(['sub1']);
+    const homeRouterMap = {
+        '1': '/home/arrayToLinkList',
+        '2': '/home/reduxDemo',
+        '3': '/home/useGlobalHookDemo',
+        '4': '/home/hookStateDemo',
+        '5': '/home/recoilDemo',
+        '6': '/home/mobxDemo',
+        '7': '/home/constateDemo',
+        '99': '/home/customHook'
+    };
     function handleClick(e) {
         console.log(e);
         updateCurrent(e.key);
@@ -22,6 +32,14 @@ export default function HomeLink({ linkClickEvent }) {
             updateOpenKey(latestOpenKey ? [latestOpenKey] : []);
         }
     }
+    useEffect(() => {
+        const pathname = router.location.pathname;
+        for (let key in homeRouterMap) {
+            if (homeRouterMap[key] === pathname) {
+                updateCurrent(key);
+            }
+        }
+    }, []);
     return <Fragment>
         <Menu
             mode="inline"
