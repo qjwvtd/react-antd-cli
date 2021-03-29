@@ -3,14 +3,11 @@ import history from '@/common/router';
 import { removeToken } from '@/common/utils';
 import { recurrence, openErrorView, handleNull, status } from './httpUtils';
 export function handleStatus(response) {
+    if (!response) {
+        return;
+    }
     let tips = null;//msg
     let data = response.data || { data: null, code: null, msg: null };//data
-    if (!response) {
-        tips = '网络故障,请检查您的网络';
-        message.error(tips);
-        openErrorView({ message: tips });
-        return { code: null, data: {}, msg: tips };
-    }
     //请求直接报错
     if (typeof response === 'string') {
         openErrorView({ message: response });

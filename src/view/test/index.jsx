@@ -27,16 +27,16 @@ export default function Test() {
         }
         runFn();
     }, []);
-    // document.getElementById('arcxsbd').style.background = "#333";
+    // document.body.style.background = "#666";
     // document.getElementById('arcxsbd').style.color = "#ccc";
-    //https://www.xyyuedu.com/kepushuji/renleijianshi_congdongwudaoshangdi/281015.html
     return <Fragment>
         <div style={{ width: '100%', height: '100%' }}>
             <iframe
-                src="https://www.xyyuedu.com/kepushuji/renleijianshi_congdongwudaoshangdi/281015.html"
+                src="http://www.purepen.com/sgyy/001.htm"
                 frameBorder="0"
                 width="100%"
                 height="100%"
+                id="frame"
             >
             </iframe>
         </div>
