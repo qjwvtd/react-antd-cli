@@ -13,7 +13,12 @@ const defineMyEnv = new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('development')
 });
 //输出控制台美化
-const friendConsolePlugin = new FriendlyErrorsWebpackPlugin();
+const friendConsolePlugin = new FriendlyErrorsWebpackPlugin({
+    compilationSuccessInfo: {
+        notes: ['蛙人你好，系统正运行在http://localhost:' + base.dev.port]
+    },
+    clearConsole: true,
+});
 
 //添加热插播
 const hotUpdate = new webpack.HotModuleReplacementPlugin();
