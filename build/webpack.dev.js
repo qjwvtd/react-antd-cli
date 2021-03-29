@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const webpackConfig = require('./webpack.common.js');
 const base = require('./../config.js');
 
@@ -11,12 +12,15 @@ const defineMyEnv = new webpack.DefinePlugin({
     'process.env.NODE_PROXY': true,
     'process.env.NODE_ENV': JSON.stringify('development')
 });
+//输出控制台美化
+const friendConsolePlugin = new FriendlyErrorsWebpackPlugin();
 
 //添加热插播
 const hotUpdate = new webpack.HotModuleReplacementPlugin();
 
 webpackConfig.plugins.push(defineMyEnv);
 webpackConfig.plugins.push(hotUpdate);
+webpackConfig.plugins.push(friendConsolePlugin);
 
 if (!base.dev || Object.keys(base.dev).length === 0) {
     throw '致命错误,开发环境没有配置';
