@@ -7,8 +7,6 @@ import { handleStatus } from './handleStatus';
 //请求地址
 import webRoot from './webRoot';
 
-
-
 let baseUrl = webRoot;
 
 //生产环境
