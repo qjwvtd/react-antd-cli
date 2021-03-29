@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { message } from 'antd';
 import { getToken } from '@/common/utils';
 //不拦截token的白名单
 import whiteList from './httpWhiteRoster';
@@ -54,7 +53,7 @@ function cancelRequest(url) {
             cancel = c;
             cancel();
             //此请示不太友好，有时页面未请求未完成就跳页了，也会提示
-            message.error('来自' + url + ' \n 的请求未发出，已取消');
+            console.error('来自' + url + ' \n 的请求未发出，已取消');
         }
     });
 }
