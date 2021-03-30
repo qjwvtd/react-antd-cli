@@ -19,6 +19,10 @@ module.exports = {
     rules: {
         //强制4个缩进
         "indent": ["error", 4, { SwitchCase: 1 }],
+        // 禁止空格和 tab 的混合缩进
+        "no-mixed-spaces-and-tabs": 1,
+        // 禁用 debugger
+        "no-debugger": 1,
         //不能有声明后未被使用的变量或参数
         "no-unused-vars": "error",
         //防止在JSX中使用的变量被错误地标记为未使用
