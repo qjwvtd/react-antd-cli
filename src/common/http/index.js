@@ -42,28 +42,13 @@ axios.interceptors.request.use(config => {
 //http response 拦截器
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response));
 
-//处理请求取消
-const CancelToken = axios.CancelToken;
-let cancel = null;
-function cancelRequest(url) {
-    return new CancelToken(function executor(c) {
-        if (c && c.constructor === Function) {
-            cancel = c;
-            cancel();
-            //此请示不太友好，有时页面未请求未完成就跳页了，也会提示
-            console.error('来自' + url + ' \n 的请求未发出，已取消');
-        }
-    });
-}
+
 export default {
     POST(url, data) {
-        return axios.post(url, data, {
-            cancelToken: cancelRequest(url)
-        }).then(handleStatus);
+        return axios.post(url, data, {}).then(handleStatus);
     },
     GET(url, params) {
         return axios.get(url, {
-            cancelToken: cancelRequest(url),
             params: {
                 _t: +(new Date()),
                 ...params
@@ -72,7 +57,6 @@ export default {
     },
     DELETE(url, params) {
         return axios.delete(url, {
-            cancelToken: cancelRequest(url),
             params: {
                 _t: +(new Date()),
                 ...params
@@ -80,8 +64,6 @@ export default {
         }).then(handleStatus);
     },
     PUT(url, data) {
-        return axios.put(url, data, {
-            cancelToken: cancelRequest(url)
-        }).then(handleStatus);
+        return axios.put(url, data, {}).then(handleStatus);
     }
 };
