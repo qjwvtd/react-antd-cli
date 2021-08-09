@@ -6,6 +6,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const config = require('../config.js');
+const env = process.env.NODE_ENV === 'development';
 //工作空间
 const __include__dirname = path.resolve(__dirname, config.src);
 if (!__include__dirname) {
@@ -72,19 +73,13 @@ const sassLoader = {
 };
 const imgLoader = {
     test: /\.(png|jpg|gif|svg)$/i,
-    type: 'asset/resource',
-    generator: {
-        filename: 'static/img/[name]_[hash:8][ext]',// [ext]前面自带"."
-    },
+    use: [{ loader: 'url-loader', options: { limit: 128, name: env ? 'static/img/[name]_[hash:8].[ext]' : '/static/img/[name]_[hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };
 const fileLoader = {
-    test: /\.(eot|ttf|otf|woff|woff2|mp3|mp4)$/i,
-    type: 'asset/resource',
-    generator: {
-        filename: 'static/fonts/[name]_[hash:8][ext]',// [ext]前面自带"."
-    },
+    test: /\.(eot|svg|ttf|otf|woff|woff2|mp3|mp4)/,
+    use: [{ loader: 'file-loader', options: { limit: 128, name: env ? 'static/fonts/[name]_[hash:8].[ext]' : '/static/fonts/[name]_[hash:8].[ext]' } }],
     include: __include__dirname,
     exclude: /node_modules/
 };
